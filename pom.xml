@@ -1,0 +1,168 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ink.anh</groupId>
+  <artifactId>ItemLingo</artifactId>
+  <version>0.0.1</version>
+  <name>ItemLingo</name>
+  <description>ItemLingo projekt</description>
+  <build>
+	<plugins>
+		<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>ink.anh.lingo.ItemLingo</mainClass>
+									</transformer>
+								</transformers>
+                    			<relocations>
+                        			<relocation>
+                            			<pattern>org.bstats</pattern>
+                            			<shadedPattern>me.rothes.protocolstringreplacer.libs.org.bstats</shadedPattern>
+                        			</relocation>
+                        			<relocation>
+                            			<pattern>org.apache.commons.collections</pattern>
+                            			<shadedPattern>me.rothes.protocolstringreplacer.libs.org.apache.commons.collections</shadedPattern>
+                        			</relocation>
+                        			<relocation>
+                            			<pattern>org.neosearch.stringsearcher</pattern>
+                            			<shadedPattern>me.rothes.protocolstringreplacer.libs.org.neosearch.stringsearcher</shadedPattern>
+                        			</relocation>
+                        			<relocation>
+                            			<pattern>de.tr7zw.changeme.nbtapi</pattern>
+                            			<shadedPattern>me.rothes.protocolstringreplacer.libs.de.tr7zw.changeme.nbtapi</shadedPattern>
+                        			</relocation>
+                    			</relocations>
+								<filters>
+									<filter>
+										<artifact>*:*</artifact>
+										<excludes>
+                                			<exclude>META-INF/**</exclude>
+                                			<exclude>org/apache/commons/collections/collection/*</exclude>
+                                			<exclude>org/apache/commons/collections/list/*</exclude>
+                                			<exclude>org/apache/commons/collections/Unmodifiable.class</exclude>
+                                			<exclude>org/apache/commons/collections/ResettableIterator.class</exclude>
+										</excludes>
+									</filter>
+								</filters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+ 	<repositories>
+		<!-- This adds the Spigot Maven repository to the build -->
+		<repository>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+        	<repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+    	<repository>
+        	<id>dmulloy2-repo</id>
+        	<url>https://repo.dmulloy2.net/repository/public/</url>
+    	</repository>
+
+	</repositories>
+ 
+ <dependencies>
+	
+    <dependency>
+        <groupId>com.comphenix.protocol</groupId>
+        <artifactId>ProtocolLib</artifactId>
+        <version>5.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>23.0.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+    
+	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-lang3</artifactId>
+    	<version>3.13.0</version>
+	</dependency>
+
+    <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.1</version>
+    </dependency>
+    
+	<dependency>
+        <groupId>org.fusesource.jansi</groupId>
+        <artifactId>jansi</artifactId>
+        <version>1.18</version>
+    </dependency>
+    
+	<!--This adds the Spigot API artifact to the build -->
+	<dependency>
+		   <groupId>org.spigotmc</groupId>
+		   <artifactId>spigot-api</artifactId>
+		   <version>1.20.2-R0.1-SNAPSHOT</version>
+		   <scope>provided</scope>
+	</dependency>
+	
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.20.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+	
+	<!-- https://mvnrepository.com/artifact/net.kyori/adventure-api -->
+	<dependency>
+		<groupId>net.kyori</groupId>
+		<artifactId>adventure-api</artifactId>
+		<version>4.12.0</version>
+	</dependency>
+ 	
+	<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-core</artifactId>
+		<version>2.19.0</version>
+		<scope>compile</scope>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.2</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/io.netty/netty-handler -->
+	<dependency>
+		<groupId>io.netty</groupId>
+		<artifactId>netty-handler</artifactId>
+		<version>4.1.85.Final</version>
+	</dependency>
+ </dependencies>
+
+</project>

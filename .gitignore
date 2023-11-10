@@ -1,0 +1,7 @@
+﻿$ cat .gitignore
+.settings
+.classpath
+.project
+.project/bin/
+/bin/
+/target/

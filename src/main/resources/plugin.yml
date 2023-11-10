@@ -1,0 +1,11 @@
+main: ink.anh.lingo.ItemLingo
+name: ItemLingo
+version: 0.0.1
+author: Korvinius
+api-version: 1.13
+description: ItemLingo projekt
+website: http://anh.ink
+commands:
+    lingo:
+        aliases: [itemlingo]
+        usage: "The command '/lingo (/itemlingo)' execution error, please check the arguments' correctness."
