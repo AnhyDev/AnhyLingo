@@ -1,0 +1,2 @@
+# ItemLingoPluginMinecraft
+Minecraft Plugin ItemLingo
