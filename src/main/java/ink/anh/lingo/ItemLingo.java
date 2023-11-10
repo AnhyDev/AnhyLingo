@@ -13,7 +13,7 @@ import ink.anh.lingo.listeners.protocol.PacketListenerManager;
 
 public class ItemLingo extends JavaPlugin {
 
-	private static ItemLingo instance;
+    private static ItemLingo instance;
 	
     private boolean isSpigot;
     private boolean isPaper;
@@ -25,58 +25,56 @@ public class ItemLingo extends JavaPlugin {
     private LanguageChat languageChat;
     private ConfigurationManager configurationManager;
 
-	@Override
-	public void onLoad() {
-		instance = this;
-	}
-	
-	@Override
-	public void onEnable() {
-		checkDepends("ProtocolLib");
-		checkServer();
-        configurationManager = new ConfigurationManager(this);
-		languageSystemChat = LanguageSystemChat.getInstance(this);
-		languageItemStack = LanguageItemStack.getInstance(this);
-		//languageChat = LanguageChat.getInstance(this);
-		new PacketListenerManager().addListeners();
-		new ListenerManager(this);
-		this.getCommand("lingo").setExecutor(new LingoCommand(this));
-	}
+    @Override
+    public void onLoad() {
+    	instance = this;
+    }
 
-	@Override
-	public void onDisable() {
-		
-	}
-	
-	private void checkServer() {
-        try {
-            Class.forName("org.bukkit.entity.Player$Spigot");
+    @Override
+    public void onEnable() {
+    	checkDepends("ProtocolLib");
+    	checkServer();
+        configurationManager = new ConfigurationManager(this);
+        languageItemStack = LanguageItemStack.getInstance(this);
+        //languageChat = LanguageChat.getInstance(this);
+        new PacketListenerManager().addListeners();
+        new ListenerManager(this);
+        this.getCommand("lingo").setExecutor(new LingoCommand(this));
+    }
+
+    @Override
+    public void onDisable() {
+
+    }
+
+    private void checkServer() {
+    	try {
+    		Class.forName("org.bukkit.entity.Player$Spigot");
             isSpigot = true;
         } catch (Throwable tr) {
             isSpigot = false;
             error("Console-Sender.Messages.Initialize.Require-Spigot");
             return;
         }
-        try {
+    	try {
             Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
             isPaper = true;
             try {
-                Class.forName("io.papermc.paper.text.PaperComponents");
-                hasPaperComponent = true;
+            	Class.forName("io.papermc.paper.text.PaperComponents");
+            	hasPaperComponent = true;
             } catch (Throwable tr) {
-                hasPaperComponent = false;
+            	hasPaperComponent = false;
             }
-        } catch (Throwable tr) {
+    	} catch (Throwable tr) {
             isPaper = false;
-
-        }
-        try {
-            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
-            isFolia = true;
-        } catch (ClassNotFoundException e) {
-            isFolia = false;
-        }
-	}
+    	}
+    	try {
+    		Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+    		isFolia = true;
+    	} catch (ClassNotFoundException e) {
+    		isFolia = false;
+    	}
+    }
 
     private boolean checkDepends(String... depends) {
         boolean missingDepend = false;
@@ -105,43 +103,43 @@ public class ItemLingo extends JavaPlugin {
     	instance.getLogger().severe("\u001b[0;91m" + message + "\u001b[m");
     }
 
-	public static ItemLingo getInstance() {
-		return instance;
-	}
+    public static ItemLingo getInstance() {
+    	return instance;
+    }
 
-	public LanguageItemStack getLanguageItemStack() {
-		return languageItemStack;
-	}
+    public LanguageItemStack getLanguageItemStack() {
+    	return languageItemStack;
+    }
 
-	public LanguageChat getLanguageChat() {
-		return languageChat;
-	}
+    public LanguageChat getLanguageChat() {
+    	return languageChat;
+    }
 
-	public ConfigurationManager getConfigurationManager() {
-		return configurationManager;
-	}
+    public ConfigurationManager getConfigurationManager() {
+    	return configurationManager;
+    }
 
-	public void setConfigurationManager(ConfigurationManager configurationManager) {
-		this.configurationManager = configurationManager;
-	}
+    public void setConfigurationManager(ConfigurationManager configurationManager) {
+    	this.configurationManager = configurationManager;
+    }
 
     public boolean isSpigot() {
-        return isSpigot;
+    	return isSpigot;
     }
 
     public boolean isPaper() {
-        return isPaper;
+    	return isPaper;
     }
 
     public boolean isFolia() {
-        return isFolia;
+    	return isFolia;
     }
 
     public boolean hasPaperComponent() {
-        return hasPaperComponent;
+    	return hasPaperComponent;
     }
-    
-	public LanguageSystemChat getLanguageSystemChat() {
-		return languageSystemChat;
-	}
+
+    public LanguageSystemChat getLanguageSystemChat() {
+    	return languageSystemChat;
+    }
 }
