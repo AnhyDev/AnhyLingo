@@ -140,7 +140,7 @@ public class ItemLingo extends JavaPlugin {
     public boolean hasPaperComponent() {
         return hasPaperComponent;
     }
-
+    
 	public LanguageSystemChat getLanguageSystemChat() {
 		return languageSystemChat;
 	}
