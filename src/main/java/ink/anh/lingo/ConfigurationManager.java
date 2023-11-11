@@ -5,15 +5,19 @@ import java.io.IOException;
 import java.util.List;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import ink.anh.lingo.utils.StringUtils;
+import net.md_5.bungee.api.ChatColor;
+
 public class ConfigurationManager {
 
     private ItemLingo itemLingoPlugin;
     private File configFile;
     
-    private String defaultLang;
+    private String defaultLang = "en";
+    private String pluginName = "ItemLingo";
     private boolean debug;
     private boolean debugPacketShat;
-    private List<String> allowedDirectories; // Змінна для зберігання списку дозволених директорій
+    private List<String> allowedDirectories;
 
     ConfigurationManager(ItemLingo plugin) {
         this.itemLingoPlugin = plugin;
@@ -26,12 +30,13 @@ public class ConfigurationManager {
         if (!configFile.exists()) {
             YamlConfiguration defaultConfig = new YamlConfiguration();
             defaultConfig.set("language", "en");
+            defaultConfig.set("plugin_name", "ItemLingo");
             defaultConfig.set("debug", false);
             defaultConfig.set("debug_packet_chat", false);
-            defaultConfig.set("allowed_directories", List.of("Denizen/scripts/", "ItemLingo/items/", "ItemLingo/system/", "ItemLingo/chat/"));
+            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo/items", "ItemLingo/system"));
             try {
                 defaultConfig.save(configFile);
-                itemLingoPlugin.getLogger().info("Created default configuration.");
+                ItemLingo.warn("Default configuration created.");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -42,17 +47,21 @@ public class ConfigurationManager {
         try {
             this.itemLingoPlugin.reloadConfig();
             setDataConfig();
-            this.itemLingoPlugin.getLogger().info("Configuration reloaded.");
+            itemLingoPlugin.getLanguageSystemChat().reloadLanguages();
+            itemLingoPlugin.getLanguageItemStack().reloadLanguages();
+            itemLingoPlugin.getLanguageChat().reloadLanguages();
+            ItemLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded", defaultLang, true));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            this.itemLingoPlugin.getLogger().info("Error reloading configuration...");
+            ItemLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration", defaultLang, true));
             return false;
         }
     }
     
     private void setDataConfig() {
         defaultLang = itemLingoPlugin.getConfig().getString("language", "en");
+        pluginName = ChatColor.translateAlternateColorCodes('&',itemLingoPlugin.getConfig().getString("plugin_name", "ItemLingo"));
         debug = itemLingoPlugin.getConfig().getBoolean("debug", false);
         debugPacketShat = itemLingoPlugin.getConfig().getBoolean("debug_packet_chat", false);
         allowedDirectories = itemLingoPlugin.getConfig().getStringList("allowed_directories");
@@ -71,7 +80,7 @@ public class ConfigurationManager {
     }
 
     public List<String> getAllowedDirectories() {
-        return allowedDirectories; // Геттер для отримання списку дозволених директорій
+        return allowedDirectories;
     }
 
     public boolean isPathAllowed(String path) {
@@ -82,4 +91,8 @@ public class ConfigurationManager {
         }
         return false;
     }
+
+	public String getPluginName() {
+		return pluginName;
+	}
 }

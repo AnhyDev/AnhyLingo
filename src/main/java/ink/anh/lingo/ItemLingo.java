@@ -34,9 +34,10 @@ public class ItemLingo extends JavaPlugin {
     public void onEnable() {
     	checkDepends("ProtocolLib");
     	checkServer();
+        languageSystemChat = LanguageSystemChat.getInstance(this);
         configurationManager = new ConfigurationManager(this);
         languageItemStack = LanguageItemStack.getInstance(this);
-        //languageChat = LanguageChat.getInstance(this);
+        languageChat = LanguageChat.getInstance(this);
         new PacketListenerManager().addListeners();
         new ListenerManager(this);
         this.getCommand("lingo").setExecutor(new LingoCommand(this));

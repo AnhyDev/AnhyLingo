@@ -5,16 +5,18 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.utils.LangUtils;
+import ink.anh.lingo.utils.StringUtils;
 
 public class DirectoryContents {
 
     public static void listDirectoryContents(CommandSender sender, String directoryPath) {
-        if (!isPathAllowed(directoryPath)) {
-            sender.sendMessage("Не дозволено працювати з цією папкою: " + directoryPath);
-            return;
-        }
+    	if (directoryPath.equals("0")) directoryPath = "";
+    	String lang = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender) : null;
+    	String pluginName = ItemLingo.getInstance().getConfigurationManager().getPluginName() + ": ";
 
         File directory = new File(ItemLingo.getInstance().getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
 
@@ -34,14 +36,10 @@ public class DirectoryContents {
                     }
                 }
             } else {
-            	sender.sendMessage("Папка порожня або сталася помилка при її читанні.");
+            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty", lang, true));
             }
         } else {
-        	sender.sendMessage("Папка не існує або це не папка.");
+        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist", lang, true));
         }
-    }
-
-    private static boolean isPathAllowed(String path) {
-    	return ItemLingo.getInstance().getConfigurationManager().isPathAllowed(path);
     }
 }

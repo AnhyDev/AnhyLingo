@@ -55,7 +55,7 @@ public abstract class AbstractLanguage<T> {
         File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
         if (!dir.exists()) dir.mkdirs();
 
-        String prefix = (getPrefix() != null && !getPrefix().isEmpty()) ? getPrefix() : "default_";
+        String prefix = (getPrefix() != null && !getPrefix().isEmpty()) ? getPrefix() : "lingo_";
         for (String lang : DEFAULT_LANGS) {
             String filename = prefix + lang + ".yml";
             File file = new File(dir, filename);

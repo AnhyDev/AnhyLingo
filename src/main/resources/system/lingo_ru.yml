@@ -1,0 +1,7 @@
+lingo_err_not_have_permission: "У вас нет разрешения на использование этой команды."
+lingo_err_folder_is_empty: "Папка пуста или произошла ошибка при её чтении."
+lingo_err_folder_is_notexist: "Папки не существует или это не папка."
+lingo_err_reloading_configuration: "Ошибка перезагрузки конфигурации."
+lingo_created_default_configuration: "Создана конфигурация по умолчанию."
+lingo_configuration_reloaded: "Конфигурация перезагружена."
+lingo_language_reloaded: "Языковые файлы и конфигурация перезагружены."

@@ -14,6 +14,8 @@ import ink.anh.lingo.file.AbstractFileLoader;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.lang.ItemLang;
 import ink.anh.lingo.player.PlayerData;
+import ink.anh.lingo.utils.LangUtils;
+import ink.anh.lingo.utils.StringUtils;
 import ink.anh.lingo.file.SimpleFileLoader;
 import ink.anh.lingo.file.YamlFileLoader;
 
@@ -56,14 +58,12 @@ public class LingoCommand implements CommandExecutor {
         }
 		return false;
 	}
+	
 	private boolean loadFile(CommandSender sender, String[] args, boolean isYaml) {
-	    if (sender instanceof Player) {
-	        Player player = (Player) sender;
-	        // Перевіряємо наявність дозволу
-	        if (!player.hasPermission("itemlingo.manager")) {
-	            sender.sendMessage("You do not have permission to use this command.");
-	            return true;
-	        }
+		String permission = isYaml ? "itemlingo.file.lingo" : "itemlingo.file.other";
+    	String lang = checkPlayerPermissions(sender, permission);
+	    if (lang != null && lang.equals("no_permission")) {
+            return true;
 	    }
 	    
 	    if (args.length == 4) {
@@ -83,15 +83,10 @@ public class LingoCommand implements CommandExecutor {
 	}
 
     private boolean directory(CommandSender sender, String[] args) {
-        // Перевіряємо, чи є викликач команди гравцем
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.manager")) {
-                sender.sendMessage("You do not have permission to use this command.");
-                return true;
-            }
-        }
+    	String lang = checkPlayerPermissions(sender, "itemlingo.directory");
+	    if (lang != null && lang.equals("no_permission")) {
+            return true;
+	    }
 
         // Перевірка, чи достатньо аргументів
         if (args.length != 2) {
@@ -105,18 +100,13 @@ public class LingoCommand implements CommandExecutor {
     }
 
     private boolean reload(CommandSender sender) {
-        // Перевіряємо, чи є викликач команди гравцем
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.manager")) {
-                sender.sendMessage("You do not have permission to use this command.");
-                return true;
-            }
-        }
+    	String lang = checkPlayerPermissions(sender, "itemlingo.reload");
+	    if (lang != null && lang.equals("no_permission")) {
+            return true;
+	    }
+	    
         if (itemLingoPlugin.getConfigurationManager().reload()) {
-            itemLingoPlugin.getLanguageItemStack().reloadLanguages();
-            sender.sendMessage("The ItemLingo plugin has been reloaded.");
+            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded", lang, true));
             return true;
         }
         return false;
@@ -243,7 +233,7 @@ public class LingoCommand implements CommandExecutor {
         
         // Перевірка, чи передано достатньо аргументів
         if (args.length < 2) {
-            sender.sendMessage("Usage: /lingo list <lang>");
+            sender.sendMessage("Usage: /lingo  - ");
             return true;
         }
 
@@ -270,5 +260,22 @@ public class LingoCommand implements CommandExecutor {
 
         return true;
     }
+	
+	private String checkPlayerPermissions(CommandSender sender, String permission) {
+		String lang = null;
+	    if (sender instanceof Player) {
+	        Player player = (Player) sender;
+	        lang = LangUtils.getPlayerLanguage(player);
+	        // Перевіряємо наявність дозволу
+	        if (!player.hasPermission("permission")) {
+	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission", lang, true));
+	            return "no_permission";
+	        }
+	    }
+		return lang;
+	}
 
+	private String getPluginName() {
+		return "[" + ItemLingo.getInstance().getConfigurationManager().getPluginName() + "] ";
+	}
 }
