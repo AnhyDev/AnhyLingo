@@ -1,83 +1,81 @@
-![](https://app.anh.ink/images/ItemLingoLogo.png)
+**ItemLingo** is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, and to see item names and descriptions in their chosen language. Tested on servers with **`Spigot`**, **`Paper`**, **`Purpur`** cores version **`1.20.2`**. Requires the latest version of the `**ProtocolLib**` plugin.
 
-**ItemLingo** - це плагін для серверів Minecraft, призначений для створення багатомовного інтерфейсу. Він дозволяє гравцям отримувати системні повідомлення, повідомлення від інших плагінів, а також бачити назви та описи предметів на мові яку вони обрали. Протестовано на серверах з ядрами **`Spigot`**, **`Paper`**, **`Purpur`** версії **`1.20.2`**. Для роботи потрібна остання версія плагіну `**ProtocolLib**`.
+### Main Features
 
-### Основні Функції
+1.  #### Multilingualism:
 
-1.  #### Багатомовність:
+    *   Displaying text in the game chat and on the action bar in different languages.
+    *   Automatically uses Minecraft client's language settings if the player hasn't set their own language.
+2.  #### Language Personalization (Commands for Players):
 
-    *   Відображення тексту в ігровому чаті та на екшнбарі на різних мовах.
-    *   Автоматичне використання мовних налаштувань клієнта Minecraft, якщо гравець не встановив свою мову.
-2.  #### Персоналізація Мови (Команди для Гравців):
+    *   **`/lingo set [en|es|ua|ru]`** - setting a preferred language.
+    *   **`/lingo reset`** - resetting the set language.
+    *   **`/lingo get`** - viewing the chosen language.
+    *   If a player has not chosen or has reset their language settings, the plugin uses the language settings of the Minecraft client.
+3.  #### Automatic Item Renaming:
 
-    *   **`/lingo set [en|es|ua|ru]`** - встановлення переважної мови.
-    *   **`/lingo reset`** - скидання встановленої мови.
-    *   **`/lingo get`** - перегляд обраної мови.
-    *   Якщо гравець  не обрав, або скинув свої мовні налаштування, плагін  використовує мовні налаштування клієнта Minecraf.
-3.  #### Автоматичне Переіменування Предметів:
+    *   Renaming the name and lore of custom items to the player's language during player interaction with the item in the inventory.
+    *   Automatically sets an NBT tag with the language during renaming, to prevent unnecessary renamings.
+    *   The item is not modified in cases where the item's language matches the player's language, or when more than one player is looking at the inventory simultaneously.
 
-    *   Переіменування назви та лору кастомних предметів на мову гравця, під час взаємодії гравця з предметом у інвентарі.
-    *   Автоматичне встановлення NBT-тегу з мовою під час переіменування, для запобігання зайвим переіменуванням.
-    *   Предмет не модифікується у випадках, якщо мова предмету відповідає мові гравця, або, коли в інвентар одночасно дивляться більше одного гравця
-
-> Для того, щоб плагін **ItemLingo** міг відслідковувати та переіменовувати певні предмети, необхідно додати до них спеціальний NBT-тег **`ItemLingo`**. Цей тег повинен містити рядкове значення, яке відповідає ключу в мовному файлі.
+> For the **ItemLingo** plugin to track and rename certain items, it is necessary to add a special NBT tag **`ItemLingo`** to them. This tag should contain a string value that corresponds to the key in the language file.
 > 
-> ##### Додавання NBT-Тегу до Предмету
+> ##### Adding an NBT Tag to an Item
 > 
-> *   *   Команда для Додавання Тегу, приклад:
+> *   *   Command for Adding a Tag, example:
 >         
 >         
 >         *   **`/lingo nbt set ItemLingo string:magic_wand`**
->             *   Ця команда додає до предмету, який знаходиться в руках гравця, NBT-тег ItemLingo з рядковим значенням `magic_wand`.
->             *   Значення `magic_wand` відповідає ключу, який має бути в мовному файлі.
->     *   Використання Інших плагінів:
+>             *   This command adds the NBT tag ItemLingo with the string value `magic_wand` to the item in the player's hands.
+>             *   The value `magic_wand` corresponds to the key in the language file.
+>     *   Using Other Plugins:
 >         
 >         
->         *   Адміністратори можуть також використовувати функціонал інших плагінів для додавання цього NBT-тегу до предметів.
->         *   Головне, щоб NBT-тег мав назву **`ItemLingo`** та рядкове значення, яке відповідає ключу з мовного файлу.
+>         *   Administrators can also use the functionality of other plugins to add this NBT tag to items.
+>         *   It is important that the NBT tag is named **`ItemLingo`** and has a string value that corresponds to the key from the language file.
 > 
-> Ця функція забезпечує можливість переіменування певних предметів на сервері відповідно до вибраної мови гравця, роблячи ігровий процес більш інтерактивним та зручним для гравців, які використовують різні мови.
+> This feature ensures the ability to rename certain items on the server according to the player's chosen language, making the gameplay more interactive and convenient for players using different languages.
 
-#### Конфігурація (config.yml)
+#### Configuration (config.yml)
 
-*   **`language`**: Мова за замовчуванням для системних повідомлень.
-*   **`allowed_directories`**: Дозволені директорії для взаємодії командами.
+*   **`language`**: Default language for system messages.
+*   **`allowed_directories`**: Allowed directories for interaction by commands.
 
-#### Структура Директорій
+#### Directory Structure
 
-*   **`items`**: Файли з перекладами назв та лору кастомних предметів.
-*   **`system`**: Файли з перекладами системних повідомлень та повідомлень від плагінів.
-*   Файли повинні мати формат назви: "`xxx_[код мови].yml`", наприклад "`lingo_en.yml`", файли які не відповідають стандарту не зчитуються
+*   **`items`**: Files with translations of names and lore of custom items.
+*   **`system`**: Files with translations of system messages and messages from plugins.
+*   Files must have a naming format: "`xxx_[language code].yml`", e.g., "`lingo_en.yml`", files that do not meet the standard are not read.
 
-#### Команди Адміністратора (з дозволом itemlingo.manager)
+#### Administrator Commands (with itemlingo.manager permission)
 
-1.  Команди Завантаження Файлів:
+1.  File Download Commands:
 
     *   `**/lingo fl link_to_file directory true|false**`:
-        *   Завантаження мовних файлів у вказані дерикторії в папці плагіна **ItemLingo**.
-        *   `link_to_file`: Пряме посилання на файл.
-        *   `directory`: Директорія, в яку завантажується файл `items|system` .
-        *   `true|false`: Параметр для визначення можливості перезапису файлу.
-        *   Вимоги до файлу: валідний yml-формат, назва файлу відповідає масці `xxx_[код мови].yml`.
+        *   Downloading language files to the specified directories in the **ItemLingo** plugin folder.
+        *   `link_to_file`: Direct link to the file.
+        *   `directory`: Directory where the file is downloaded `items|system`.
+        *   `true|false`: Parameter for determining the ability to overwrite the file.
+        *   File requirements: valid yml format, file name corresponds to the mask `xxx_[language code].yml`.
     *   `**/lingo fo link_to_file directory true|false**`:
-        *   Завантаження будь-яких файлів у директорію `directory`, яка знаходиться в межах папки плагінів сервера.
-        *   <span style="border: 0px solid #d9d9e3; box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-scroll-snap-strictness: proximity; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; font-weight: 600; color: var(--tw-prose-bold);">Важливо:</span> Завантаження можливе лише в ті директорії, які визначені як дозволені в конфігураційному файлі плагіна (`allowed_directories`).
-        *   У випадку, якщо піддиректорія в межах дозволеної директорії не існує, вона буде автоматично створена під час виконання команди.
-        *   `link_to_file`: Пряме посилання на файл для завантаження.
-        *   `directory`: Цільова директорія для файлу в межах директорій плагінів сервера.
-        *   `true|false`: Параметр, який визначає, чи дозволено перезаписувати вже існуючі файли.
-2.  **`/lingo dir [directory]`**: Показує вміст папки `directory`, яка знаходиться в директорії плагінів сервера.
+        *   Downloading any files to the `directory` within the server's plugin folders.
+        *   <span style="border: 0px solid #d9d9e3; box-sizing: border-box; --tw-border-spacing-x: 0; --tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-scroll-snap-strictness: proximity; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgba(69,89,164,.5); --tw-ring-offset-shadow: 0 0 transparent; --tw-ring-shadow: 0 0 transparent; --tw-shadow: 0 0 transparent; --tw-shadow-colored: 0 0 transparent; font-weight: 600; color: var(--tw-prose-bold);">Important:</span> Downloading is only possible in directories defined as allowed in the plugin's configuration file (`allowed_directories`).
+        *   If a subdirectory within an allowed directory does not exist, it will be automatically created during command execution.
+        *   `link_to_file`: Direct link to the file for download.
+        *   `directory`: The target directory for the file within the server's plugin directories.
+        *   `true|false`: Parameter determining whether it is allowed to overwrite existing files.
+2.  **`/lingo dir [directory]`**: Shows the contents of the `directory` folder in the server's plugin directory.
 
-3.  **`/lingo reload`**: Перезавантаження конфігурації плагіна.
+3.  **`/lingo reload`**: Reloading the plugin's configuration.
 
-4.  **`/lingo list <lang>`**: Відображає список "ключів" усіх предметів, для яких існує переклад на вказаній мові.
+4.  **`/lingo list <lang>`**: Displays a list of "keys" of all items for which a translation exists in the specified language.
 
-5.  **`/lingo item <lang> <key>`**: Показує назву та лор на вказаній мові для вказаного ключа.
+5.  **`/lingo item <lang> <key>`**: Shows the name and lore in the specified language for the specified key.
 
 6.  **`/lingo nbt set <nbt_key> <params...>`**:
 
-    *   Встановлення NBT-тегу nbt_key з параметрами params, з вказівкою типу даних (напр., `string:value, int:10, int:10`).
-    *   Приклади типів значень: `int, double, intarray, string`.
-7.  **`/lingo list`**: Список NBT-тегів предмету, який знаходиться в руках гравця.
+    *   Setting the NBT tag nbt_key with params, specifying the data type (e.g., `string:value, int:10, int:10`).
+    *   Examples of value types: `int, double, intarray, string`.
+7.  **`/lingo list`**: List of NBT tags of the item in the player's hands.
 
-8.  **`/lingo nbt info <nbt_key>`**: Показує значення конкретного NBT-тегу предмету, що знаходиться в руках гравця.
+8.  **`/lingo nbt info <nbt_key>`**: Shows the value of a specific NBT tag of the item in the player's hands.
