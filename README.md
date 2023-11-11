@@ -1,3 +1,5 @@
+![](https://app.anh.ink/images/ItemLingoLogo.png)
+
 **ItemLingo** is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, and to see item names and descriptions in their chosen language. Tested on servers with **`Spigot`**, **`Paper`**, **`Purpur`** cores version **`1.20.2`**. Requires the latest version of the `**ProtocolLib**` plugin.
 
 ### Main Features
