@@ -26,9 +26,9 @@ public class StringUtils {
 	    }
 	    
 	    if (isSystemChat) {
-	        newWorld = itemLingoPlugin.getLanguageSystemChat().getChatData(lang, word);
+	        newWorld = itemLingoPlugin.getLanguageSystemChat().getData(lang, word);
 	    } else {
-	        newWorld = itemLingoPlugin.getLanguageChat().getChatData(lang, word);
+	        newWorld = itemLingoPlugin.getLanguageChat().getData(lang, word);
 	    }
 	    
 	    return newWorld != null ? newWorld : word;

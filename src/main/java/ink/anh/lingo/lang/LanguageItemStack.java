@@ -49,6 +49,10 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
                 ItemLang itemLang;
                 if (section.contains("copy")) {
                     itemLang = processCopiedItem(section, langMap);
+                    if (itemLang == null) {
+                        // Якщо processCopiedItem повертає null, пропускаємо цей елемент
+                        continue;
+                    }
                 } else {
                     // Звичайне зчитування предмета
                     String name = StringUtils.colorize(section.getString("name"));
@@ -71,7 +75,8 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         ItemLang baseItemLang = langMap.get(baseKey);
 
         if (baseItemLang == null) {
-            throw new IllegalStateException("Base item for copy not found: " + baseKey);
+            ItemLingo.error("Base item for copy not found: " + baseKey);
+            return null; // Повертаємо null, щоб уникнути подальшої обробки
         }
 
         String name = baseItemLang.getName();
@@ -94,32 +99,5 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
 
         String[] lore = loreList.toArray(new String[0]);
         return new ItemLang(name, lore);
-    }
-
-    public Map<String, ItemLang> getLanguageMap(String lang) {
-        Map<String, ItemLang> langMap = data.get(lang);
-        if (langMap != null) {
-            return langMap;
-        } else {
-            String defaultLanguage = itemLingoPlugin.getConfigurationManager().getDefaultLang();
-            langMap = data.get(defaultLanguage);
-            if (langMap != null) {
-                return langMap;
-            } else {
-                return data.get("en");
-            }
-        }
-    }
-
-    public ItemLang getItemData(String lang, String key) {
-        Map<String, ItemLang> langMap = getLanguageMap(lang);
-        if (langMap == null) {
-            return null;
-        }
-        return langMap.getOrDefault(key, null);
-    }
-
-    public boolean itemsDataContainsKey(String lang, String key) {
-        return getItemData(lang, key) != null;
     }
 }

@@ -28,7 +28,8 @@ public class FileCommandProcessor {
             fileLoader.processingFile(sender, url, directoryPath, isReplace);
             sender.sendMessage("File operation initiated for directory " + directoryPath);
         } else {
-            sender.sendMessage("Usage: /lingo fl/fo/fd <url> <path> [is_replaced]");
+            sender.sendMessage("Usage: /lingo fl/fo <url> <path> [is_replaced]");
+            sender.sendMessage("Usage: /lingo fd <path> <file_name>");
         }
         return true;
     }

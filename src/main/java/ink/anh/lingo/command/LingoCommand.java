@@ -1,6 +1,8 @@
 package ink.anh.lingo.command;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
@@ -185,7 +187,7 @@ public class LingoCommand implements CommandExecutor {
         String key = args[2];
 
         // Отримання об'єкта ItemLang
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getItemData(lang, key);
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(lang, key);
 
         if (itemLang == null) {
             sender.sendMessage("No item data found for the specified language and key.");
@@ -220,22 +222,28 @@ public class LingoCommand implements CommandExecutor {
 
         String lang = args[1];
 
-        // Отримання мапи для вказаної мови
-        Map<String, ItemLang> langMap = itemLingoPlugin.getLanguageItemStack().getLanguageMap(lang);
+        // Отримання мапи елементів з LanguageItemStack
+        Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getData();
 
-        if (langMap == null || langMap.isEmpty()) {
+        // Перебір усіх елементів, шукаючи ті, що відповідають вказаній мові
+        List<String> keysForLang = new ArrayList<>();
+        for (Map.Entry<String, Map<String, ItemLang>> entry : data.entrySet()) {
+            if (entry.getValue().containsKey(lang)) {
+                keysForLang.add(entry.getKey());
+            }
+        }
+
+        if (keysForLang.isEmpty()) {
             sender.sendMessage("No data found for the specified language.");
             return true;
         }
 
         // Виведення всіх ключів
         sender.sendMessage("Keys for language " + lang + ":");
-        for (String key : langMap.keySet()) {
+        for (String key : keysForLang) {
             sender.sendMessage(key);
-        }
-        if (isPlayer) {
-            for (String key : langMap.keySet()) {
-            	itemLingoPlugin.getLogger().info(key);
+            if (isPlayer) {
+                itemLingoPlugin.getLogger().info(key);
             }
         }
 

@@ -87,7 +87,7 @@ public class InventoryLocalizationListener implements Listener {
             String customID = String.valueOf(compound.getValue(key_NBT).getValue());
 
             // Якщо customID існує в нашому словнику, ми змінюємо ім'я та лор предмета
-            if (itemLingoPlugin.getLanguageItemStack().itemsDataContainsKey(playerLang, customID)) {
+            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, playerLang)) {
 
                 // Перевірка на наявність тегу lang_NBT та його відповідність playerLang
                 if (compound.containsKey(lang_NBT)) {
@@ -122,12 +122,12 @@ public class InventoryLocalizationListener implements Listener {
     }
 
     private String getTranslatedName(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getItemData(lang, customID);
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
         return itemLang != null ? itemLang.getName() : null; 
     }
 
     private List<String> getTranslatedLore(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getItemData(lang, customID);
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
         return itemLang != null && itemLang.getLore() != null ? Arrays.asList(itemLang.getLore()) : null;
     }
     
