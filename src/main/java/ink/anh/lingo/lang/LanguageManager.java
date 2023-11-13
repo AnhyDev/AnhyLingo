@@ -7,16 +7,9 @@ import java.util.Map;
 
 public abstract class LanguageManager extends AbstractLanguage<String> {
 	
-    private String directory;
 
     public LanguageManager(ItemLingo itemLingoPlugin, String directory) {
-        super(itemLingoPlugin);
-        this.directory = directory;
-    }
-
-    @Override
-    protected String getDirectory() {
-        return directory;
+        super(itemLingoPlugin, directory);
     }
 
 	@Override

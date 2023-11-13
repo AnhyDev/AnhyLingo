@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class LanguageItemStack extends AbstractLanguage<ItemLang> {
 
     private static LanguageItemStack instance = null;
-
     private static final Object LOCK = new Object();
+    private static final String DIRECTORY = "items";
     
     public LanguageItemStack(ItemLingo plugin) {
-        super(plugin);
+        super(plugin, DIRECTORY);
     }
 
     public static LanguageItemStack getInstance(ItemLingo itemLingoPlugin) {
@@ -31,11 +31,6 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
             }
         }
         return instance;
-    }
-
-    @Override
-    protected String getDirectory() {
-        return "items";
     }
 
     @Override

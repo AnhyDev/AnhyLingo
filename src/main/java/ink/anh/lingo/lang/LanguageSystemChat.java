@@ -6,10 +6,10 @@ public class LanguageSystemChat extends LanguageManager {
 
     private static LanguageSystemChat instance = null;
     private static final Object LOCK = new Object();
-    private static final String CHAT_TYPE = "system";
+    private static final String DIRECTORY = "system";
 
     private LanguageSystemChat(ItemLingo itemLingoPlugin) {
-        super(itemLingoPlugin, CHAT_TYPE);
+        super(itemLingoPlugin, DIRECTORY);
     }
 
     public static LanguageSystemChat getInstance(ItemLingo itemLingoPlugin) {

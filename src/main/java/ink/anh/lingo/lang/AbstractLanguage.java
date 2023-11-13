@@ -15,15 +15,20 @@ public abstract class AbstractLanguage<T> {
 
     public static final String[] DEFAULT_LANGS = {"en", "ua", "ru"}; // всі мови за замовчуванням
     protected Map<String, Map<String, T>> data = new HashMap<>();
+    private String directory;
 
-    public AbstractLanguage(ItemLingo itemLingoPlugin) {
+    public AbstractLanguage(ItemLingo itemLingoPlugin, String directory) {
         this.itemLingoPlugin = itemLingoPlugin;
+        this.directory = directory;
         saveDefaultLang();
         loadLanguages();
     }
-
-    protected abstract String getDirectory();
+    
     protected abstract Map<String, T> extractData(FileConfiguration langConfig);
+
+    protected String getDirectory() {
+        return directory;
+    }
 
     private void saveDefaultLang() {
         File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
