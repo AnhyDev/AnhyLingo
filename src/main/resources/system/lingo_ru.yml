@@ -1,7 +1,24 @@
+# Общее
 lingo_err_not_have_permission: "У вас нет разрешения на использование этой команды."
-lingo_err_folder_is_empty: "Папка пуста или произошла ошибка при её чтении."
-lingo_err_folder_is_notexist: "Папки не существует или это не папка."
+# Загрузка конфигураций
+lingo_err_folder_is_empty: "Папка пуста или произошла ошибка при ее чтении."
+lingo_err_folder_is_notexist: "Папка не существует или это не папка."
 lingo_err_reloading_configuration: "Ошибка перезагрузки конфигурации."
 lingo_created_default_configuration: "Создана конфигурация по умолчанию."
 lingo_configuration_reloaded: "Конфигурация перезагружена."
 lingo_language_reloaded: "Языковые файлы и конфигурация перезагружены."
+# Удаление файлов
+lingo_err_not_allowed_to_delete: "Не разрешено удалять файлы из этой папки: "
+lingo_err_folder_does_not_exist: "Папка не существует: "
+lingo_file_deleted_successfully: "Файл успешно удален: "
+lingo_err_not_allowed_delete_from_this_folder: "Не удалось удалить файл: "
+lingo_err_file_not_found: "Файл не найден: "
+lingo_err_error_deleting_file: "Ошибка при удалении файла: "
+# Загрузка разных файлов
+lingo_err_uploading_not_allowed: "Не разрешено загружать в эту папку: "
+lingo_err_failed_create_folder: "Не удалось создать папку: "
+lingo_err_error_loading_file: "Ошибка при загрузке файла: "
+lingo_err_file_already_exists: "Файл уже существует: "
+lingo_err_error_in_URL: "Ошибка в URL: "
+lingo_file_uploaded_successfully: "Файл успешно загружен: "
+# Загрузка языковых файлов ItemLingo

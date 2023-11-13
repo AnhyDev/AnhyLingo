@@ -1,7 +1,24 @@
+# General
 lingo_err_not_have_permission: "You do not have permission to use this command."
+# Loading configurations
 lingo_err_folder_is_empty: "The folder is empty or an error occurred while reading it."
 lingo_err_folder_is_notexist: "The folder does not exist or it is not a folder."
 lingo_err_reloading_configuration: "Error reloading configuration."
 lingo_created_default_configuration: "Default configuration created."
 lingo_configuration_reloaded: "Configuration reloaded."
 lingo_language_reloaded: "Language files and configuration reloaded."
+# Deleting files
+lingo_err_not_allowed_to_delete: "Not allowed to delete files from this folder: "
+lingo_err_folder_does_not_exist: "Folder does not exist: "
+lingo_file_deleted_successfully: "File successfully deleted: "
+lingo_err_not_allowed_delete_from_this_folder: "Failed to delete file: "
+lingo_err_file_not_found: "File not found: "
+lingo_err_error_deleting_file: "Error deleting file: "
+# Uploading various files
+lingo_err_uploading_not_allowed: "Not allowed to upload to this folder: "
+lingo_err_failed_create_folder: "Failed to create folder: "
+lingo_err_error_loading_file: "Error loading file: "
+lingo_err_file_already_exists: "File already exists: "
+lingo_err_error_in_URL: "Error in URL: "
+lingo_file_uploaded_successfully: "File uploaded successfully: "
+# Loading ItemLingo language files
