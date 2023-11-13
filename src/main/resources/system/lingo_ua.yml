@@ -1,7 +1,47 @@
+# Загальне
 lingo_err_not_have_permission: "Ви не маєте дозволу на використання цієї команди."
+# Завантаження конфігурацій
 lingo_err_folder_is_empty: "Папка порожня або сталася помилка при її читанні."
 lingo_err_folder_is_notexist: "Папка не існує або це не папка."
 lingo_err_reloading_configuration: "Помилка перезавантаження конфігурації."
 lingo_created_default_configuration: "Створена конфігурація за замовчуванням."
 lingo_configuration_reloaded: "Конфігурацію перезавантажено."
 lingo_language_reloaded: "Мовні файли та конфігурацію перезавантажено."
+# Видалення файлів
+lingo_err_not_allowed_to_delete: "Не дозволено видаляти файли з цієї папки: "
+lingo_err_folder_does_not_exist: "Папка не існує: "
+lingo_file_deleted_successfully: "Файл успішно видалено: "
+lingo_err_not_allowed_delete_from_this_folder: "Не вдалося видалити файл: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_error_deleting_file: "Помилка при видаленні файлу: "
+# Завантаженні різних файлів
+lingo_err_uploading_not_allowed: "Не дозволено завантажувати в цю папку: "
+lingo_err_failed_create_folder: "Не вдалося створити папку: "
+lingo_err_error_loading_file: "Помилка при завантаженні файлу: "
+lingo_err_file_already_exists: "Файл вже існує: "
+lingo_err_error_in_URL: "Помилка в URL: "
+lingo_file_uploaded_successfully: "Файл успішно завантажено: "
+# Завантаження мовних файлів ItemLingo
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+#
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+#
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+#
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "
+lingo_err_file_not_found: "Файл не знайдено: "

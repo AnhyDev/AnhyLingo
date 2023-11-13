@@ -18,6 +18,7 @@ public class ConfigurationManager {
     private boolean debug;
     private boolean debugPacketShat;
     private List<String> allowedDirectories;
+    private List<String> allowedDirectoriesForDeletion;
 
     ConfigurationManager(ItemLingo plugin) {
         this.itemLingoPlugin = plugin;
@@ -33,7 +34,8 @@ public class ConfigurationManager {
             defaultConfig.set("plugin_name", "ItemLingo");
             defaultConfig.set("debug", false);
             defaultConfig.set("debug_packet_chat", false);
-            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo/items", "ItemLingo/system"));
+            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
+            defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
             try {
                 defaultConfig.save(configFile);
                 ItemLingo.warn("Default configuration created.");
@@ -65,6 +67,7 @@ public class ConfigurationManager {
         debug = itemLingoPlugin.getConfig().getBoolean("debug", false);
         debugPacketShat = itemLingoPlugin.getConfig().getBoolean("debug_packet_chat", false);
         allowedDirectories = itemLingoPlugin.getConfig().getStringList("allowed_directories");
+        allowedDirectoriesForDeletion = itemLingoPlugin.getConfig().getStringList("allowed_del_directories");
     }
 
     public String getDefaultLang() {
@@ -92,7 +95,20 @@ public class ConfigurationManager {
         return false;
     }
 
+    public boolean isPathDeleteAllowed(String path) {
+        for (String allowedPath : allowedDirectoriesForDeletion) {
+            if (path.contains(allowedPath)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public String getPluginName() {
 		return pluginName;
+	}
+
+	public List<String> getAllowedDirectoriesForDeletion() {
+		return allowedDirectoriesForDeletion;
 	}
 }

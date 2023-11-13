@@ -18,14 +18,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.lang.ItemLang;
 
-public class YamlFileLoader extends AbstractFileLoader {
+public class YamlFileLoader extends AbstractFileManager {
     
     public YamlFileLoader(ItemLingo plugin) {
     	super(plugin);
 	}
 
     @Override
-    public void loadFile(CommandSender sender, String urlString, String directory, boolean overwriteExisting) {
+    public void processingFile(CommandSender sender, String urlString, String directory, boolean overwriteExisting) {
         Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
             try {
                 URL fileUrl = new URL(urlString);

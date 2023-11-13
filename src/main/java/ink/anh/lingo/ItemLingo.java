@@ -34,8 +34,8 @@ public class ItemLingo extends JavaPlugin {
     public void onEnable() {
     	checkDepends("ProtocolLib");
     	checkServer();
-        languageSystemChat = LanguageSystemChat.getInstance(this);
         configurationManager = new ConfigurationManager(this);
+        languageSystemChat = LanguageSystemChat.getInstance(this);
         languageItemStack = LanguageItemStack.getInstance(this);
         languageChat = LanguageChat.getInstance(this);
         new PacketListenerManager().addListeners();
@@ -93,7 +93,7 @@ public class ItemLingo extends JavaPlugin {
     }
 
     public static void info(String message) {
-    	instance.getLogger().info(message);
+    	instance.getLogger().info("\u001b[0;94m" + message + "\u001b[m");
     }
 
     public static void warn(String message) {

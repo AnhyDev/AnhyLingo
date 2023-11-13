@@ -10,14 +10,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.lingo.ItemLingo;
-import ink.anh.lingo.file.AbstractFileLoader;
 import ink.anh.lingo.file.DirectoryContents;
+import ink.anh.lingo.file.FileProcessType;
+import ink.anh.lingo.file.FileCommandProcessor;
 import ink.anh.lingo.lang.ItemLang;
 import ink.anh.lingo.player.PlayerData;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.utils.StringUtils;
-import ink.anh.lingo.file.SimpleFileLoader;
-import ink.anh.lingo.file.YamlFileLoader;
 
 public class LingoCommand implements CommandExecutor {
 	
@@ -48,38 +47,20 @@ public class LingoCommand implements CommandExecutor {
                 return resetLang(sender);
             case "dir":
                 return directory(sender, args);
+            case "flingo":
             case "fl":
-                return loadFile(sender, args, true);
+                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.YAML_LOADER);
+            case "fother":
             case "fo":
-                return loadFile(sender, args, false);
+                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.SIMPLE_LOADER);
+            case "fdel":
+            case "fd":
+                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.FILE_DELETER);
             default:
                 return false;
             }
         }
 		return false;
-	}
-	
-	private boolean loadFile(CommandSender sender, String[] args, boolean isYaml) {
-		String permission = isYaml ? "itemlingo.file.lingo" : "itemlingo.file.other";
-    	String lang = checkPlayerPermissions(sender, permission);
-	    if (lang != null && lang.equals("no_permission")) {
-            return true;
-	    }
-	    
-	    if (args.length == 4) {
-	        String url = args[1];
-	        String directoryPath = args[2];
-	        boolean isReplace = Boolean.parseBoolean(args[3]);
-	        
-	        // Вибираємо відповідний лоадер на основі параметра isYaml
-	        AbstractFileLoader fileLoader = isYaml ? new YamlFileLoader(itemLingoPlugin) : new SimpleFileLoader(itemLingoPlugin);
-	        
-	        fileLoader.loadFile(sender, url, directoryPath, isReplace);
-	        sender.sendMessage("File loading initiated for directory " + directoryPath);
-	    } else {
-	        sender.sendMessage("Usage: /lingo fl/fo <url> <path> <is_replaced>");
-	    }
-	    return true;
 	}
 
     private boolean directory(CommandSender sender, String[] args) {

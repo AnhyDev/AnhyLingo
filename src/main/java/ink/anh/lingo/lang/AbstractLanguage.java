@@ -56,7 +56,7 @@ public abstract class AbstractLanguage<T> {
                 itemLingoPlugin.saveResource(getDirectory() + "/" + filename, false);
             } else if (!file.exists()) {
                 // Логування чи інше повідомлення про те, що файл у пакеті не знайдено
-            	ItemLingo.error("Не вдалося знайти ресурс: " + filename);
+            	ItemLingo.error("The resource could not be found: " + filename);
             }
         }
     }
@@ -65,7 +65,7 @@ public abstract class AbstractLanguage<T> {
         File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
 
         if (dir.listFiles() != null && dir.listFiles().length > 0 && itemLingoPlugin.getConfigurationManager().isDebug()) {
-        	ItemLingo.info("Список файлів:");
+        	ItemLingo.info("List of files:");
 
             // Пройдіться по кожному файлу в масиві і виведіть їх імена
             for (File file : dir.listFiles()) {
@@ -80,7 +80,7 @@ public abstract class AbstractLanguage<T> {
 
         if (files == null || files.length == 0) {
             // Логування, якщо не знайдено файлів
-        	ItemLingo.error("No language files found in directory: " + dir.getAbsolutePath());
+        	ItemLingo.error("No language files found in directory: " + dir);
             return;
         }
 
@@ -99,7 +99,7 @@ public abstract class AbstractLanguage<T> {
             }
 
             // Додавання запису до логу про завантаження файлу
-            ItemLingo.warn("Loaded language file: " + dir + "/" + fileName);
+            ItemLingo.info("Loaded language file: " + dir + "/" + fileName);
         }
     }
     
