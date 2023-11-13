@@ -109,6 +109,6 @@ public class PacketTITLE extends AbstractPacketListener {
 
     @Override
     public String getTranslatedText(String key, String lang) {
-        return itemLingoPlugin.getLanguageChat().getData(lang, key); 
+        return itemLingoPlugin.getLanguageChat().getData(key, lang); 
     }
 }

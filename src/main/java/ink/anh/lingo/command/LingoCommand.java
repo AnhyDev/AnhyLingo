@@ -187,7 +187,7 @@ public class LingoCommand implements CommandExecutor {
         String key = args[2];
 
         // Отримання об'єкта ItemLang
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(lang, key);
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(key, lang);
 
         if (itemLang == null) {
             sender.sendMessage("No item data found for the specified language and key.");
@@ -223,7 +223,7 @@ public class LingoCommand implements CommandExecutor {
         String lang = args[1];
 
         // Отримання мапи елементів з LanguageItemStack
-        Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getData();
+        Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getDataMap();
 
         // Перебір усіх елементів, шукаючи ті, що відповідають вказаній мові
         List<String> keysForLang = new ArrayList<>();

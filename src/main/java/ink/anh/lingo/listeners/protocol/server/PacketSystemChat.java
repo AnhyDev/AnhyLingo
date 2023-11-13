@@ -126,6 +126,6 @@ public class PacketSystemChat extends AbstractPacketListener {
 
     @Override
     public String getTranslatedText(String key, String lang) {
-        return itemLingoPlugin.getLanguageSystemChat().getData(lang, key); 
+        return itemLingoPlugin.getLanguageSystemChat().getData(key, lang); 
     }
 }

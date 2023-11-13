@@ -92,7 +92,7 @@ public abstract class AbstractLanguage<T> {
         loadLanguages();
     }
     
-    public Map<String, Map<String, T>> getData() {
+    public Map<String, Map<String, T>> getDataMap() {
         return data;
     }
 
