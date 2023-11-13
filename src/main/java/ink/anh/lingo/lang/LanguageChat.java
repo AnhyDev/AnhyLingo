@@ -27,11 +27,6 @@ public class LanguageChat extends AbstractLanguage<String> {
     }
 
     @Override
-    protected String getPrefix() {
-        return "chat_";
-    }
-
-    @Override
     protected String getDirectory() {
         return "chat";
     }

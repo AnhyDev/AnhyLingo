@@ -34,11 +34,6 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     }
 
     @Override
-    protected String getPrefix() {
-        return null;
-    }
-
-    @Override
     protected String getDirectory() {
         return "items";
     }

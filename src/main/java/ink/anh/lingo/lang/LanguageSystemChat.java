@@ -27,11 +27,6 @@ public class LanguageSystemChat extends AbstractLanguage<String> {
     }
 
     @Override
-    protected String getPrefix() {
-        return null;
-    }
-
-    @Override
     protected String getDirectory() {
         return "system";
     }
