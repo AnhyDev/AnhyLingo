@@ -38,7 +38,7 @@ public class ConfigurationManager {
             defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
             try {
                 defaultConfig.save(configFile);
-                ItemLingo.warn("Default configuration created.");
+                ItemLingo.warn("Default configuration created. ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,11 +52,11 @@ public class ConfigurationManager {
             itemLingoPlugin.getLanguageSystemChat().reloadLanguages();
             itemLingoPlugin.getLanguageItemStack().reloadLanguages();
             itemLingoPlugin.getLanguageChat().reloadLanguages();
-            ItemLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded", defaultLang, true));
+            ItemLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , defaultLang, true));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            ItemLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration", defaultLang, true));
+            ItemLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", defaultLang, true));
             return false;
         }
     }

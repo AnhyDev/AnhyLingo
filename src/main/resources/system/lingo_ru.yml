@@ -21,4 +21,5 @@ lingo_err_error_loading_file: "Ошибка при загрузке файла: 
 lingo_err_file_already_exists: "Файл уже существует: "
 lingo_err_error_in_URL: "Ошибка в URL: "
 lingo_file_uploaded_successfully: "Файл успешно загружен: "
+lingo_file_updated_successfully: "Файл успешно обновлен: "
 # Загрузка языковых файлов ItemLingo

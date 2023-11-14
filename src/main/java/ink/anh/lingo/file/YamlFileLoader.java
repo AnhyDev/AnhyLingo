@@ -1,8 +1,6 @@
 package ink.anh.lingo.file;
 
 
-import java.io.InputStream;
-import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
@@ -31,7 +29,7 @@ public class YamlFileLoader extends AbstractFileManager {
                 URL fileUrl = new URL(urlString);
                 File dir = new File(itemLingoPlugin.getDataFolder(), directory);
                 if (!dir.exists()) {
-                    sender.sendMessage("Папка не існує: " + dir.getPath());
+                    sender.sendMessage("lingo_err_folder_does_not_exist " + dir.getPath());
                     return; // Вихід з методу, якщо папка не існує
                 }
 
@@ -39,26 +37,25 @@ public class YamlFileLoader extends AbstractFileManager {
                 File destinationFile = new File(dir, fileName);
 
                 // Перевіряємо, чи потрібно оновлювати або створювати файл
-                if (!destinationFile.exists() || (overwriteExisting && needsUpdate(sender, destinationFile, fileUrl, directory))) {
-                    try (InputStream in = fileUrl.openStream();
-                         FileOutputStream out = new FileOutputStream(destinationFile)) {
-                        byte[] buffer = new byte[1024];
-                        int length;
-                        while ((length = in.read(buffer)) > 0) {
-                            out.write(buffer, 0, length);
-                        }
-                    }
+                if (!destinationFile.exists()) {
+                    saveFileFromUrl(fileUrl, destinationFile);
+                    sender.sendMessage("lingo_file_uploaded_successfully " + destinationFile.getPath());
+                } else if (overwriteExisting && needsUpdate(sender, destinationFile, fileUrl, directory)) {
+                    saveFileFromUrl(fileUrl, destinationFile);
+                    sender.sendMessage("lingo_file_updated_successfully " + destinationFile.getPath());
+                } else {
+                    sender.sendMessage("lingo_err_file_already_exists " + destinationFile.getPath());
                 }
             } catch (MalformedURLException e) {
-                sender.sendMessage("Помилка в URL: " + e.getMessage());
+                sender.sendMessage("lingo_err_error_in_URL " + e.getMessage());
             } catch (IOException e) {
-                e.printStackTrace();
+            	sender.sendMessage("lingo_err_error_loading_file " + e.getMessage());
             }
         });
     }
 
     private boolean needsUpdate(CommandSender sender, File file, URL url, String directory) {
-        String langFileRegex = "_[a-zA-Z]{2}\\.yml";
+        String langFileRegex = "*._[a-zA-Z]{2}\\.yml";
         
         // Перевірте, чи назва файлу відповідає шаблону
         if (!file.getName().matches(langFileRegex)) {

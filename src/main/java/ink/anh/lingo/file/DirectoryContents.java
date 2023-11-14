@@ -36,10 +36,10 @@ public class DirectoryContents {
                     }
                 }
             } else {
-            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty", lang, true));
+            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty" , lang, true));
             }
         } else {
-        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist", lang, true));
+        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist ", lang, true));
         }
     }
 }

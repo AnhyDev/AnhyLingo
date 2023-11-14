@@ -18,7 +18,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
         Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
             try {
                 if (!isPathAllowed(directoryPath, true)) {
-                    sender.sendMessage("lingo_err_not_allowed_to_delete" + directoryPath);
+                    sender.sendMessage("lingo_err_not_allowed_to_delete " + directoryPath);
                     return;
                 }
 
@@ -26,7 +26,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
                 File dir = new File(itemLingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
 
                 if (!dir.exists()) {
-                    sender.sendMessage("lingo_err_folder_does_not_exist" + dir.getPath());
+                    sender.sendMessage("lingo_err_folder_does_not_exist " + dir.getPath());
                     return;
                 }
 
@@ -34,15 +34,15 @@ public class SimpleFileDeleter extends AbstractFileManager {
 
                 if (fileToDelete.exists()) {
                     if (fileToDelete.delete()) {
-                        sender.sendMessage("lingo_file_deleted_successfully" + fileToDelete.getPath());
+                        sender.sendMessage("lingo_file_deleted_successfully " + fileToDelete.getPath());
                     } else {
-                        sender.sendMessage("lingo_err_not_allowed_delete_from_this_folder" + fileToDelete.getPath());
+                        sender.sendMessage("lingo_err_not_allowed_delete_from_this_folder " + fileToDelete.getPath());
                     }
                 } else {
-                    sender.sendMessage("lingo_err_file_not_found" + fileToDelete.getPath());
+                    sender.sendMessage("lingo_err_file_not_found " + fileToDelete.getPath());
                 }
             } catch (Exception e) {
-                sender.sendMessage("lingo_err_error_deleting_file" + e.getMessage());
+                sender.sendMessage("lingo_err_error_deleting_file " + e.getMessage());
             }
         });
     }

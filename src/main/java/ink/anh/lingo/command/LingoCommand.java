@@ -89,7 +89,7 @@ public class LingoCommand implements CommandExecutor {
 	    }
 	    
         if (itemLingoPlugin.getConfigurationManager().reload()) {
-            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded", lang, true));
+            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", lang, true));
             return true;
         }
         return false;
@@ -257,7 +257,7 @@ public class LingoCommand implements CommandExecutor {
 	        lang = LangUtils.getPlayerLanguage(player);
 	        // Перевіряємо наявність дозволу
 	        if (!player.hasPermission("permission")) {
-	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission", lang, true));
+	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", lang, true));
 	            return "no_permission";
 	        }
 	    }

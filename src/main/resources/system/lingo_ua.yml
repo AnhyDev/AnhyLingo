@@ -21,6 +21,7 @@ lingo_err_error_loading_file: "Помилка при завантаженні ф
 lingo_err_file_already_exists: "Файл вже існує: "
 lingo_err_error_in_URL: "Помилка в URL: "
 lingo_file_uploaded_successfully: "Файл успішно завантажено: "
+lingo_file_updated_successfully: "Файл успішно оновлено: "
 # Завантаження мовних файлів ItemLingo
 lingo_err_file_not_found: "Файл не знайдено: "
 lingo_err_file_not_found: "Файл не знайдено: "

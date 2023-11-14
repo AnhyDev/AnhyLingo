@@ -21,4 +21,5 @@ lingo_err_error_loading_file: "Error loading file: "
 lingo_err_file_already_exists: "File already exists: "
 lingo_err_error_in_URL: "Error in URL: "
 lingo_file_uploaded_successfully: "File uploaded successfully: "
+lingo_file_updated_successfully: "File updated successfully: "
 # Loading ItemLingo language files

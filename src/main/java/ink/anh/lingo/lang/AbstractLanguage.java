@@ -84,6 +84,9 @@ public abstract class AbstractLanguage<T> {
                 
                 data.computeIfAbsent(key, k -> new HashMap<>()).put(lang, value);
             }
+            
+            if (itemLingoPlugin.getConfigurationManager().isDebug())
+            ItemLingo.info("Upload file: " + dir + "/" + fileName);
         }
     }
     
