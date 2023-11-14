@@ -53,7 +53,7 @@ public abstract class AbstractLanguage<T> {
         File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
 
         if (dir.listFiles() != null && dir.listFiles().length > 0 && itemLingoPlugin.getConfigurationManager().isDebug()) {
-            ItemLingo.info("List of files:");
+            ItemLingo.info("List of directory files: ../" + dir + "/");
 
             for (File file : dir.listFiles()) {
                 ItemLingo.info(file.getName());

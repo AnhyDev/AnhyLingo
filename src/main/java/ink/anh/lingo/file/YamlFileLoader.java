@@ -15,6 +15,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.lang.ItemLang;
+import ink.anh.lingo.messages.MessageType;
 
 public class YamlFileLoader extends AbstractFileManager {
     
@@ -29,7 +30,7 @@ public class YamlFileLoader extends AbstractFileManager {
                 URL fileUrl = new URL(urlString);
                 File dir = new File(itemLingoPlugin.getDataFolder(), directory);
                 if (!dir.exists()) {
-                    sender.sendMessage("lingo_err_folder_does_not_exist " + dir.getPath());
+                    sendMessage(sender, "lingo_err_folder_does_not_exist ./" + dir.getPath(), MessageType.ERROR);
                     return; // Вихід з методу, якщо папка не існує
                 }
 
@@ -39,27 +40,27 @@ public class YamlFileLoader extends AbstractFileManager {
                 // Перевіряємо, чи потрібно оновлювати або створювати файл
                 if (!destinationFile.exists()) {
                     saveFileFromUrl(fileUrl, destinationFile);
-                    sender.sendMessage("lingo_file_uploaded_successfully " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_file_uploaded_successfully ./" + destinationFile.getPath(), MessageType.NORMAL);
                 } else if (overwriteExisting && needsUpdate(sender, destinationFile, fileUrl, directory)) {
                     saveFileFromUrl(fileUrl, destinationFile);
-                    sender.sendMessage("lingo_file_updated_successfully " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_file_updated_successfully ./" + destinationFile.getPath(), MessageType.NORMAL);
                 } else {
-                    sender.sendMessage("lingo_err_file_already_exists " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_err_file_already_exists ./" + destinationFile.getPath(), MessageType.ERROR);
                 }
             } catch (MalformedURLException e) {
-                sender.sendMessage("lingo_err_error_in_URL " + e.getMessage());
+                sendMessage(sender, "lingo_err_error_in_URL " + e.getMessage(), MessageType.CRITICAL_ERROR);
             } catch (IOException e) {
-            	sender.sendMessage("lingo_err_error_loading_file " + e.getMessage());
+            	sendMessage(sender, "lingo_err_error_loading_file " + e.getMessage(), MessageType.CRITICAL_ERROR);
             }
         });
     }
 
     private boolean needsUpdate(CommandSender sender, File file, URL url, String directory) {
-        String langFileRegex = "*._[a-zA-Z]{2}\\.yml";
+        String langFileRegex = ".*_[a-zA-Z]{2}\\.yml";
         
         // Перевірте, чи назва файлу відповідає шаблону
         if (!file.getName().matches(langFileRegex)) {
-            sender.sendMessage("Назва файлу не відповідає шаблону: " + file.getName());
+            sendMessage(sender, "Назва файлу не відповідає шаблону: " + file.getName(), MessageType.ERROR);
             return false;
         }
 
@@ -76,7 +77,7 @@ public class YamlFileLoader extends AbstractFileManager {
             return true;
         } catch (Exception e) {
             // Якщо під час розбору виникли помилки, файл не валідний
-            sender.sendMessage("Помилка при розборі YAML: " + e.getMessage());
+            sendMessage(sender, "Помилка при розборі YAML: " + e.getMessage(), MessageType.CRITICAL_ERROR);
             return false;
         }
     }
@@ -86,7 +87,7 @@ public class YamlFileLoader extends AbstractFileManager {
             // Перевіряємо, чи всі ключі у файлі конфігурації є рядками
             for (String key : yamlConfig.getKeys(true)) {
                 if (!(yamlConfig.get(key) instanceof String)) {
-                    sender.sendMessage("Ключ '" + key + "' у директорії '" + directory + "' не є рядком.");
+                    sendMessage(sender, "Ключ '" + key + "' у директорії '" + directory + "' не є рядком.", MessageType.ERROR);
                     return false;
                 }
             }
@@ -111,16 +112,16 @@ public class YamlFileLoader extends AbstractFileManager {
                         // Спроба створення ItemLang для перевірки
                         new ItemLang(name, lore.toArray(new String[0]));
                     } catch (Exception e) {
-                        sender.sendMessage("Не вдалося створити ItemLang для ключа '" + key + "': " + e.getMessage());
+                        sendMessage(sender, "Не вдалося створити ItemLang для ключа '" + key + "': " + e.getMessage(), MessageType.CRITICAL_ERROR);
                         return false;
                     }
                 }
             } else {
-                sender.sendMessage("Розділ 'items' відсутній у файлі.");
+                sendMessage(sender, "Розділ 'items' відсутній у файлі.", MessageType.ERROR);
                 return false;
             }
         } else {
-            sender.sendMessage("Невідомий тип директорії: " + directory);
+            sendMessage(sender, "Невідомий тип директорії: " + directory, MessageType.ERROR);
             return false;
         }
         return true;

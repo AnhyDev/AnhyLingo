@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.net.URL;
 import org.bukkit.command.CommandSender;
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.messages.MessageType;
+import ink.anh.lingo.messages.Messenger;
 
 public abstract class AbstractFileManager {
 
@@ -47,4 +49,7 @@ public abstract class AbstractFileManager {
         }
     }
 
+    public void sendMessage(CommandSender sender, String message, MessageType type) {
+    	Messenger.sendMessage(sender, message, type);
+    }
 }

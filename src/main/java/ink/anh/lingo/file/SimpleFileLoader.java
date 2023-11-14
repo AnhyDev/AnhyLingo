@@ -8,6 +8,7 @@ import java.net.URL;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.messages.MessageType;
 
 public class SimpleFileLoader extends AbstractFileManager {
 
@@ -20,7 +21,7 @@ public class SimpleFileLoader extends AbstractFileManager {
         Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
             try {
                 if (!isPathAllowed(directoryPath, false)) {
-                    sender.sendMessage("lingo_err_uploading_not_allowed " + directoryPath);
+                    sendMessage(sender, "lingo_err_uploading_not_allowed " + directoryPath, MessageType.ERROR);
                     return;
                 }
 
@@ -28,7 +29,7 @@ public class SimpleFileLoader extends AbstractFileManager {
                 // Вказуємо шлях до папки plugins
                 File dir = new File(itemLingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
                 if (!dir.exists() && !dir.mkdirs()) {
-                    sender.sendMessage("lingo_err_failed_create_folder " + dir.getPath());
+                    sendMessage(sender, "lingo_err_failed_create_folder " + dir.getPath(), MessageType.ERROR);
                     return;
                 }
 
@@ -37,17 +38,17 @@ public class SimpleFileLoader extends AbstractFileManager {
 
                 if (!destinationFile.exists()) {
                     saveFileFromUrl(fileUrl, destinationFile);
-                    sender.sendMessage("lingo_file_uploaded_successfully " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_file_uploaded_successfully " + destinationFile.getPath(), MessageType.NORMAL);
                 } else if (overwriteExisting) {
                     saveFileFromUrl(fileUrl, destinationFile);
-                    sender.sendMessage("lingo_file_updated_successfully " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_file_updated_successfully " + destinationFile.getPath(), MessageType.NORMAL);
                 } else {
-                    sender.sendMessage("lingo_err_file_already_exists " + destinationFile.getPath());
+                    sendMessage(sender, "lingo_err_file_already_exists " + destinationFile.getPath(), MessageType.NORMAL);
                 }
             } catch (MalformedURLException e) {
-                sender.sendMessage("lingo_err_error_in_URL " + e.getMessage());
+                sendMessage(sender, "lingo_err_error_in_URL " + e.getMessage(), MessageType.CRITICAL_ERROR);
             } catch (IOException e) {
-            	sender.sendMessage("lingo_err_error_loading_file " + e.getMessage());
+            	sendMessage(sender, "lingo_err_error_loading_file " + e.getMessage(), MessageType.CRITICAL_ERROR);
             }
         });
     }
