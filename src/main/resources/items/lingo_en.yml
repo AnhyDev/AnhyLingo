@@ -1,4 +1,4 @@
-# Основний предмет
+# Main item
 magic_wand:
   name: "&bMagic Wand"
   lore:
@@ -6,15 +6,51 @@ magic_wand:
     - "&7It can perform magical feats."
     - "&7Use it wisely."
 
-# Копія основного предмета зі зміненою першою лінією лору
+# A copy of the main item with the first line of lore changed
 magic_wand_1:
   copy: magic_wand
   lines:
     1: "&cEnhanced Magic Wand"
 
-# Ще одна копія зі змінами у першій та третій лініях лору
+# Another copy with changes in the first and third lines of the lore
 magic_wand_2:
   copy: magic_wand
   lines:
     1: "&dAdvanced Magic Wand"
     3: "&dIt holds immense power."
+
+# Other items
+eternal_sword:
+  name: "&cEternal Sword"
+  lore:
+    - "&7A legendary sword that never dulls."
+    - "&7Said to be forged from a fallen star."
+    - "&7Its blade cuts through darkness."
+    
+phantom_cloak:
+  name: "&5Phantom Cloak"
+  lore:
+    - "&7A cloak woven from the threads of night."
+    - "&7Grants the wearer invisibility in shadows."
+    - "&7Whispers secrets of the ancient world."
+    
+skywalker_boots:
+  name: "&9Skywalker Boots"
+  lore:
+    - "&7Boots crafted from the essence of clouds."
+    - "&7Allows the wearer to walk on air."
+    - "&7Feels lighter than a feather."
+    
+sunshield_helmet:
+  name: "&eSunshield Helmet"
+  lore:
+    - "&7A helmet that shines like the sun."
+    - "&7Protects the wearer from all harm."
+    - "&7Radiates a warm, comforting glow."
+    
+galeforce_bow:
+  name: "&aGaleforce Bow"
+  lore:
+    - "&7A bow imbued with the spirit of the wind."
+    - "&7Arrows fly like swift gusts."
+    - "&7Said to never miss its target."

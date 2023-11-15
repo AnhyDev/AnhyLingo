@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.Permissions;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.file.FileCommandProcessor;
@@ -66,7 +67,7 @@ public class LingoCommand implements CommandExecutor {
 	}
 
     private boolean directory(CommandSender sender, String[] args) {
-    	String lang = checkPlayerPermissions(sender, "itemlingo.directory");
+    	String lang = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
 	    if (lang != null && lang.equals("no_permission")) {
             return true;
 	    }
