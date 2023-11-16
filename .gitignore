@@ -5,3 +5,4 @@
 .project/bin/
 /bin/
 /target/
+.dependency-reduced-pom.xml
