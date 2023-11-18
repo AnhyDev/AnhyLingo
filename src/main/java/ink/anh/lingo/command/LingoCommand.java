@@ -176,17 +176,17 @@ public class LingoCommand implements CommandExecutor {
                 return true;
             }
         }
-
-    	if (args.length <= 2) {
-    		return listKeysForLang(sender, args);
-    	}
     	
         if (args.length != 3) {
-            sender.sendMessage("Usage: /lingo items <lang> <key>");
+            sender.sendMessage("Usage: /lingo items list or /lingo items <lang> <key>");
             return true;
         }
 
         String lang = args[1];
+
+        if (lang.equalsIgnoreCase("list")) {
+    		return listKeysForLang(sender, args, isPlayer);
+    	}
         
         String key = args[2];
 
@@ -205,26 +205,9 @@ public class LingoCommand implements CommandExecutor {
         return true;
     }
 
-    private boolean listKeysForLang(CommandSender sender, String[] args) {
-    	
-    	boolean isPlayer = false;
-        if (sender instanceof Player) {
-        	isPlayer = true;
-            Player player = (Player) sender;
-            // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.item.info")) {
-                sender.sendMessage("You do not have permission to use this command.");
-                return true;
-            }
-        }
-        
-        // Перевірка, чи передано достатньо аргументів
-        if (args.length < 2 || !args[1].equalsIgnoreCase("list")) {
-            sender.sendMessage("Usage: /lingo items list or /lingo items <lang> <key>");
-            return true;
-        }
+    private boolean listKeysForLang(CommandSender sender, String[] args, boolean isPlayer) {
 
-        String lang = args[1];
+        String lang = args[2];
         // Отримання мапи елементів з LanguageItemStack
         Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getDataMap();
 
