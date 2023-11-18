@@ -36,10 +36,8 @@ public class LingoCommand implements CommandExecutor {
             switch (args[0].toLowerCase()) {
             case "nbt":
                 return new NBTSubCommand(itemLingoPlugin).execNBT(sender, args);
-            case "item":
+            case "items":
                 return itemLang(sender, args);
-            case "list":
-                return listKeysForLang(sender, args);
             case "reload":
                 return reload(sender);
             case "set":
@@ -173,18 +171,23 @@ public class LingoCommand implements CommandExecutor {
         	isPlayer = true;
             Player player = (Player) sender;
             // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.manager")) {
+            if (!player.hasPermission("itemlingo.items.info")) {
                 sender.sendMessage("You do not have permission to use this command.");
                 return true;
             }
         }
-        // Перевірка, чи достатньо аргументів
-        if (args.length < 3) {
-            sender.sendMessage("Usage: /lingo item <lang> <key>");
+
+    	if (args.length <= 2) {
+    		return listKeysForLang(sender, args);
+    	}
+    	
+        if (args.length != 3) {
+            sender.sendMessage("Usage: /lingo items <lang> <key>");
             return true;
         }
 
         String lang = args[1];
+        
         String key = args[2];
 
         // Отримання об'єкта ItemLang
@@ -209,20 +212,19 @@ public class LingoCommand implements CommandExecutor {
         	isPlayer = true;
             Player player = (Player) sender;
             // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.manager")) {
+            if (!player.hasPermission("itemlingo.item.info")) {
                 sender.sendMessage("You do not have permission to use this command.");
                 return true;
             }
         }
         
         // Перевірка, чи передано достатньо аргументів
-        if (args.length < 2) {
-            sender.sendMessage("Usage: /lingo  - ");
+        if (args.length < 2 || !args[1].equalsIgnoreCase("list")) {
+            sender.sendMessage("Usage: /lingo items list or /lingo items <lang> <key>");
             return true;
         }
 
         String lang = args[1];
-
         // Отримання мапи елементів з LanguageItemStack
         Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getDataMap();
 
