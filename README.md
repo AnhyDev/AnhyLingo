@@ -6,7 +6,7 @@
 
 # ItemLingo
 
-<span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span></span> is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, as well as see names and descriptions of items in their chosen language. Tested on servers with <span style="box-sizing: border-box; font-weight: bolder;">`Spigot`</span>, <span style="box-sizing: border-box; font-weight: bolder;">`Paper`</span>, <span style="box-sizing: border-box; font-weight: bolder;">`Purpur`</span> cores version <span style="box-sizing: border-box; font-weight: bolder;">`1.20.2`</span>. The latest version of the `<span style="box-sizing: border-box; font-weight: bolder;">ProtocolLib</span>` plugin is required for operation.
+ItemLingo is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, as well as see names and descriptions of items in their chosen language. Tested on servers with `Spigot`, `Paper`, `Purpur` cores version `1.20.2`. The latest version of the `ProtocolLib` plugin is required for operation.
 
 </div>
 
@@ -53,20 +53,20 @@
 
 1.  #### Set the desired languages
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo set <langs>`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)
+*   `/lingo set <langs>`
 *   <langs> - can be one or more languages, for example `en` or `en it es`. Plugin will search for the translation in order.
 
 1.  #### Resetting the set language
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo reset`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)
+*   `/lingo reset`
 *   Clears the list of selected languages, the plugin will receive the language from the minecraft client.
 
 1.  #### Get languages
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo get`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)
+*   `/lingo get`
 *   View selected languages for translation.
 
 </div>
@@ -77,7 +77,7 @@
 
 ##### (with permission itemlingo.*)
 
-> <span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">The ItemLingo plugin for Minecraft servers</span></span> is equipped with administrative commands to manage multilingualism on the server. These commands are only accessible to players with extended administrative rights and allow for customization and control over the plugin's language options. The administrators can use these tools to set the available languages on the server, modify translations of game elements and the interface, and adjust language settings as per the players' needs. This approach promotes inclusivity and accessibility of the game for players from different countries and ensures a more flexible approach to cultural and linguistic diversity on Minecraft
+> The ItemLingo plugin for Minecraft servers is equipped with administrative commands to manage multilingualism on the server. These commands are only accessible to players with extended administrative rights and allow for customization and control over the plugin's language options. The administrators can use these tools to set the available languages on the server, modify translations of game elements and the interface, and adjust language settings as per the players' needs. This approach promotes inclusivity and accessibility of the game for players from different countries and ensures a more flexible approach to cultural and linguistic diversity on Minecraft
 
 </div>
 
@@ -87,22 +87,22 @@
 
 1.  #### Reloading the plugin
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.reload)</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.reload)
 *   Reloads the general configuration and language files configurations
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo reload`</span>
+*   `/lingo reload`
 
 1.  #### Information about available item localizations
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)
 *   Displays a list of "keys" for all items that have a translation in the specified language.
 
-<span style="box-sizing: border-box; font-weight: bolder;">`/lingo items list <lang>`</span>
+`/lingo items list <lang>`
 
 1.  #### Show localization for key
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)
 *   Shows the name and lore in the specified language for the given key.
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo item <lang> <key>`</span>
+*   `/lingo item <lang> <key>`
 
 </div>
 
@@ -114,22 +114,22 @@
 
 1.  #### Adding an NBT tag or changing its value
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.set")</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt set <nbt_key> <params...>`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.set")
+*   `/lingo nbt set <nbt_key> <params...>`
 *   Setting the NBT tag nbt_key with parameters params, specifying the data type (e.g., `string:value, int:10`).
 *   Examples of value types: `int, double, intarray, string`.
 
 1.  #### View NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.list")</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt list`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.list")
+*   `/lingo nbt list`
 *   Displays a list of NBT tags for the item currently in the player's hand
 *   Examples of value types: `int, double, intarray, string`.
 
 1.  #### Viewing the value of NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.info")</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt info <nbt_key>`</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.info")
+*   `/lingo nbt info <nbt_key>`
 *   Shows the value of a specific NBT tag for the item in the player's hand.
 
 </div>
@@ -144,11 +144,11 @@
 
     *   #### File YAML ItemLingo uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.lingo)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.lingo)
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fl (flingo) link_to_file folder true|false</span>`
+    `/lingo fl (flingo) link_to_file folder true|false`
 
-    *   Uploading language files to subfolders of the <span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span> plugin directory.
+    *   Uploading language files to subfolders of the ItemLingo plugin directory.
     *   `link_to_file`: Direct link to the file.
     *   `folder`: Folder where the file is uploaded `items|system`.
     *   `true|false`: Parameter to determine the possibility of overwriting the file.
@@ -156,12 +156,12 @@
 
     *   #### File uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fo (fother) link_to_file directory true|false</span>`
+    `/lingo fo (fother) link_to_file directory true|false`
 
     *   Uploading any files into the `directory` within the server plugins folder.
-    *   <span style="box-sizing: border-box; font-weight: bolder;">Important:</span> Uploading is only possible in the directories defined as allowed in the plugin configuration file (`allowed_directories`).
+    *   Important: Uploading is only possible in the directories defined as allowed in the plugin configuration file (`allowed_directories`).
     *   If a subdirectory within the allowed directory does not exist, it will be automatically created during the execution of the command.
     *   `link_to_file`: Direct link to the file for download.
     *   `directory`: Target directory for the file within the server plugins directories.
@@ -171,11 +171,11 @@
 
     *   #### Deleting a file
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fd (fdel) directory file_name</span>`
+    `/lingo fd (fdel) directory file_name`
 
-    *   <span style="box-sizing: border-box; font-weight: bolder;">Important:</span> Deleting is only possible in the directories defined as allowed in the plugin configuration file (`allowed_del_directories`).
+    *   Important: Deleting is only possible in the directories defined as allowed in the plugin configuration file (`allowed_del_directories`).
     *   `directory`: File path.
     *   `file_name`: File name
 
@@ -183,9 +183,9 @@
 
     *   #### View folder contents
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.view)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.view)
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo dir [directory]</span>`
+    `/lingo dir [directory]`
 
     *   Displays the contents of the `directory` folder located in the server plugins directory.
     *   If `[directory]` is set to 0, it will show the contents of the `./plugins/` folder.
@@ -200,21 +200,21 @@
     *   Automatic setting of the NBT tag with the language during renaming to prevent unnecessary renamings.
     *   The item is not modified in cases where the language of the item matches the language of the player, or when more than one player is looking at the inventory simultaneously.
 
-> For the <span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span> plugin to track and rename certain items, it is necessary to add a special NBT tag <span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span>. This tag should contain a string value that corresponds to the key in the language file.
+> For the ItemLingo plugin to track and rename certain items, it is necessary to add a special NBT tag `ItemLingo`. This tag should contain a string value that corresponds to the key in the language file.
 > 
 > #### Adding an NBT Tag to an Item
 > 
 > *   *   Command for Adding Tag, example:
 >         
 >         
->         *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt set ItemLingo string:magic_wand`</span>
+>         *   `/lingo nbt set ItemLingo string:magic_wand`
 >             *   This command adds the NBT tag ItemLingo with the string value `magic_wand` to the item in the player's hand.
 >             *   The value `magic_wand` corresponds to the key that must be in the language file.
 >     *   Using Other Plugins:
 >         
 >         
 >         *   Administrators can also use the functionality of other plugins to add this NBT tag to items.
->         *   It is important that the NBT tag has the name <span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span> and a string value that corresponds to the key from the language file.
+>         *   It is important that the NBT tag has the name `ItemLingo` and a string value that corresponds to the key from the language file.
 > 
 > This feature provides the ability to rename certain items on the server according to the player's chosen language, making the gameplay more interactive and convenient for players who use different languages.
 
@@ -224,12 +224,12 @@
 
 ### Configuration (config.yml)
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`language`</span>: The default language for system messages.
-*   <span style="box-sizing: border-box; font-weight: bolder;">`allowed_directories`</span>: Allowed directories for command interaction.
+*   `language`: The default language for system messages.
+*   `allowed_directories`: Allowed directories for command interaction.
 
 ### Directory Structure
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`items`</span>: Files with translations of names and lore of custom items.
+*   `items`: Files with translations of names and lore of custom items.
 
 <div class="code-container" style="box-sizing: border-box;">
 
@@ -292,7 +292,7 @@
 
 </div>
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`system`</span>: Files with translations of system messages and messages from plugins.
+*   `system`: Files with translations of system messages and messages from plugins.
 
 <div class="code-container" style="box-sizing: border-box;">
 
