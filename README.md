@@ -268,28 +268,6 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
         - "&7A cloak woven from the threads of night."
         - "&7Grants the wearer invisibility in shadows."
         - "&7Whispers secrets of the ancient world."
-
-    skywalker_boots:
-      name: "&9Skywalker Boots"
-      lore:
-        - "&7Boots crafted from the essence of clouds."
-        - "&7Allows the wearer to walk on air."
-        - "&7Feels lighter than a feather."
-
-    sunshield_helmet:
-      name: "&eSunshield Helmet"
-      lore:
-        - "&7A helmet that shines like the sun."
-        - "&7Protects the wearer from all harm."
-        - "&7Radiates a warm, comforting glow."
-
-    galeforce_bow:
-      name: "&aGaleforce Bow"
-      lore:
-        - "&7A bow imbued with the spirit of the wind."
-        - "&7Arrows fly like swift gusts."
-        - "&7Said to never miss its target."
-
 </div>
 
 *   `system`: Files with translations of system messages and messages from plugins.
@@ -305,22 +283,6 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
     lingo_created_default_configuration: "Default configuration created."
     lingo_configuration_reloaded: "Configuration reloaded."
     lingo_language_reloaded: "Language files and configuration reloaded."
-    # Deleting files
-    lingo_err_not_allowed_to_delete: "Not allowed to delete files from this folder: "
-    lingo_err_folder_does_not_exist: "Folder does not exist: "
-    lingo_file_deleted_successfully: "File successfully deleted: "
-    lingo_err_not_allowed_delete_from_this_folder: "Failed to delete file: "
-    lingo_err_file_not_found: "File not found: "
-    lingo_err_error_deleting_file: "Error deleting file: "
-    # Uploading various files
-    lingo_err_uploading_not_allowed: "Not allowed to upload to this folder: "
-    lingo_err_failed_create_folder: "Failed to create folder: "
-    lingo_err_error_loading_file: "Error loading file: "
-    lingo_err_file_already_exists: "File already exists: "
-    lingo_err_error_in_URL: "Error in URL: "
-    lingo_file_uploaded_successfully: "File uploaded successfully: "
-    lingo_file_updated_successfully: "File updated successfully: "
-    # Loading ItemLingo language files
 
 </div>
 
