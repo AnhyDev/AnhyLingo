@@ -144,13 +144,13 @@ public class LingoCommand implements CommandExecutor {
         // Перевіряємо, чи є викликач команди гравцем
         if (sender instanceof Player) {
             Player player = (Player) sender;
-        	String lang;
+        	String langs;
         	String langData = "Lingo";
         	
         	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
-        		lang = data.getStringData(player, langData);
-                sender.sendMessage("You language: " + lang);
+        		langs = data.getStringData(player, langData).replace(',', ' ');
+                sender.sendMessage("You language: " + langs);
                 return true;
         	}
             sender.sendMessage("You have not set the language");
