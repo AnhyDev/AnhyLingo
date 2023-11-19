@@ -1,231 +1,235 @@
-<div class="content-container-y" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; max-width: 95%; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="content-wrapper" style="font-size: 16px; box-sizing: border-box; overflow-y: scroll; position: fixed; background-color: transparent; background-image: url('../images/cracks.png'); top: 20px; bottom: 23px; padding-top: 67px; padding-bottom: 15px; width: 1920px; font-family: Arial, sans-serif;">
 
-# <span style="box-sizing: border-box; vertical-align: inherit;">ItemLingo</span>
+<div class="container content-container" style="box-sizing: border-box; width: 1528px; padding: 30px; margin: auto; max-width: 1140px; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; min-width: 80%;">
 
-<span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span></span><span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;"> — плагін для серверів Minecraft, призначений для створення багатомовного інтерфейсу. </span><span style="box-sizing: border-box; vertical-align: inherit;">Це дозволяє гравцям отримувати системні повідомлення, повідомлення від інших плагінів, а також переглядати назви й описи елементів вибраною мовою. </span><span style="box-sizing: border-box; vertical-align: inherit;">Перевірено на серверах з </span><span style="box-sizing: border-box; vertical-align: inherit;">версією ядер</span></span><span style="box-sizing: border-box; font-weight: bolder;">`Spigot`</span><span style="box-sizing: border-box; vertical-align: inherit;">,</span><span style="box-sizing: border-box; font-weight: bolder;">`Paper`</span><span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;">,</span><span style="box-sizing: border-box; vertical-align: inherit;">. </span><span style="box-sizing: border-box; vertical-align: inherit;">Для роботи потрібна</span><span style="box-sizing: border-box; vertical-align: inherit;">остання версія плагіна</span></span><span style="box-sizing: border-box; font-weight: bolder;">`Purpur`</span><span style="box-sizing: border-box; font-weight: bolder;">`1.20.2`</span>`<span style="box-sizing: border-box; font-weight: bolder;">ProtocolLib</span>`
+<div class="content-container-y" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; max-width: 95%; min-width: 80%;">
 
-</div>
+# ItemLingo
 
-<div class="content-container-x" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); max-width: 95%; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
-
-## <span style="box-sizing: border-box; vertical-align: inherit;">Функціональність плагіна</span>
-
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Багатомовність:</span>
-
-    ##### <span style="box-sizing: border-box; vertical-align: inherit;">(всі гравці):</span>
-
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Можливість вибрати потрібні мови за допомогою команди.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Автоматично використовувати налаштування мови клієнта Minecraft, якщо гравець не встановив бажані мови.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Відображення тексту в ігровому чаті та на панелі дій різними мовами.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Автоматичний переклад користувацьких елементів на вибрану мову під час взаємодії.</span>
-2.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Робота з предметами гри:</span>
-
-    ##### <span style="box-sizing: border-box; vertical-align: inherit;">(гравці з правами адміністратора):</span>
-
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Можливість створювати багатомовні елементи.</span>
-
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Робота з тегами NBT:</span>
-
-    ##### <span style="box-sizing: border-box; vertical-align: inherit;">(гравці з правами адміністратора):</span>
-
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Переглянути доступні теги товарів NBT.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Встановлення, зміна та видалення тегів NBT в елементах.</span>
-
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Робота з файлами:</span>
-
-    ##### <span style="box-sizing: border-box; vertical-align: inherit;">(гравці з правами адміністратора):</span>
-
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження мовних файлів у папку плагіна.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження будь-яких файлів у дозволені папки.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Видалення файлів із дозволених папок.</span>
+<span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span></span> is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, as well as see names and descriptions of items in their chosen language. Tested on servers with <span style="box-sizing: border-box; font-weight: bolder;">`Spigot`</span>, <span style="box-sizing: border-box; font-weight: bolder;">`Paper`</span>, <span style="box-sizing: border-box; font-weight: bolder;">`Purpur`</span> cores version <span style="box-sizing: border-box; font-weight: bolder;">`1.20.2`</span>. The latest version of the `<span style="box-sizing: border-box; font-weight: bolder;">ProtocolLib</span>` plugin is required for operation.
 
 </div>
 
-<div class="container content-container-y" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="content-container-x" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); max-width: 95%; min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Персоналізація мови з командами для всіх гравців:</span>
+## Functionality of the plugin
 
-> <span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;">Гравці мають можливість вибирати мови для системних повідомлень, сповіщень плагінів і відображення елементів гри, які підтримують кілька мов. </span><span style="box-sizing: border-box; vertical-align: inherit;">Якщо мова, яку вибрав гравець, була додана адміністраторами, усі відповідні інформаційні повідомлення відображатимуться цією мовою. </span><span style="box-sizing: border-box; vertical-align: inherit;">У випадках, коли гравець не вибрав жодної конкретної мови, система буде використовувати мовні налаштування клієнта Minecraft. </span><span style="box-sizing: border-box; vertical-align: inherit;">Якщо вибрана мова не підтримується в локалізації, гравець отримуватиме повідомлення мовою за замовчуванням, встановленою в плагіні.</span></span>
+1.  #### Multilingualism:
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Встановіть потрібні мови</span>
+    ##### (all players):
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(дозвіл не потрібен)</span>
+    *   Ability to select desired languages using the command.
+    *   Automatically use Minecraft client language settings if the player has not set their preferred languages.
+    *   Display of text in the game chat and on the action bar in different languages.
+    *   Automatic translation of custom items into the selected language during interaction.
+2.  #### Working with game items:
+
+    ##### (players with admin permissions):
+
+    *   Ability to create multilingual items.
+
+1.  #### Working with NBT tags:
+
+    ##### (players with admin permissions):
+
+    *   View available NBT item tags.
+    *   Installing, changing and deleting NBT tags in items.
+
+1.  #### Work with files:
+
+    ##### (players with admin permissions):
+
+    *   Uploading language files to the plugin folder.
+    *   Uploading any files to allowed folderss.
+    *   Deleting files from allowed folderss.
+
+</div>
+
+<div class="container content-container-y" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%;">
+
+### Language Personalization with Commands for All Players:
+
+> Players have the option to select languages for system messages, plugin notifications, and the display of game items that support multiple languages. If the language chosen by the player has been added by the administrators, all relevant informational messages will be displayed in that language. In cases where the player has not selected any specific language, the system will use the language settings of the Minecraft client. If the chosen language is not supported in the localization, the player will receive messages in the default language set in the plugin.
+
+1.  #### Set the desired languages
+
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo set <langs>`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;"><langs> - може бути однією або кількома мовами, наприклад </span>`en`<span style="box-sizing: border-box; vertical-align: inherit;">або </span>`en it es`<span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;">. </span><span style="box-sizing: border-box; vertical-align: inherit;">Плагін шукатиме переклад по порядку.</span></span>
+*   <langs> - can be one or more languages, for example `en` or `en it es`. Plugin will search for the translation in order.
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Скидання встановленої мови</span>
+1.  #### Resetting the set language
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(дозвіл не потрібен)</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo reset`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Очищає список вибраних мов, плагін отримає мову від клієнта minecraft.</span>
+*   Clears the list of selected languages, the plugin will receive the language from the minecraft client.
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Отримати мови</span>
+1.  #### Get languages
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(дозвіл не потрібен)</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(no permission is required)</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo get`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Переглянути вибрані мови для перекладу.</span>
+*   View selected languages for translation.
 
 </div>
 
-<div class="container content-container-x" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="container content-container-x" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%;">
 
-## <span style="box-sizing: border-box; vertical-align: inherit;">Команди адміністратора</span>
+## Administrator Commands
 
-##### <span style="box-sizing: border-box; vertical-align: inherit;">(з дозволом itemlingo.*)</span>
+##### (with permission itemlingo.*)
 
-> <span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">Плагін ItemLingo для серверів Minecraft</span></span><span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;"> оснащений адміністративними командами для керування багатомовністю на сервері. </span><span style="box-sizing: border-box; vertical-align: inherit;">Ці команди доступні лише для гравців із розширеними правами адміністратора та дозволяють налаштовувати та контролювати параметри мови плагіна. </span><span style="box-sizing: border-box; vertical-align: inherit;">Адміністратори можуть використовувати ці інструменти для встановлення доступних мов на сервері, змінення перекладів ігрових елементів та інтерфейсу та налаштування мовних параметрів відповідно до потреб гравців. </span><span style="box-sizing: border-box; vertical-align: inherit;">Цей підхід сприяє інклюзивності та доступності гри для гравців з різних країн і забезпечує більш гнучкий підхід до культурного та мовного розмаїття в Minecraft</span></span>
+> <span style="box-sizing: border-box; text-decoration-line: underline;"><span style="box-sizing: border-box; font-weight: bolder;">The ItemLingo plugin for Minecraft servers</span></span> is equipped with administrative commands to manage multilingualism on the server. These commands are only accessible to players with extended administrative rights and allow for customization and control over the plugin's language options. The administrators can use these tools to set the available languages on the server, modify translations of game elements and the interface, and adjust language settings as per the players' needs. This approach promotes inclusivity and accessibility of the game for players from different countries and ensures a more flexible approach to cultural and linguistic diversity on Minecraft
 
 </div>
 
-<div class="container content-container-y" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="container content-container-y" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Команди перезавантаження та інформації:</span>
+### Reloading and information commands:
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Перезавантаження плагіна</span>
+1.  #### Reloading the plugin
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволом itemlingo.reload)</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Перезавантажує загальну конфігурацію та конфігурації мовних файлів</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.reload)</span>
+*   Reloads the general configuration and language files configurations
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo reload`</span>
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Інформація про доступні локалізації предметів</span>
+1.  #### Information about available item localizations
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволу itemlingo.items.info)</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Відображає список «ключів» для всіх елементів, які мають переклад зазначеною мовою.</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)</span>
+*   Displays a list of "keys" for all items that have a translation in the specified language.
 
 <span style="box-sizing: border-box; font-weight: bolder;">`/lingo items list <lang>`</span>
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Показати локалізацію ключа</span>
+1.  #### Show localization for key
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволу itemlingo.items.info)</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Показує назву та знання вказаною мовою для даного ключа.</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)</span>
+*   Shows the name and lore in the specified language for the given key.
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo item <lang> <key>`</span>
 
 </div>
 
-<div id="nbt" class="container content-container-x" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div id="nbt" class="container content-container-x" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Робота з тегами NBT:</span>
+### Working with NBT tags:
 
-##### <span style="box-sizing: border-box; vertical-align: inherit;">(з дозволу itemlingo.nbt.*)</span>
+##### (with permission itemlingo.nbt.*)
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Додавання тегу NBT або зміна його значення</span>
+1.  #### Adding an NBT tag or changing its value
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволу, "itemlingo.nbt.set")</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.set")</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt set <nbt_key> <params...>`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Налаштування тегу NBT nbt_key з параметрами params, вказуючи тип даних (наприклад, </span>`string:value, int:10`<span style="box-sizing: border-box; vertical-align: inherit;">).</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Приклади типів значень: </span>`int, double, intarray, string`<span style="box-sizing: border-box; vertical-align: inherit;">.</span>
+*   Setting the NBT tag nbt_key with parameters params, specifying the data type (e.g., `string:value, int:10`).
+*   Examples of value types: `int, double, intarray, string`.
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Переглянути теги NBT</span>
+1.  #### View NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволу, "itemlingo.nbt.list")</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.list")</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt list`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Відображає список тегів NBT для предмета, який зараз знаходиться в руках гравця</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Приклади типів значень: </span>`int, double, intarray, string`<span style="box-sizing: border-box; vertical-align: inherit;">.</span>
+*   Displays a list of NBT tags for the item currently in the player's hand
+*   Examples of value types: `int, double, intarray, string`.
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Перегляд значення тегів NBT</span>
+1.  #### Viewing the value of NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволу, "itemlingo.nbt.info")</span>
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.info")</span>
 *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt info <nbt_key>`</span>
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Показує значення конкретного тегу NBT для предмета в руці гравця.</span>
+*   Shows the value of a specific NBT tag for the item in the player's hand.
 
 </div>
 
-<div id="files" class="container content-container-y" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div id="files" class="container content-container-y" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Робота з файлами</span>
+### Working with files
 
-##### <span style="box-sizing: border-box; vertical-align: inherit;">(з дозволом itemlingo.file.*)</span>
+##### (with permission itemlingo.file.*)
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження файлів</span>
+1.  #### File Uploading
 
-    *   #### <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження файлу YAML ItemLingo</span>
+    *   #### File YAML ItemLingo uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволом itemlingo.file.lingo)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.lingo)</span>
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fl (flingo) link_to_file folder true|false</span>`<span style="box-sizing: border-box; vertical-align: inherit;">:</span>
+    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fl (flingo) link_to_file folder true|false</span>`
 
-    *   <span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;">Завантаження мовних файлів у підпапки </span><span style="box-sizing: border-box; vertical-align: inherit;">каталогу плагінів </span></span><span style="box-sizing: border-box; font-weight: bolder;">ItemLingo .</span>
-    *   `link_to_file`<span style="box-sizing: border-box; vertical-align: inherit;">: пряме посилання на файл.</span>
-    *   `folder`<span style="box-sizing: border-box; vertical-align: inherit;">: папка, куди завантажується файл </span>`items|system`<span style="box-sizing: border-box; vertical-align: inherit;">.</span>
-    *   `true|false`<span style="box-sizing: border-box; vertical-align: inherit;">: Параметр для визначення можливості перезапису файлу.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Вимоги до файлу: дійсний формат yml, назва файлу відповідає шаблону </span>`xxx_[language_code].yml`<span style="box-sizing: border-box; vertical-align: inherit;">.</span>
+    *   Uploading language files to subfolders of the <span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span> plugin directory.
+    *   `link_to_file`: Direct link to the file.
+    *   `folder`: Folder where the file is uploaded `items|system`.
+    *   `true|false`: Parameter to determine the possibility of overwriting the file.
+    *   File requirements: valid yml format, file name corresponds to the pattern `xxx_[language_code].yml`.
 
-    *   #### <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження файлу</span>
+    *   #### File uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволом itemlingo.file.other)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)</span>
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fo (fother) link_to_file directory true|false</span>`<span style="box-sizing: border-box; vertical-align: inherit;">:</span>
+    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fo (fother) link_to_file directory true|false</span>`
 
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Завантаження будь-яких файлів у </span>`directory`<span style="box-sizing: border-box; vertical-align: inherit;">папку плагінів сервера.</span>
-    *   <span style="box-sizing: border-box; font-weight: bolder;">Важливо:</span><span style="box-sizing: border-box; vertical-align: inherit;"> завантаження можливе лише в каталоги, визначені як дозволені у файлі конфігурації плагіна ( </span>`allowed_directories`<span style="box-sizing: border-box; vertical-align: inherit;">).</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Якщо підкаталог у дозволеному каталозі не існує, він буде автоматично створений під час виконання команди.</span>
-    *   `link_to_file`<span style="box-sizing: border-box; vertical-align: inherit;">: пряме посилання на файл для завантаження.</span>
-    *   `directory`<span style="box-sizing: border-box; vertical-align: inherit;">: цільовий каталог для файлу в каталогах плагінів сервера.</span>
-    *   `true|false`<span style="box-sizing: border-box; vertical-align: inherit;">: параметр, який визначає, чи дозволено перезаписувати існуючі файли.</span>
+    *   Uploading any files into the `directory` within the server plugins folder.
+    *   <span style="box-sizing: border-box; font-weight: bolder;">Important:</span> Uploading is only possible in the directories defined as allowed in the plugin configuration file (`allowed_directories`).
+    *   If a subdirectory within the allowed directory does not exist, it will be automatically created during the execution of the command.
+    *   `link_to_file`: Direct link to the file for download.
+    *   `directory`: Target directory for the file within the server plugins directories.
+    *   `true|false`: Parameter that determines whether overwriting existing files is allowed.
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Видалення файлів</span>
+1.  #### Deleting files
 
-    *   #### <span style="box-sizing: border-box; vertical-align: inherit;">Видалення файлу</span>
+    *   #### Deleting a file
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволом itemlingo.file.other)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)</span>
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fd (fdel) directory file_name</span>`<span style="box-sizing: border-box; vertical-align: inherit;">:</span>
+    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo fd (fdel) directory file_name</span>`
 
-    *   <span style="box-sizing: border-box; font-weight: bolder;">Важливо:</span><span style="box-sizing: border-box; vertical-align: inherit;"> видалення можливе лише в каталогах, визначених як дозволені у файлі конфігурації плагіна ( </span>`allowed_del_directories`<span style="box-sizing: border-box; vertical-align: inherit;">).</span>
-    *   `directory`<span style="box-sizing: border-box; vertical-align: inherit;">: шлях до файлу.</span>
-    *   `file_name`<span style="box-sizing: border-box; vertical-align: inherit;">: Ім'я файлу</span>
+    *   <span style="box-sizing: border-box; font-weight: bolder;">Important:</span> Deleting is only possible in the directories defined as allowed in the plugin configuration file (`allowed_del_directories`).
+    *   `directory`: File path.
+    *   `file_name`: File name
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Перегляд файлу</span>
+1.  #### File view
 
-    *   #### <span style="box-sizing: border-box; vertical-align: inherit;">Переглянути вміст папки</span>
+    *   #### View folder contents
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(з дозволом itemlingo.file.view)</span>
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.view)</span>
 
-    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo dir [directory]</span>`<span style="box-sizing: border-box; vertical-align: inherit;">:</span>
+    `<span style="box-sizing: border-box; font-weight: bolder;">/lingo dir [directory]</span>`
 
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Відображає вміст папки </span>`directory`<span style="box-sizing: border-box; vertical-align: inherit;">, розташованої в каталозі плагінів сервера.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Якщо </span>`[directory]`<span style="box-sizing: border-box; vertical-align: inherit;">встановлено значення 0, відображатиметься вміст папки </span>`./plugins/`<span style="box-sizing: border-box; vertical-align: inherit;">.</span>
+    *   Displays the contents of the `directory` folder located in the server plugins directory.
+    *   If `[directory]` is set to 0, it will show the contents of the `./plugins/` folder.
 
 </div>
 
-<div class="container content-container-x" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="container content-container-x" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Автоматичне перейменування елементів:</span>
+### Automatic Item Renaming:
 
-1.  *   <span style="box-sizing: border-box; vertical-align: inherit;">Перейменування назви та історії власних предметів на мову гравця під час взаємодії гравця з предметом в інвентарі.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Автоматичне налаштування тегу NBT з мовою під час перейменування, щоб запобігти непотрібним перейменуванням.</span>
-    *   <span style="box-sizing: border-box; vertical-align: inherit;">Предмет не змінюється у випадках, коли мова предмета збігається з мовою гравця або коли кілька гравців переглядають інвентар одночасно.</span>
+1.  *   Renaming the name and lore of custom items to the player's language during the player's interaction with the item in the inventory.
+    *   Automatic setting of the NBT tag with the language during renaming to prevent unnecessary renamings.
+    *   The item is not modified in cases where the language of the item matches the language of the player, or when more than one player is looking at the inventory simultaneously.
 
-> <span style="box-sizing: border-box; vertical-align: inherit;">Щоб плагін </span><span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span><span style="box-sizing: border-box; vertical-align: inherit;"> відстежував і перейменовував певні елементи, необхідно додати спеціальний тег NBT </span><span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span><span style="box-sizing: border-box; vertical-align: inherit;"><span style="box-sizing: border-box; vertical-align: inherit;">. </span><span style="box-sizing: border-box; vertical-align: inherit;">Цей тег має містити рядкове значення, яке відповідає ключу в мовному файлі.</span></span>
+> For the <span style="box-sizing: border-box; font-weight: bolder;">ItemLingo</span> plugin to track and rename certain items, it is necessary to add a special NBT tag <span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span>. This tag should contain a string value that corresponds to the key in the language file.
 > 
-> #### <span style="box-sizing: border-box; vertical-align: inherit;">Додавання тегу NBT до елемента</span>
+> #### Adding an NBT Tag to an Item
 > 
-> *   *   <span style="box-sizing: border-box; vertical-align: inherit;">Команда для додавання тегу, приклад:</span>
+> *   *   Command for Adding Tag, example:
 >         
 >         
 >         *   <span style="box-sizing: border-box; font-weight: bolder;">`/lingo nbt set ItemLingo string:magic_wand`</span>
->             *   <span style="box-sizing: border-box; vertical-align: inherit;">Ця команда додає тег NBT ItemLingo зі значенням рядка </span>`magic_wand`<span style="box-sizing: border-box; vertical-align: inherit;">до предмета в руці гравця.</span>
->             *   <span style="box-sizing: border-box; vertical-align: inherit;">Значення </span>`magic_wand`<span style="box-sizing: border-box; vertical-align: inherit;">відповідає ключу, який повинен бути в мовному файлі.</span>
->     *   <span style="box-sizing: border-box; vertical-align: inherit;">Використання інших плагінів:</span>
+>             *   This command adds the NBT tag ItemLingo with the string value `magic_wand` to the item in the player's hand.
+>             *   The value `magic_wand` corresponds to the key that must be in the language file.
+>     *   Using Other Plugins:
 >         
 >         
->         *   <span style="box-sizing: border-box; vertical-align: inherit;">Адміністратори також можуть використовувати функції інших плагінів, щоб додати цей тег NBT до елементів.</span>
->         *   <span style="box-sizing: border-box; vertical-align: inherit;">Важливо, щоб тег NBT мав назву </span><span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span><span style="box-sizing: border-box; vertical-align: inherit;">та рядкове значення, яке відповідає ключу з мовного файлу.</span>
+>         *   Administrators can also use the functionality of other plugins to add this NBT tag to items.
+>         *   It is important that the NBT tag has the name <span style="box-sizing: border-box; font-weight: bolder;">`ItemLingo`</span> and a string value that corresponds to the key from the language file.
 > 
-> <span style="box-sizing: border-box; vertical-align: inherit;">Ця функція надає можливість перейменовувати певні елементи на сервері відповідно до вибраної гравцем мови, що робить ігровий процес більш інтерактивним і зручним для гравців, які використовують різні мови.</span>
+> This feature provides the ability to rename certain items on the server according to the player's chosen language, making the gameplay more interactive and convenient for players who use different languages.
 
 </div>
 
-<div id="configuration" class="container content-container-y" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div id="configuration" class="container content-container-y" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Конфігурація (config.yml)</span>
+### Configuration (config.yml)
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`language`</span><span style="box-sizing: border-box; vertical-align: inherit;">: мова за умовчанням для системних повідомлень.</span>
-*   <span style="box-sizing: border-box; font-weight: bolder;">`allowed_directories`</span><span style="box-sizing: border-box; vertical-align: inherit;">: Дозволені каталоги для командної взаємодії.</span>
+*   <span style="box-sizing: border-box; font-weight: bolder;">`language`</span>: The default language for system messages.
+*   <span style="box-sizing: border-box; font-weight: bolder;">`allowed_directories`</span>: Allowed directories for command interaction.
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Структура каталогу</span>
+### Directory Structure
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`items`</span><span style="box-sizing: border-box; vertical-align: inherit;">: Файли з перекладами імен і історії користувальницьких предметів.</span>
+*   <span style="box-sizing: border-box; font-weight: bolder;">`items`</span>: Files with translations of names and lore of custom items.
 
 <div class="code-container" style="box-sizing: border-box;">
 
@@ -288,7 +292,7 @@
 
 </div>
 
-*   <span style="box-sizing: border-box; font-weight: bolder;">`system`</span><span style="box-sizing: border-box; vertical-align: inherit;">: Файли з перекладами системних повідомлень і повідомлень плагінів.</span>
+*   <span style="box-sizing: border-box; font-weight: bolder;">`system`</span>: Files with translations of system messages and messages from plugins.
 
 <div class="code-container" style="box-sizing: border-box;">
 
@@ -320,20 +324,22 @@
 
 </div>
 
-*   <span style="box-sizing: border-box; vertical-align: inherit;">Файли повинні мати формат імені: " </span>`xxx_[language_code].yml`<span style="box-sizing: border-box; vertical-align: inherit;">", наприклад " </span>`lingo_en.yml`<span style="box-sizing: border-box; vertical-align: inherit;">", файли, що не відповідають стандарту, не читаються.</span>
+*   Files must have the name format: "`xxx_[language_code].yml`", for example, "`lingo_en.yml`", files that do not meet the standard are not read.
 
 </div>
 
-<div class="container content-container-x" style="box-sizing: border-box; width: 1261.93px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
+<div class="container content-container-x" style="box-sizing: border-box; width: 1394.59px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; box-shadow: rgba(0, 0, 0, 0.6) 0px 4px 10px; background-color: rgba(28, 28, 28, 0.7); min-width: 80%;">
 
-### <span style="box-sizing: border-box; vertical-align: inherit;">Плани щодо майбутніх оновлень:</span>
+### Plans for future updates:
 
-1.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Локалізація заголовків і субтитрів</span>
+1.  #### Localization of titles and subtitles
 
-2.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Локалізація власних імен мобів і NPC</span>
+2.  #### Localization of custom names of mobs and NPCs
 
-3.  #### <span style="box-sizing: border-box; vertical-align: inherit;">Локалізація користувацьких елементів інвентарю</span>
+3.  #### Localization of custom inventory elements
 
 </div>
 
-.
+</div>
+
+</div>
