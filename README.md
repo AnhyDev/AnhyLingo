@@ -247,13 +247,6 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
       lines:
         1: "&cEnhanced Magic Wand"
 
-    # Another copy with changes in the first and third lines of the lore
-    magic_wand_2:
-      copy: magic_wand
-      lines:
-        1: "&dAdvanced Magic Wand"
-        3: "&dIt holds immense power."
-
     # Other items
     eternal_sword:
       name: "&cEternal Sword"
