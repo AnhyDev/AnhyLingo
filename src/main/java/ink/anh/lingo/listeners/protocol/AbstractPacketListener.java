@@ -30,17 +30,17 @@ public abstract class AbstractPacketListener {
 
     protected abstract void handlePacket(PacketEvent event);
 
-    public abstract String getTranslatedText(String key, String lang);
+    public abstract String getTranslatedText(String key, String[] langs);
 
     protected void register() {
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter);
     }
 
-    public String getPlayerLanguage(Player player) {
+    public String[] getPlayerLanguage(Player player) {
         return LangUtils.getPlayerLanguage(player);
     }
 
-    public String modifyChat(String originalJson, String playerLang, ModificationState modState, String textBlock) {
+    public String modifyChat(String originalJson, String[] langs, ModificationState modState, String textBlock) {
         Gson gson = new Gson();
         JsonElement chatElement = gson.fromJson(originalJson, JsonElement.class);
         JsonArray extraArray = chatElement.getAsJsonObject().getAsJsonArray("extra");
@@ -50,7 +50,7 @@ public abstract class AbstractPacketListener {
                 JsonObject element = extraArray.get(i).getAsJsonObject();
                 if (element.has(textBlock)) {
                     String text = element.get(textBlock).getAsString();
-                    String modifiedText = processText(text, playerLang, modState);
+                    String modifiedText = processText(text, langs, modState);
                     if (modifiedText != null) {
                         element.addProperty(textBlock, modifiedText);
                     }
@@ -60,7 +60,7 @@ public abstract class AbstractPacketListener {
         return gson.toJson(chatElement);
     }
 
-    private String processText(String text, String playerLang, ModificationState modState) {
+    private String processText(String text, String[] langs, ModificationState modState) {
         boolean prependSpace = text.startsWith(" ");
         boolean appendSpace = text.endsWith(" ");
 
@@ -73,7 +73,7 @@ public abstract class AbstractPacketListener {
 
         boolean textModified = false;
         for (String word : words) {
-            String replacement = getTranslatedText(word, playerLang);
+            String replacement = getTranslatedText(word, langs);
             if (replacement != null) {
                 newText.append(replacement);
                 textModified = true;
@@ -93,12 +93,12 @@ public abstract class AbstractPacketListener {
         return textModified ? newText.toString() : null;
     }
     
-    public void reSetActionBar(PacketEvent event, String playerLang, ModificationState modState) {
+    public void reSetActionBar(PacketEvent event, String[] langs, ModificationState modState) {
     	PacketContainer packet = event.getPacket();
         StructureModifier<Object> fields = packet.getModifier();
         if (fields.read(1) != null && fields.read(1) instanceof String) {
         	String jsonActionBar = fields.read(1).toString();
-        	String modifiedJson = modifyChat(jsonActionBar, playerLang, modState, "text");
+        	String modifiedJson = modifyChat(jsonActionBar, langs, modState, "text");
         	packet.getModifier().write(1, modifiedJson);
         }
     }

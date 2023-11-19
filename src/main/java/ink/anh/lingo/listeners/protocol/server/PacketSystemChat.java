@@ -53,7 +53,7 @@ public class PacketSystemChat extends AbstractPacketListener {
     protected void handlePacket(PacketEvent event) {
         
         ModificationState modState = new ModificationState();
-        String playerLang = getPlayerLanguage(event.getPlayer());
+        String[] langs = getPlayerLanguage(event.getPlayer());
         
         
         PacketContainer packet = event.getPacket();
@@ -67,7 +67,7 @@ public class PacketSystemChat extends AbstractPacketListener {
                 	ItemLingo.warn("booleans.read(0): " + booleans.read(0));
             	
                 if (booleans.read(0)) {
-                	reSetActionBar(event, playerLang, modState);
+                	reSetActionBar(event, langs, modState);
                     return;
                 }
             } else if (packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()) {
@@ -106,7 +106,7 @@ public class PacketSystemChat extends AbstractPacketListener {
                 isPaper = true;
             }
 
-        	modifiedJson = modifyChat(jsonSystemChat, playerLang, modState, "text");
+        	modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
 
             // Запис модифікованого рядка назад у компонент
             if (modState.isModified() && modifiedJson != null) {
@@ -125,7 +125,7 @@ public class PacketSystemChat extends AbstractPacketListener {
     }
 
     @Override
-    public String getTranslatedText(String key, String lang) {
-        return itemLingoPlugin.getLanguageSystemChat().getData(key, lang); 
+    public String getTranslatedText(String key, String[] langs) {
+        return itemLingoPlugin.getLanguageSystemChat().getData(key, langs); 
     }
 }

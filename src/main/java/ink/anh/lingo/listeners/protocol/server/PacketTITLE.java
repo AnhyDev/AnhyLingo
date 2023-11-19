@@ -55,7 +55,7 @@ public class PacketTITLE extends AbstractPacketListener {
     protected void handlePacket(PacketEvent event) {
         
         ModificationState modState = new ModificationState();
-        String playerLang = getPlayerLanguage(event.getPlayer());
+        String[] langs = getPlayerLanguage(event.getPlayer());
         
         
         PacketContainer packet = event.getPacket();
@@ -97,7 +97,7 @@ public class PacketTITLE extends AbstractPacketListener {
 
     	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
     	ItemLingo.info("jsonSystemChat: " + jsonSystemChat);
-    	modifiedJson = modifyChat(jsonSystemChat, playerLang, modState, "text");
+    	modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
 
         // Запис модифікованого рядка назад у компонент
         if (modState.isModified() && modifiedJson != null) {
@@ -108,7 +108,7 @@ public class PacketTITLE extends AbstractPacketListener {
     }
 
     @Override
-    public String getTranslatedText(String key, String lang) {
+    public String getTranslatedText(String key, String[] lang) {
         return itemLingoPlugin.getLanguageChat().getData(key, lang); 
     }
 }

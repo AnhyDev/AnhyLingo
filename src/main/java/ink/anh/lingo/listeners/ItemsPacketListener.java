@@ -42,18 +42,18 @@ public class ItemsPacketListener {
         	    
         	    itemLingoPlugin.getLogger().warning("NBT event.getPacketType(): " + event.getPacketType().name());
         	    
-                String playerLang = getPlayerLanguage(event.getPlayer());
+                String[] langs = getPlayerLanguage(event.getPlayer());
         	    
         	    if (event.getPacketType() == PacketType.Play.Server.WINDOW_ITEMS) {
-        	        handleWindowItemsPacket(event, playerLang);
+        	        handleWindowItemsPacket(event, langs);
         	    } else if (event.getPacketType() == PacketType.Play.Server.SET_SLOT) {
-        	    	handleSetSlotPacket(event, playerLang);
+        	    	handleSetSlotPacket(event, langs);
         	    }
         	}
         });
     }
 
-    private void handleWindowItemsPacket(PacketEvent event, String playerLang) {
+    private void handleWindowItemsPacket(PacketEvent event, String[] langs) {
         itemLingoPlugin.getLogger().info("Handling WINDOW_ITEMS packet...");
 
         // Додатковий лог для виводу вмісту пакету
@@ -83,7 +83,7 @@ public class ItemsPacketListener {
         for (int i = 0; i < itemArray.length; i++) {
             if (itemArray[i] != null) {
                 itemLingoPlugin.getLogger().info("Modifying item at index " + i + "...");
-                itemArray[i] = modifyItem(playerLang, itemArray[i]);
+                itemArray[i] = modifyItem(langs, itemArray[i]);
                 modifiedItemsCount++;
             }
         }
@@ -93,7 +93,7 @@ public class ItemsPacketListener {
         itemLingoPlugin.getLogger().info("Modified total of " + modifiedItemsCount + " items in the packet.");
     }
 
-    private void handleSetSlotPacket(PacketEvent event, String playerLang) {
+    private void handleSetSlotPacket(PacketEvent event, String[] langs) {
         StructureModifier<ItemStack> itemModifier = event.getPacket().getItemModifier();
         
         if (itemModifier.size() > 0 && itemModifier.read(0) != null) {
@@ -102,11 +102,11 @@ public class ItemsPacketListener {
             itemLingoPlugin.getLogger().info("Original item name: " + 
 	            (item.hasItemMeta() && item.getItemMeta().hasDisplayName() ? item.getItemMeta().getDisplayName() : "null"));
             
-            itemModifier.write(0, modifyItem(playerLang, item));
+            itemModifier.write(0, modifyItem(langs, item));
         }
     }
 
-    private ItemStack modifyItem(String playerLang, ItemStack item) {
+    private ItemStack modifyItem(String[] langs, ItemStack item) {
         if (item == null || !item.hasItemMeta()) {
             return item; // Якщо предмета немає або немає метаданих, просто повертаємо його.
         }
@@ -121,14 +121,14 @@ public class ItemsPacketListener {
             itemLingoPlugin.getLogger().info("Found customID in NBT: " + customID);
 
             // Якщо customID існує в нашому словнику, ми змінюємо ім'я та лор предмета
-            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, playerLang)) {
+            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, langs)) {
             	
                 ItemMeta meta = item.getItemMeta();
                 
-                String displayName = getTranslatedName(customID, playerLang);
+                String displayName = getTranslatedName(customID, langs);
                 if (displayName != null) meta.setDisplayName(displayName);
                 
-                List<String> lore = getTranslatedLore(customID, playerLang);
+                List<String> lore = getTranslatedLore(customID, langs);
                 if (lore != null) meta.setLore(lore);
                 
                 item.setItemMeta(meta);
@@ -140,17 +140,17 @@ public class ItemsPacketListener {
     }
 
 
-    private String getPlayerLanguage(Player player) {
+    private String[] getPlayerLanguage(Player player) {
         return LangUtils.getPlayerLanguage(player);
     }
 
-    private String getTranslatedName(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
+    private String getTranslatedName(String customID, String[] langs) {
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, langs);
         return itemLang != null ? itemLang.getName() : null; 
     }
 
-    private List<String> getTranslatedLore(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
+    private List<String> getTranslatedLore(String customID, String[] langs) {
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, langs);
         return itemLang != null && itemLang.getLore() != null ? Arrays.asList(itemLang.getLore()) : null;
     }
 }

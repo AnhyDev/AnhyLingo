@@ -15,7 +15,7 @@ public class DirectoryContents {
 
     public static void listDirectoryContents(CommandSender sender, String directoryPath) {
     	if (directoryPath.equals("0")) directoryPath = "";
-    	String lang = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender) : null;
+    	String[] langs = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender) : null;
     	String pluginName = ItemLingo.getInstance().getConfigurationManager().getPluginName() + ": ";
 
         File directory = new File(ItemLingo.getInstance().getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
@@ -36,10 +36,10 @@ public class DirectoryContents {
                     }
                 }
             } else {
-            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty" , lang, true));
+            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty" , langs, true));
             }
         } else {
-        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist ", lang, true));
+        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist ", langs, true));
         }
     }
 }

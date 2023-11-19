@@ -10,7 +10,7 @@ public class StringUtils {
         return text.replace("&", "§");
     }
 	
-	public static String translateKyeWorld(String text, String lang, boolean isSystemChat) {
+	public static String translateKyeWorld(String text, String[] langs, boolean isSystemChat) {
 	    String newText = null;
 	    ItemLingo itemLingoPlugin = ItemLingo.getInstance();
 	    
@@ -18,12 +18,12 @@ public class StringUtils {
 	        return text;
 	    }
 
-	    if (lang == null && itemLingoPlugin.getConfigurationManager() != null) {
-	        lang = itemLingoPlugin.getConfigurationManager().getDefaultLang();
+	    if ((langs == null || langs.length == 0) && itemLingoPlugin.getConfigurationManager() != null) {
+	    	langs = new String[]{itemLingoPlugin.getConfigurationManager().getDefaultLang()};
 	    }
 
-	    if (lang == null) {
-	        lang = "en";
+	    if ((langs == null || langs.length == 0)) {
+	    	langs = new String[]{"en"};
 	    }
 	    
 	    LanguageManager langMan;
@@ -33,11 +33,11 @@ public class StringUtils {
 	    	langMan = itemLingoPlugin.getLanguageChat();
 	    }
 	    
-	    newText = processText(text, langMan, lang);
+	    newText = processText(text, langMan, langs);
 	    return newText != null ? newText : text;
 	}
 
-	public static String processText(String text, LanguageManager langMan, String lang) {
+	public static String processText(String text, LanguageManager langMan, String[] langs) {
         boolean prependSpace = text.startsWith(" ");
         boolean appendSpace = text.endsWith(" ");
 
@@ -50,7 +50,7 @@ public class StringUtils {
 
         boolean textModified = false;
         for (String word : words) {
-            String replacement = langMan.getData(word, lang);
+            String replacement = langMan.getData(word, langs);
             if (replacement != null) {
                 newText.append(replacement);
                 textModified = true;

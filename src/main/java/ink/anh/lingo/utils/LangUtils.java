@@ -7,17 +7,17 @@ import ink.anh.lingo.player.PlayerData;
 public class LangUtils {
 
 
-    public static String getPlayerLanguage(Player player) {
-    	String lang;
+    public static String[] getPlayerLanguage(Player player) {
+    	String[] lang;
     	String langData = "Lingo";
     	
     	PlayerData data = new PlayerData();
     	if (data.hasCustomData(player, langData)) {
     		lang = data.getCustomData(player, langData);
     	} else {
-    		lang = processLocale(player);
+    		lang = new String[]{processLocale(player)};
     	}
-    	return lang != null ? lang : "en";
+    	return lang.length != 0 ? lang : new String[]{"en"};
     }
 
     public static String processLocale(Player player) {

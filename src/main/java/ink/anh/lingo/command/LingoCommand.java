@@ -65,8 +65,8 @@ public class LingoCommand implements CommandExecutor {
 	}
 
     private boolean directory(CommandSender sender, String[] args) {
-    	String lang = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
-	    if (lang != null && lang.equals("no_permission")) {
+    	String[] langs = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
+	    if (langs != null && langs[1].equals("no_permission")) {
             return true;
 	    }
 
@@ -82,13 +82,13 @@ public class LingoCommand implements CommandExecutor {
     }
 
     private boolean reload(CommandSender sender) {
-    	String lang = checkPlayerPermissions(sender, "itemlingo.reload");
-	    if (lang != null && lang.equals("no_permission")) {
+    	String[] langs = checkPlayerPermissions(sender, "itemlingo.reload");
+	    if (langs != null && langs[1].equals("no_permission")) {
             return true;
 	    }
 	    
         if (itemLingoPlugin.getConfigurationManager().reload()) {
-            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", lang, true));
+            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true));
             return true;
         }
         return false;
@@ -98,32 +98,44 @@ public class LingoCommand implements CommandExecutor {
         String langData = "Lingo";
         String ua = "ua";
         String uk = "uk";
+
         // Перевіряємо, чи є викликач команди гравцем
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            // Перевірка, чи достатньо аргументів
-            if (args.length != 2) {
-                sender.sendMessage("Usage: /lingo set <lang>");
+            // Перевірка, чи є достатньо аргументів (мінімум 2)
+            if (args.length < 2) {
+                sender.sendMessage("Usage: /lingo set <lang1> <lang2> ...");
                 return true;
             }
-            String lang = args[1].toLowerCase(); // Переведення введення до нижнього регістру
-            // Перевірка на довжину мовного коду
-            if (lang.length() != 2) {
-                sender.sendMessage("Language code should be 2 letters.");
-                return true;
-            }
+
+            // Створюємо масив для зберігання мовних кодів
+            String[] langs = Arrays.copyOfRange(args, 1, args.length);
+
             // Отримуємо масив доступних мовних кодів ISO 639-1
             String[] isoLanguages = Locale.getISOLanguages();
-            // Перевірка, чи є код мови дійсним ISO мовним кодом або спеціальним випадком "ua"
-            if (!Arrays.asList(isoLanguages).contains(lang) && !lang.equals(ua)) {
-                sender.sendMessage("Invalid language code.");
-                return true;
+            
+            for (int i = 0; i < langs.length; i++) {
+                String lang = langs[i].toLowerCase(); // Переведення до нижнього регістру
+
+                // Перевірка на довжину мовного коду
+                if (lang.length() != 2) {
+                    sender.sendMessage("Language code should be 2 letters.");
+                    return true;
+                }
+
+                // Перевірка, чи є код мови дійсним ISO мовним кодом або спеціальним випадком "ua"
+                if (!Arrays.asList(isoLanguages).contains(lang) && !lang.equals(ua)) {
+                    sender.sendMessage("Invalid language code: " + lang);
+                    return true;
+                }
+
+                if (lang.equals(uk)) {
+                    langs[i] = ua;
+                }
             }
-            if (lang.equals(uk)) {
-            	lang = ua;
-            }
-            // Якщо все добре, можна здійснити налаштування мови для гравця...
-            new PlayerData().setCustomData(player, langData, lang);
+
+            // Якщо все добре, здійснюємо налаштування мови для гравця
+            new PlayerData().setCustomData(player, langData, langs);
         }
         return true;
     }
@@ -137,7 +149,7 @@ public class LingoCommand implements CommandExecutor {
         	
         	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
-        		lang = data.getCustomData(player, langData);
+        		lang = data.getStringData(player, langData);
                 sender.sendMessage("You language: " + lang);
                 return true;
         	}
@@ -188,10 +200,13 @@ public class LingoCommand implements CommandExecutor {
     		return listKeysForLang(sender, args, isPlayer);
     	}
         
+
+        String[] langs = new String[]{lang};
+        
         String key = args[2];
 
         // Отримання об'єкта ItemLang
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(key, lang);
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(key, langs);
 
         if (itemLang == null) {
             sender.sendMessage("No item data found for the specified language and key.");
@@ -236,18 +251,18 @@ public class LingoCommand implements CommandExecutor {
         return true;
     }
 	
-	private String checkPlayerPermissions(CommandSender sender, String permission) {
-		String lang = null;
+	private String[] checkPlayerPermissions(CommandSender sender, String permission) {
+		String[] langs = null;
 	    if (sender instanceof Player) {
 	        Player player = (Player) sender;
-	        lang = LangUtils.getPlayerLanguage(player);
+	        langs = LangUtils.getPlayerLanguage(player);
 	        // Перевіряємо наявність дозволу
 	        if (!player.hasPermission("permission")) {
-	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", lang, true));
-	            return "no_permission";
+	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true));
+	            return new String[] {"no_permission"};
 	        }
 	    }
-		return lang;
+		return langs;
 	}
 
 	private String getPluginName() {

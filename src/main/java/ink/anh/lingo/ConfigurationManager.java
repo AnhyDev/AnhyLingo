@@ -52,11 +52,11 @@ public class ConfigurationManager {
             itemLingoPlugin.getLanguageSystemChat().reloadLanguages();
             itemLingoPlugin.getLanguageItemStack().reloadLanguages();
             itemLingoPlugin.getLanguageChat().reloadLanguages();
-            ItemLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , defaultLang, true));
+            ItemLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, true));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            ItemLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", defaultLang, true));
+            ItemLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", new String[] {defaultLang}, true));
             return false;
         }
     }

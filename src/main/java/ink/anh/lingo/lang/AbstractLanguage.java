@@ -6,6 +6,7 @@ import ink.anh.lingo.ItemLingo;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,35 +99,47 @@ public abstract class AbstractLanguage<T> {
     public Map<String, Map<String, T>> getDataMap() {
         return data;
     }
-
-    public T getData(String key, String lang) {
+    
+    public T getData(String key, String[] langs) {
         Map<String, T> dataMap = data.get(key);
         if (dataMap == null) {
             return null;
         }
 
-        T dataValue = dataMap.get(lang);
-        if (dataValue != null) {
-            return dataValue;
-        }
-
         String defaultLanguage = itemLingoPlugin.getConfigurationManager().getDefaultLang();
-        if (!lang.equals(defaultLanguage)) {
-            dataValue = dataMap.get(defaultLanguage);
+        boolean defaultLangChecked = false;
+        boolean englishLangChecked = false;
+
+        for (String lang : langs) {
+            if (lang.equals(defaultLanguage)) {
+                defaultLangChecked = true;
+            }
+            if (lang.equals("en")) {
+                englishLangChecked = true;
+            }
+
+            T dataValue = dataMap.get(lang);
             if (dataValue != null) {
                 return dataValue;
             }
         }
 
-        if (!defaultLanguage.equals("en") && !lang.equals("en")) {
-            dataValue = dataMap.get("en");
+        if (!defaultLangChecked) {
+            T dataValue = dataMap.get(defaultLanguage);
+            if (dataValue != null) {
+                return dataValue;
+            }
+        }
+
+        if (!englishLangChecked && !defaultLanguage.equals("en")) {
+            T dataValue = dataMap.get("en");
             if (dataValue != null) {
                 return dataValue;
             }
         }
 
         for (String availableLang : dataMap.keySet()) {
-            if (!availableLang.equals(lang) && !availableLang.equals(defaultLanguage)) {
+            if (!Arrays.asList(langs).contains(availableLang) && !availableLang.equals(defaultLanguage) && !availableLang.equals("en")) {
                 return dataMap.get(availableLang);
             }
         }
@@ -134,7 +147,7 @@ public abstract class AbstractLanguage<T> {
         return null;
     }
 
-    public boolean dataContainsKey(String key, String lang) {
-        return getData(key, lang) != null;
+    public boolean dataContainsKey(String key, String[] langs) {
+        return getData(key, langs) != null;
     }
 }

@@ -52,7 +52,7 @@ public class PacketChat extends AbstractPacketListener {
 	protected void handlePacket(PacketEvent event) {
         
         ModificationState modState = new ModificationState();
-        String playerLang = getPlayerLanguage(event.getPlayer());
+        String[] langs = getPlayerLanguage(event.getPlayer());
         
         try {
             Object chatComponents = event.getPacket().getChatComponents().read(0);
@@ -60,7 +60,7 @@ public class PacketChat extends AbstractPacketListener {
                 
                 WrappedChatComponent wrappedChat = (WrappedChatComponent) chatComponents;
                 String jsonChat = wrappedChat.getJson();
-                String modifiedJson = modifyChat(jsonChat, playerLang, modState, "text");
+                String modifiedJson = modifyChat(jsonChat, langs, modState, "text");
                 
                 if (modState.isModified() && modifiedJson != null) {
                     WrappedChatComponent modifiedComponent = WrappedChatComponent.fromJson(modifiedJson);
@@ -73,7 +73,7 @@ public class PacketChat extends AbstractPacketListener {
     }
 
     @Override
-    public String getTranslatedText(String key, String lang) {
-        return itemLingoPlugin.getLanguageChat().getData(key, lang); 
+    public String getTranslatedText(String key, String[] langs) {
+        return itemLingoPlugin.getLanguageChat().getData(key, langs); 
     }
 }

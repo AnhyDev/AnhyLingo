@@ -39,11 +39,11 @@ public class InventoryLocalizationListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryOpen(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
-        String playerLang = getPlayerLanguage(player);
+        String[] langs = getPlayerLanguage(player);
 
         if(event.getInventory().getViewers().size() == 1) {
             for (ItemStack item : event.getInventory().getContents()) {
-            	if (checkItem(item)) modifyItem(playerLang, item);
+            	if (checkItem(item)) modifyItem(langs, item);
             }
         }
     }
@@ -53,13 +53,13 @@ public class InventoryLocalizationListener implements Listener {
         if (event.getView().getType() == InventoryType.CREATIVE) return;
         
         Player player = (Player) event.getWhoClicked();
-        String playerLang = getPlayerLanguage(player);
+        String[] langs = getPlayerLanguage(player);
 
         if(event.getInventory().getViewers().size() == 1) {
             ItemStack currentItem = event.getCurrentItem();
             
             if (checkItem(currentItem)) {
-        	    modifyItem(playerLang, currentItem);
+        	    modifyItem(langs, currentItem);
             }
         }
     }
@@ -69,14 +69,14 @@ public class InventoryLocalizationListener implements Listener {
     	if (!(event.getEntity() instanceof Player)) return;
     	
         Player player = (Player) event.getEntity();
-        String playerLang = getPlayerLanguage(player);
+        String[] langs = getPlayerLanguage(player);
 
         ItemStack pickedItem = event.getItem().getItemStack();
-        if (checkItem(pickedItem)) modifyItem(playerLang, pickedItem);
+        if (checkItem(pickedItem)) modifyItem(langs, pickedItem);
     }
 
 
-    private void modifyItem(String playerLang, ItemStack item) {
+    private void modifyItem(String[] langs, ItemStack item) {
         
         // Отримання NBT компаунда предмета
         NbtCompound compound = NbtFactory.asCompound(NbtFactory.fromItemTag(item));
@@ -87,27 +87,27 @@ public class InventoryLocalizationListener implements Listener {
             String customID = String.valueOf(compound.getValue(key_NBT).getValue());
 
             // Якщо customID існує в нашому словнику, ми змінюємо ім'я та лор предмета
-            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, playerLang)) {
+            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, langs)) {
 
-                // Перевірка на наявність тегу lang_NBT та його відповідність playerLang
+                // Перевірка на наявність тегу lang_NBT та його відповідність langs
                 if (compound.containsKey(lang_NBT)) {
                     String langID = String.valueOf(compound.getValue(lang_NBT).getValue());
-                    if (langID.equals(playerLang)) {
+                    if (langID.equals(langs)) {
                         return; // Якщо умова виконується, повертаємо предмет без змін
                     }
                 }
 
                 // Встановлюємо значення NBT
-                NBTExplorer.setNBTValueFromString(item, lang_NBT, "string:" + playerLang);
+                NBTExplorer.setNBTValueFromString(item, lang_NBT, "string:" + langs);
                 
                 ItemMeta meta = item.getItemMeta();
                 
-                String displayName = getTranslatedName(customID, playerLang);
+                String displayName = getTranslatedName(customID, langs);
                 if (displayName != null) {
                     meta.setDisplayName(displayName);
                 }
                 
-                List<String> lore = getTranslatedLore(customID, playerLang);
+                List<String> lore = getTranslatedLore(customID, langs);
                 if (lore != null) {
                     meta.setLore(lore);
                 }
@@ -117,17 +117,17 @@ public class InventoryLocalizationListener implements Listener {
         }
     }
 
-    private String getPlayerLanguage(Player player) {
+    private String[] getPlayerLanguage(Player player) {
         return LangUtils.getPlayerLanguage(player);
     }
 
-    private String getTranslatedName(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
+    private String getTranslatedName(String customID, String[] langs) {
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, langs);
         return itemLang != null ? itemLang.getName() : null; 
     }
 
-    private List<String> getTranslatedLore(String customID, String lang) {
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, lang);
+    private List<String> getTranslatedLore(String customID, String[] langs) {
+        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, langs);
         return itemLang != null && itemLang.getLore() != null ? Arrays.asList(itemLang.getLore()) : null;
     }
     
