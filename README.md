@@ -1,5 +1,3 @@
-<div class="content-logo-container" style="box-sizing: border-box; width: 1328.35px; text-align: center; font-family: Arial, sans-serif; font-size: 16px;">![Плагін ItemLingoLogo для Minecraft.  Проявник ангідриту](https://dev.anh.ink/images/ItemLingoLogo.png)</div>
-
 <div class="content-container-y" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; max-width: 95%; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px;">
 
 # <span style="box-sizing: border-box; vertical-align: inherit;">ItemLingo</span>
