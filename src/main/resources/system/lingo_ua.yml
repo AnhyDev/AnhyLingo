@@ -1,20 +1,34 @@
-# Загальне
+#
+# ██╗████████╗███████╗███╗░░░███╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+# ██║╚══██╔══╝██╔════╝████╗░████║██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+# ██║░░░██║░░░█████╗░░██╔████╔██║██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+# ██║░░░██║░░░██╔══╝░░██║╚██╔╝██║██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+# ██║░░░██║░░░███████╗██║░╚═╝░██║███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+# ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+#
+# Внутрішні системні повідомлення плагіну ItemLingo
+#
+# 1 Загальне
 lingo_err_not_have_permission: "Ви не маєте дозволу на використання цієї команди."
-# Завантаження конфігурацій
+lingo_err_command_format: "Формат команди: "
+# 2 Завантаження конфігурацій
+#
 lingo_err_folder_is_empty: "Папка порожня або сталася помилка при її читанні."
 lingo_err_folder_is_notexist: "Папка не існує або це не папка."
 lingo_err_reloading_configuration: "Помилка перезавантаження конфігурації."
 lingo_created_default_configuration: "Створена конфігурація за замовчуванням."
 lingo_configuration_reloaded: "Конфігурацію перезавантажено."
 lingo_language_reloaded: "Мовні файли та конфігурацію перезавантажено."
-# Видалення файлів
+#
+# 3 Видалення файлів
 lingo_err_not_allowed_to_delete: "Не дозволено видаляти файли з цієї папки: "
 lingo_err_folder_does_not_exist: "Папка не існує: "
 lingo_file_deleted_successfully: "Файл успішно видалено: "
 lingo_err_not_allowed_delete_from_this_folder: "Не вдалося видалити файл: "
 lingo_err_file_not_found: "Файл не знайдено: "
 lingo_err_error_deleting_file: "Помилка при видаленні файлу: "
-# Завантаженні різних файлів
+#
+# 4 Завантаженні різних файлів
 lingo_err_uploading_not_allowed: "Не дозволено завантажувати в цю папку: "
 lingo_err_failed_create_folder: "Не вдалося створити папку: "
 lingo_err_error_loading_file: "Помилка при завантаженні файлу: "
@@ -22,27 +36,34 @@ lingo_err_file_already_exists: "Файл вже існує: "
 lingo_err_error_in_URL: "Помилка в URL: "
 lingo_file_uploaded_successfully: "Файл успішно завантажено: "
 lingo_file_updated_successfully: "Файл успішно оновлено: "
-# Завантаження мовних файлів ItemLingo
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
 #
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
+# 5 Завантаження мовних файлів ItemLingo
+lingo_err_filename_not_pattern: "Назва файлу не відповідає шаблону: "
+lingo_err_error_parsing_YAML: "Помилка при розборі YAML: "
+lingo_err_key_not_string: "Ключ не є рядком: "
+lingo_err_failed_create_ItemLang_key: "Не вдалося створити ItemLang для ключа "
+lingo_err_items_section_is_missing_file: "Розділ 'items' відсутній у файлі. "
+lingo_err_unknown_directory_type: "Невідомий тип директорії: "
 #
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
+# 6 Загальне для роботи з файлами
+lingo_file_operation_initiated: "Розпочато файлову операцію для каталогу: "
 #
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
-lingo_err_file_not_found: "Файл не знайдено: "
+# 7 Мовні команди
+lingo_err_language_code_2letters: "Код мови має складатися з 2 букв. "
+lingo_err_invalid_language_code: "Недійсний код мови: "
+lingo_you_language: "Список обраних вами мов: "
+lingo_you_have_not set_language: "Ви не обрали жодної мови, використовуються налаштування майнкрафту "
+lingo_cleared_the_language: "Ви очистили список мов, будуть використовуватися налаштування майнкрафту "
+lingo_err_no_item_data_found: "Не знайдено жодних даних для вказаної мови та ключа. "
+lingo_keys_for_language: "Ключі для мови "
+#
+# 8 NBT
+lingo_NBT_value_set: "NBT-значення було встановлено. "
+lingo_err_item_no_NBT_tags: "У вашого предмета немає NBT-тегів. "
+lingo_NBT keys_for_item: "NBT-ключі для вашого предмета: "
+lingo_err_NBT_tag_not_exist: "NBT-тег з таким ключем не існує. "
+lingo_err_command_only_player: "Дану команду може виконувати лише гравець. "
+lingo_err_have_nothing_hand: "У вас в руці нічого немає. "
+#
+#
 lingo_err_file_not_found: "Файл не знайдено: "

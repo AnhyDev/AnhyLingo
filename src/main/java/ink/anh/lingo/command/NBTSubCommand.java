@@ -1,6 +1,9 @@
 package ink.anh.lingo.command;
 
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.Permissions;
+import ink.anh.lingo.messages.MessageType;
+import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.nbt.NBTExplorer;
 
 import java.util.Arrays;
@@ -21,7 +24,6 @@ public class NBTSubCommand {
 	
     boolean execNBT(CommandSender sender, String[] args) {
         if (args.length < 2) {
-            sender.sendMessage("Command: /lingo nbt <params...>");
             return false;
         }
         switch (args[1].toLowerCase()) {
@@ -36,14 +38,14 @@ public class NBTSubCommand {
     }
 
     private boolean set(CommandSender sender, String[] args) {
-        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender);
+        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_SET);
         if (itemInHand == null) {
             return false;
         }
 
         // Перевіряємо, чи передано достатньо аргументів
         if (args.length < 4) {
-            sender.sendMessage("Command: /lingo nbt set <nbt_key> <params...>");
+            sendMessage(sender, "lingo_err_command_format /lingo nbt set <nbt_key> <params...>", MessageType.WARNING);
             return false;
         }
 
@@ -53,12 +55,12 @@ public class NBTSubCommand {
         // Встановлюємо значення NBT
         NBTExplorer.setNBTValueFromString(itemInHand, nbtKey, nbtValueString);
 
-        sender.sendMessage("NBT-значення було встановлено.");
+        sendMessage(sender, "lingo_NBT_value_set ", MessageType.NORMAL);
         return true;
     }
 
     private boolean list(CommandSender sender) {
-        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender);
+        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_LIST);
         if (itemInHand == null) {
             return false;
         }
@@ -67,14 +69,14 @@ public class NBTSubCommand {
         NbtCompound compound = NBTExplorer.getNBT(itemInHand);
 
         if (compound == null || compound.getKeys().isEmpty()) {
-            sender.sendMessage("У вашого предмета немає NBT-тегів.");
+            sendMessage(sender, "lingo_err_item_no_NBT_tags ", MessageType.WARNING);
             return true;
         }
 
         // Виводимо список ключів
-        sender.sendMessage("NBT-ключі для вашого предмета:");
+        sendMessage(sender, "lingo_NBT keys_for_item ", MessageType.NORMAL);
         for (String key : compound.getKeys()) {
-            sender.sendMessage("- " + key);
+            sendMessage(sender, "- " + key, MessageType.ESPECIALLY);
         }
         for (String key : compound.getKeys()) {
         	itemLingoPlugin.getLogger().info("- " + key);
@@ -84,14 +86,14 @@ public class NBTSubCommand {
     }
 
     private boolean info(CommandSender sender, String[] args) {
-        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender);
+        ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_INFO);
         if (itemInHand == null) {
             return false;
         }
 
         // Перевіряємо, чи передано ключ NBT-тегу
         if (args.length < 3) {
-            sender.sendMessage("Command: /lingo nbt info <nbt_key>");
+            sendMessage(sender, "lingo_err_command_format /lingo nbt info <nbt_key>", MessageType.WARNING);
             return false;
         }
 
@@ -101,13 +103,13 @@ public class NBTSubCommand {
         NbtCompound compound = NBTExplorer.getNBT(itemInHand);
 
         if (compound == null || !compound.containsKey(nbtKey)) {
-            sender.sendMessage("NBT-тег з таким ключем не існує.");
+            sendMessage(sender, "lingo_err_NBT_tag_not_exist ", MessageType.WARNING);
             return true;
         }
 
         // Виводимо значення NBT-тегу
         String value = nbtValueToString(compound, nbtKey);
-        sender.sendMessage("NBT-" + nbtKey + ": " + value);
+        sendMessage(sender, "NBT-" + nbtKey + ": " + value, MessageType.NORMAL);
 
         // Відправляємо інформацію в логи серверу
         itemLingoPlugin.getLogger().info("NBT-" + nbtKey + " for player " + sender.getName() + ": " + value);
@@ -115,25 +117,25 @@ public class NBTSubCommand {
         return true;
     }
 
-    private ItemStack validatePlayerWithPermissionAndGetItemInHand(CommandSender sender) {
+    private ItemStack validatePlayerWithPermissionAndGetItemInHand(CommandSender sender, String permission) {
         // Перевіряємо, чи є викликач команди гравцем
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command is only available to players.");
+            sendMessage(sender, "lingo_err_command_only_player ", MessageType.ERROR);
             return null;
         }
 
         Player player = (Player) sender;
 
         // Перевіряємо наявність дозволу
-        if (!player.hasPermission("itemlingo.manager")) {
-            sender.sendMessage("You do not have permission to use this command.");
+        if (!player.hasPermission(permission)) {
+            sendMessage(sender, "lingo_err_not_have_permission ", MessageType.ERROR);
             return null;
         }
 
         // Перевіряємо, чи має гравець предмет в руці
         ItemStack itemInHand = player.getInventory().getItemInMainHand();
         if (itemInHand == null || itemInHand.getType().isAir()) {
-            sender.sendMessage("You have no item in your hand.");
+            sendMessage(sender, "lingo_err_have_nothing_hand ", MessageType.WARNING);
             return null;
         }
 
@@ -161,7 +163,7 @@ public class NBTSubCommand {
         } else if (value instanceof byte[]) {
             return Arrays.toString((byte[]) value);
         } else if (value instanceof NbtCompound) {
-            return value.toString(); // Або скоректоване представлення для NbtCompound
+            return value.toString();
         } else if (value instanceof int[]) {
             return Arrays.toString((int[]) value);
         } else if (value instanceof long[]) {
@@ -173,10 +175,14 @@ public class NBTSubCommand {
         } else if (value instanceof String) {
             return (String) value;
         } else if (value instanceof NbtList<?>) {
-            return value.toString(); // Або скоректоване представлення для NbtList
+            return value.toString(); 
         } else {
             return value != null ? value.toString() : "null";
         }
+    }
+
+	private static void sendMessage(CommandSender sender, String message, MessageType type) {
+    	Messenger.sendMessage(sender, message, type);
     }
 
 }

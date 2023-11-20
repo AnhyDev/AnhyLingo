@@ -9,6 +9,7 @@ import java.util.Map;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.lingo.ItemLingo;
@@ -17,6 +18,8 @@ import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.file.FileCommandProcessor;
 import ink.anh.lingo.lang.ItemLang;
+import ink.anh.lingo.messages.MessageType;
+import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.player.PlayerData;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.utils.StringUtils;
@@ -66,13 +69,13 @@ public class LingoCommand implements CommandExecutor {
 
     private boolean directory(CommandSender sender, String[] args) {
     	String[] langs = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
-	    if (langs != null && langs[1].equals("no_permission")) {
+	    if (langs != null && langs[1] == null) {
             return true;
 	    }
 
         // Перевірка, чи достатньо аргументів
         if (args.length != 2) {
-            sender.sendMessage("Usage: /lingo dir <path>");
+            sendMessage(sender, "lingo_err_command_format /lingo dir <path>", MessageType.WARNING);
             return true;
         }
         
@@ -82,13 +85,13 @@ public class LingoCommand implements CommandExecutor {
     }
 
     private boolean reload(CommandSender sender) {
-    	String[] langs = checkPlayerPermissions(sender, "itemlingo.reload");
-	    if (langs != null && langs[1].equals("no_permission")) {
+    	String[] langs = checkPlayerPermissions(sender, Permissions.RELOAD);
+	    if (langs != null && langs[1] == null) {
             return true;
 	    }
 	    
         if (itemLingoPlugin.getConfigurationManager().reload()) {
-            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true));
+            sendMessage(sender, getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true), MessageType.NORMAL);
             return true;
         }
         return false;
@@ -104,7 +107,7 @@ public class LingoCommand implements CommandExecutor {
             Player player = (Player) sender;
             // Перевірка, чи є достатньо аргументів (мінімум 2)
             if (args.length < 2) {
-                sender.sendMessage("Usage: /lingo set <lang1> <lang2> ...");
+                sendMessage(sender, "lingo_err_command_format /lingo set <lang1> <lang2> ...", MessageType.WARNING);
                 return true;
             }
 
@@ -119,13 +122,13 @@ public class LingoCommand implements CommandExecutor {
 
                 // Перевірка на довжину мовного коду
                 if (lang.length() != 2) {
-                    sender.sendMessage("Language code should be 2 letters.");
+                    sendMessage(sender, "lingo_err_language_code_2letters ", MessageType.WARNING);
                     return true;
                 }
 
                 // Перевірка, чи є код мови дійсним ISO мовним кодом або спеціальним випадком "ua"
                 if (!Arrays.asList(isoLanguages).contains(lang) && !lang.equals(ua)) {
-                    sender.sendMessage("Invalid language code: " + lang);
+                    sendMessage(sender, "lingo_err_invalid_language_code " + lang, MessageType.WARNING);
                     return true;
                 }
 
@@ -150,10 +153,10 @@ public class LingoCommand implements CommandExecutor {
         	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
         		langs = data.getStringData(player, langData).replace(',', ' ');
-                sender.sendMessage("You language: " + langs);
+                sendMessage(sender, "lingo_you_language " + langs, MessageType.NORMAL);
                 return true;
         	}
-            sender.sendMessage("You have not set the language");
+            sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
             return true;
         }
         return false;
@@ -168,36 +171,35 @@ public class LingoCommand implements CommandExecutor {
         	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
         		data.removeCustomData(player, langData);
-                sender.sendMessage("You have cleared the language");
+                sendMessage(sender, "lingo_cleared_the_language ", MessageType.NORMAL);
                 return true;
         	}
-            sender.sendMessage("You have not set the language");
+            sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
             return true;
         }
         return false;
     }
 
     private boolean itemLang(CommandSender sender, String[] args) {
-    	boolean isPlayer = false;
-        if (sender instanceof Player) {
-        	isPlayer = true;
-            Player player = (Player) sender;
-            // Перевіряємо наявність дозволу
-            if (!player.hasPermission("itemlingo.items.info")) {
-                sender.sendMessage("You do not have permission to use this command.");
+    	
+    	String[] checkPlayer = checkPlayerPermissions(sender, Permissions.RELOAD);
+    	if (checkPlayer != null) {
+    	    if (checkPlayer[1] == null) {
+                sendMessage(sender, "lingo_err_not_have_permission ", MessageType.WARNING);
                 return true;
-            }
-        }
+
+    	    }
+    	}
     	
         if (args.length != 3) {
-            sender.sendMessage("Usage: /lingo items list or /lingo items <lang> <key>");
+            sendMessage(sender, "lingo_err_command_format /lingo items list or /lingo items <lang> <key>", MessageType.WARNING);
             return true;
         }
 
         String lang = args[1];
 
         if (lang.equalsIgnoreCase("list")) {
-    		return listKeysForLang(sender, args, isPlayer);
+    		return listKeysForLang(sender, args, checkPlayer != null);
     	}
         
 
@@ -209,13 +211,13 @@ public class LingoCommand implements CommandExecutor {
         ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(key, langs);
 
         if (itemLang == null) {
-            sender.sendMessage("No item data found for the specified language and key.");
+            sendMessage(sender, "lingo_err_no_item_data_found ", MessageType.WARNING);
             return true;
         }
 
         // Виведення toString() об'єкта ItemLang
-        sender.sendMessage(itemLang.toString());
-        if (isPlayer) itemLingoPlugin.getLogger().info(itemLang.toString());
+        sendMessage(sender, itemLang.toString(), MessageType.ESPECIALLY);
+        if (checkPlayer != null) itemLingoPlugin.getLogger().info(itemLang.toString());
 
         return true;
     }
@@ -235,14 +237,14 @@ public class LingoCommand implements CommandExecutor {
         }
 
         if (keysForLang.isEmpty()) {
-            sender.sendMessage("No data found for the specified language.");
+            sendMessage(sender, "lingo_err_no_item_data_found ", MessageType.WARNING);
             return true;
         }
 
         // Виведення всіх ключів
-        sender.sendMessage("Keys for language " + lang + ":");
+        sendMessage(sender, "lingo_keys_for_language " + lang + ":", MessageType.NORMAL);
         for (String key : keysForLang) {
-            sender.sendMessage(key);
+            sendMessage(sender, key, MessageType.ESPECIALLY);
             if (isPlayer) {
                 itemLingoPlugin.getLogger().info(key);
             }
@@ -251,21 +253,36 @@ public class LingoCommand implements CommandExecutor {
         return true;
     }
 	
-	private String[] checkPlayerPermissions(CommandSender sender, String permission) {
-		String[] langs = null;
-	    if (sender instanceof Player) {
-	        Player player = (Player) sender;
-	        langs = LangUtils.getPlayerLanguage(player);
-	        // Перевіряємо наявність дозволу
-	        if (!player.hasPermission("permission")) {
-	            sender.sendMessage(getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true));
-	            return new String[] {"no_permission"};
-	        }
-	    }
-		return langs;
-	}
+    public static String[] checkPlayerPermissions(CommandSender sender, String permission) {
+        // Перевірка, чи команду виконує консоль
+        if (sender instanceof ConsoleCommandSender) {
+            return null;
+        }
 
-	private String getPluginName() {
+        // Ініціалізація масиву з одним елементом null
+        String[] langs = new String[] {null};
+
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+
+            // Отримуємо мови для гравця
+            langs = LangUtils.getPlayerLanguage(player);
+
+            // Перевіряємо наявність дозволу у гравця
+            if (!player.hasPermission(permission)) {
+                sendMessage(sender, getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true), MessageType.ERROR);
+                return langs;
+            }
+        }
+
+        return langs;
+    }
+
+	private static String getPluginName() {
 		return "[" + ItemLingo.getInstance().getConfigurationManager().getPluginName() + "] ";
 	}
+
+	private static void sendMessage(CommandSender sender, String message, MessageType type) {
+    	Messenger.sendMessage(sender, message, type);
+    }
 }

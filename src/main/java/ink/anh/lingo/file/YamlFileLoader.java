@@ -60,7 +60,7 @@ public class YamlFileLoader extends AbstractFileManager {
         
         // Перевірте, чи назва файлу відповідає шаблону
         if (!file.getName().matches(langFileRegex)) {
-            sendMessage(sender, "Назва файлу не відповідає шаблону: " + file.getName(), MessageType.ERROR);
+            sendMessage(sender, "lingo_err_filename_not_pattern " + file.getName(), MessageType.ERROR);
             return false;
         }
 
@@ -77,7 +77,7 @@ public class YamlFileLoader extends AbstractFileManager {
             return true;
         } catch (Exception e) {
             // Якщо під час розбору виникли помилки, файл не валідний
-            sendMessage(sender, "Помилка при розборі YAML: " + e.getMessage(), MessageType.CRITICAL_ERROR);
+            sendMessage(sender, "lingo_err_error_parsing_YAML " + e.getMessage(), MessageType.CRITICAL_ERROR);
             return false;
         }
     }
@@ -87,7 +87,7 @@ public class YamlFileLoader extends AbstractFileManager {
             // Перевіряємо, чи всі ключі у файлі конфігурації є рядками
             for (String key : yamlConfig.getKeys(true)) {
                 if (!(yamlConfig.get(key) instanceof String)) {
-                    sendMessage(sender, "Ключ '" + key + "' у директорії '" + directory + "' не є рядком.", MessageType.ERROR);
+                    sendMessage(sender, "lingo_err_key_not_string " + key + " - " + directory, MessageType.ERROR);
                     return false;
                 }
             }
@@ -112,16 +112,16 @@ public class YamlFileLoader extends AbstractFileManager {
                         // Спроба створення ItemLang для перевірки
                         new ItemLang(name, lore.toArray(new String[0]));
                     } catch (Exception e) {
-                        sendMessage(sender, "Не вдалося створити ItemLang для ключа '" + key + "': " + e.getMessage(), MessageType.CRITICAL_ERROR);
+                        sendMessage(sender, "lingo_err_failed_create_ItemLang_key '" + key + "': " + e.getMessage(), MessageType.CRITICAL_ERROR);
                         return false;
                     }
                 }
             } else {
-                sendMessage(sender, "Розділ 'items' відсутній у файлі.", MessageType.ERROR);
+                sendMessage(sender, "lingo_err_items_section_is_missing_file ", MessageType.ERROR);
                 return false;
             }
         } else {
-            sendMessage(sender, "Невідомий тип директорії: " + directory, MessageType.ERROR);
+            sendMessage(sender, "lingo_err_unknown_directory_type " + directory, MessageType.ERROR);
             return false;
         }
         return true;

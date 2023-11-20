@@ -3,6 +3,7 @@ package ink.anh.lingo.file;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.messages.MessageType;
 
 import java.io.File;
 
@@ -18,7 +19,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
         Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
             try {
                 if (!isPathAllowed(directoryPath, true)) {
-                    sender.sendMessage("lingo_err_not_allowed_to_delete " + directoryPath);
+                    sendMessage(sender, "lingo_err_not_allowed_to_delete " + directoryPath, MessageType.ERROR);
                     return;
                 }
 
@@ -26,7 +27,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
                 File dir = new File(itemLingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
 
                 if (!dir.exists()) {
-                    sender.sendMessage("lingo_err_folder_does_not_exist " + dir.getPath());
+                    sendMessage(sender, "lingo_err_folder_does_not_exist " + dir.getPath(), MessageType.ERROR);
                     return;
                 }
 
@@ -34,15 +35,15 @@ public class SimpleFileDeleter extends AbstractFileManager {
 
                 if (fileToDelete.exists()) {
                     if (fileToDelete.delete()) {
-                        sender.sendMessage("lingo_file_deleted_successfully " + fileToDelete.getPath());
+                        sendMessage(sender, "lingo_file_deleted_successfully " + fileToDelete.getPath(), MessageType.NORMAL);
                     } else {
-                        sender.sendMessage("lingo_err_not_allowed_delete_from_this_folder " + fileToDelete.getPath());
+                        sendMessage(sender, "lingo_err_not_allowed_delete_from_this_folder " + fileToDelete.getPath(), MessageType.ERROR);
                     }
                 } else {
-                    sender.sendMessage("lingo_err_file_not_found " + fileToDelete.getPath());
+                    sendMessage(sender, "lingo_err_file_not_found " + fileToDelete.getPath(), MessageType.ERROR);
                 }
             } catch (Exception e) {
-                sender.sendMessage("lingo_err_error_deleting_file " + e.getMessage());
+                sendMessage(sender, "lingo_err_error_deleting_file " + e.getMessage(), MessageType.ERROR);
             }
         });
     }

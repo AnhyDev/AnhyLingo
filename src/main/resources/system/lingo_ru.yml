@@ -1,20 +1,34 @@
-# Общее
+#
+# ██╗████████╗███████╗███╗░░░███╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+# ██║╚══██╔══╝██╔════╝████╗░████║██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+# ██║░░░██║░░░█████╗░░██╔████╔██║██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+# ██║░░░██║░░░██╔══╝░░██║╚██╔╝██║██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+# ██║░░░██║░░░███████╗██║░╚═╝░██║███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+# ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+#
+# Внутренние системные сообщения плагина ItemLingo
+#
+# 1 Общее
 lingo_err_not_have_permission: "У вас нет разрешения на использование этой команды."
-# Загрузка конфигураций
+lingo_err_command_format: "Формат команды: "
+#
+# 2 Загрузка конфигураций
 lingo_err_folder_is_empty: "Папка пуста или произошла ошибка при ее чтении."
 lingo_err_folder_is_notexist: "Папка не существует или это не папка."
 lingo_err_reloading_configuration: "Ошибка перезагрузки конфигурации."
 lingo_created_default_configuration: "Создана конфигурация по умолчанию."
 lingo_configuration_reloaded: "Конфигурация перезагружена."
 lingo_language_reloaded: "Языковые файлы и конфигурация перезагружены."
-# Удаление файлов
+#
+# 3 Удаление файлов
 lingo_err_not_allowed_to_delete: "Не разрешено удалять файлы из этой папки: "
 lingo_err_folder_does_not_exist: "Папка не существует: "
 lingo_file_deleted_successfully: "Файл успешно удален: "
 lingo_err_not_allowed_delete_from_this_folder: "Не удалось удалить файл: "
 lingo_err_file_not_found: "Файл не найден: "
 lingo_err_error_deleting_file: "Ошибка при удалении файла: "
-# Загрузка разных файлов
+#
+# 4 Загрузка разных файлов
 lingo_err_uploading_not_allowed: "Не разрешено загружать в эту папку: "
 lingo_err_failed_create_folder: "Не удалось создать папку: "
 lingo_err_error_loading_file: "Ошибка при загрузке файла: "
@@ -22,4 +36,32 @@ lingo_err_file_already_exists: "Файл уже существует: "
 lingo_err_error_in_URL: "Ошибка в URL: "
 lingo_file_uploaded_successfully: "Файл успешно загружен: "
 lingo_file_updated_successfully: "Файл успешно обновлен: "
-# Загрузка языковых файлов ItemLingo
+#
+# 5 Загрузка языковых файлов ItemLingo
+lingo_err_filename_not_pattern: "Название файла не соответствует шаблону: "
+lingo_err_error_parsing_YAML: "Ошибка при разборе YAML: "
+lingo_err_key_not_string: "Ключ не является строкой: "
+lingo_err_failed_create_ItemLang_key: "Не удалось создать ItemLang для ключа "
+lingo_err_items_section_is_missing_file: "Раздел 'items' отсутствует в файле. "
+lingo_err_unknown_directory_type: "Неизвестный тип директории: "
+#
+# 6 Общее для работы с файлами
+lingo_file_operation_initiated: "Начата файловая операция для каталога: "
+#
+# 7 Языковые команды
+lingo_err_language_code_2letters: "Код языка должен состоять из 2 букв. "
+lingo_err_invalid_language_code: "Недействительный код языка: "
+lingo_you_language: "Список выбранных вами языков: "
+lingo_you_have_not_set_language: "Вы не выбрали ни одного языка, используются настройки майнкрафта "
+lingo_cleared_the_language: "Вы очистили список языков, будут использоваться настройки майнкрафта "
+lingo_err_no_item_data_found: "Не найдено никаких данных для указанного языка и ключа. "
+lingo_keys_for_language: "Ключи для языка "
+#
+# 8 NBT
+lingo_NBT_value_set: "NBT-значение было установлено. "
+lingo_err_item_no_NBT_tags: "У вашего предмета нет NBT-тегов. "
+lingo_NBT_keys_for_item: "NBT-ключи для вашего предмета: "
+lingo_err_NBT_tag_not_exist: "NBT-тег с таким ключом не существует. "
+lingo_err_command_only_player: "Данную команду может выполнить только игрок. "
+lingo_err_have_nothing_hand: "У вас в руке ничего нет. "
+#

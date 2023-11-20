@@ -3,6 +3,8 @@ package ink.anh.lingo.file;
 import org.bukkit.command.CommandSender;
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.Permissions;
+import ink.anh.lingo.messages.MessageType;
+import ink.anh.lingo.messages.Messenger;
 
 public class FileCommandProcessor {
     
@@ -15,7 +17,7 @@ public class FileCommandProcessor {
     public boolean processFile(CommandSender sender, String[] args, FileProcessType fileProcessType) {
         String permission = getPermissionForFileType(fileProcessType);
         if (!sender.hasPermission(permission)) {
-            sender.sendMessage("You do not have permission to perform this action.");
+            sendMessage(sender, "lingo_err_not_have_permission: ", MessageType.WARNING);
             return true;
         }
 
@@ -26,12 +28,21 @@ public class FileCommandProcessor {
 
             AbstractFileManager fileLoader = getFileManagerForType(fileProcessType);
             fileLoader.processingFile(sender, url, directoryPath, isReplace);
-            sender.sendMessage("File operation initiated for directory " + directoryPath);
+            sendMessage(sender, "lingo_file_operation_initiated " + directoryPath, MessageType.WARNING);
         } else {
-            sender.sendMessage("Usage: /lingo fl/fo <url> <path> [is_replaced]");
-            sender.sendMessage("Usage: /lingo fd <path> <file_name>");
+        	switch (args[0].toLowerCase()) {
+            case "fl":
+                sendMessage(sender, "lingo_err_command_format /lingo fl <url> <folder> [is_replaced]", MessageType.WARNING);
+                return true;
+            case "fo":
+                sendMessage(sender, "lingo_err_command_format /lingo fo <url> <path> [is_replaced]", MessageType.WARNING);
+                return true;
+            case "fd":
+                sendMessage(sender, "lingo_err_command_format /lingo fd <path> <file_name>", MessageType.WARNING);
+                return true;
+            }
         }
-        return true;
+            return true;
     }
 
     private String getPermissionForFileType(FileProcessType fileProcessType) {
@@ -45,6 +56,10 @@ public class FileCommandProcessor {
             default:
                 return "";
         }
+    }
+
+    private void sendMessage(CommandSender sender, String message, MessageType type) {
+    	Messenger.sendMessage(sender, message, type);
     }
 
     private AbstractFileManager getFileManagerForType(FileProcessType fileProcessType) {
