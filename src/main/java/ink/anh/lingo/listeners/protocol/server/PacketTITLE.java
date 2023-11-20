@@ -11,11 +11,13 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 
 import ink.anh.lingo.utils.SpigotUtils;
+import ink.anh.lingo.utils.TypeText;
 import ink.anh.lingo.utils.PaperUtils;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
+import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class PacketTITLE extends AbstractPacketListener {
 
@@ -107,8 +109,8 @@ public class PacketTITLE extends AbstractPacketListener {
         }
     }
 
-    @Override
-    public String getTranslatedText(String key, String[] lang) {
-        return itemLingoPlugin.getLanguageChat().getData(key, lang); 
-    }
+	@Override
+	public TypeText getTypeText() {
+		return TypeText.SYSTEM_CHAT;
+	}
 }

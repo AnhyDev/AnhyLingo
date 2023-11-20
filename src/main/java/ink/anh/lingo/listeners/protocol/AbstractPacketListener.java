@@ -13,6 +13,8 @@ import com.google.gson.JsonObject;
 
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.utils.LangUtils;
+import ink.anh.lingo.utils.StringUtils;
+import ink.anh.lingo.utils.TypeText;
 
 import javax.annotation.Nonnull;
 
@@ -30,7 +32,7 @@ public abstract class AbstractPacketListener {
 
     protected abstract void handlePacket(PacketEvent event);
 
-    public abstract String getTranslatedText(String key, String[] langs);
+    public abstract TypeText getTypeText();
 
     protected void register() {
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter);
@@ -50,47 +52,15 @@ public abstract class AbstractPacketListener {
                 JsonObject element = extraArray.get(i).getAsJsonObject();
                 if (element.has(textBlock)) {
                     String text = element.get(textBlock).getAsString();
-                    String modifiedText = processText(text, langs, modState);
-                    if (modifiedText != null) {
+                    modState = StringUtils.translateKyeWorldModificationState(text, langs, getTypeText(), modState);
+                    String modifiedText = modState.getTranslatedText();
+                    if (modState.isModified()) {
                         element.addProperty(textBlock, modifiedText);
                     }
                 }
             }
         }
         return gson.toJson(chatElement);
-    }
-
-    private String processText(String text, String[] langs, ModificationState modState) {
-        boolean prependSpace = text.startsWith(" ");
-        boolean appendSpace = text.endsWith(" ");
-
-        String[] words = text.trim().split(" ");
-        StringBuilder newText = new StringBuilder();
-
-        if (prependSpace) {
-            newText.append(" ");
-        }
-
-        boolean textModified = false;
-        for (String word : words) {
-            String replacement = getTranslatedText(word, langs);
-            if (replacement != null) {
-                newText.append(replacement);
-                textModified = true;
-                if (!modState.isModified()) {
-                    modState.setModified(true);
-                }
-            } else {
-                newText.append(word);
-            }
-            newText.append(" ");
-        }
-
-        if (!appendSpace && newText.length() > 0) {
-            newText.setLength(newText.length() - 1);
-        }
-
-        return textModified ? newText.toString() : null;
     }
     
     public void reSetActionBar(PacketEvent event, String[] langs, ModificationState modState) {
@@ -103,15 +73,5 @@ public abstract class AbstractPacketListener {
         }
     }
 
-    public class ModificationState {
-        private boolean orModified = false;
 
-        public boolean isModified() {
-            return orModified;
-        }
-
-        public void setModified(boolean modified) {
-            this.orModified = modified;
-        }
-    }
 }

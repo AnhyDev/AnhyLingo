@@ -17,6 +17,10 @@ public abstract class LanguageManager extends AbstractLanguage<String> {
         Map<String, String> langMap = new HashMap<>();
         for (String key : langConfig.getKeys(false)) {
             String value = langConfig.getString(key);
+            
+            if (itemLingoPlugin.getConfigurationManager().isDebug())
+            	ItemLingo.info("LanguageManager: " + key + ": " + value);
+            
             langMap.put(key, value);
         }
         return langMap;

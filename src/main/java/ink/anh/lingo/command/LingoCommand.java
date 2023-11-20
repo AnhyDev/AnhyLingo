@@ -69,7 +69,7 @@ public class LingoCommand implements CommandExecutor {
 
     private boolean directory(CommandSender sender, String[] args) {
     	String[] langs = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
-	    if (langs != null && langs[1] == null) {
+	    if (langs != null && langs[0] == null) {
             return true;
 	    }
 
@@ -86,12 +86,12 @@ public class LingoCommand implements CommandExecutor {
 
     private boolean reload(CommandSender sender) {
     	String[] langs = checkPlayerPermissions(sender, Permissions.RELOAD);
-	    if (langs != null && langs[1] == null) {
+	    if (langs != null && langs[0] == null) {
             return true;
 	    }
 	    
         if (itemLingoPlugin.getConfigurationManager().reload()) {
-            sendMessage(sender, getPluginName() + StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true), MessageType.NORMAL);
+            sendMessage(sender, StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true), MessageType.NORMAL);
             return true;
         }
         return false;
@@ -270,17 +270,13 @@ public class LingoCommand implements CommandExecutor {
 
             // Перевіряємо наявність дозволу у гравця
             if (!player.hasPermission(permission)) {
-                sendMessage(sender, getPluginName() + StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true), MessageType.ERROR);
+                sendMessage(sender, StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true), MessageType.ERROR);
                 return langs;
             }
         }
 
         return langs;
     }
-
-	private static String getPluginName() {
-		return "[" + ItemLingo.getInstance().getConfigurationManager().getPluginName() + "] ";
-	}
 
 	private static void sendMessage(CommandSender sender, String message, MessageType type) {
     	Messenger.sendMessage(sender, message, type);

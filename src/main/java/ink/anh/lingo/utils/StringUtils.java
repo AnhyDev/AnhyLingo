@@ -2,6 +2,7 @@ package ink.anh.lingo.utils;
 
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.lang.LanguageManager;
+import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class StringUtils {
 
@@ -9,6 +10,16 @@ public class StringUtils {
 	public static String colorize(String text) {
         return text.replace("&", "§");
     }
+	
+	public static ModificationState translateKyeWorldModificationState(String text, String[] langs, TypeText typeText, ModificationState state) {
+		boolean isSystemChat = typeText == TypeText.SYSTEM_CHAT ? true : false;
+		String newText = translateKyeWorld(text, langs, isSystemChat);
+		if (!newText.equals(text)) {
+			state.setModified(true);
+			state.setTranslatedText(newText);
+		}
+		return state;
+	}
 	
 	public static String translateKyeWorld(String text, String[] langs, boolean isSystemChat) {
 	    String newText = null;

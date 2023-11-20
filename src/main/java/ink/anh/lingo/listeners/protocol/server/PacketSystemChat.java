@@ -12,9 +12,11 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import ink.anh.lingo.utils.PaperUtils;
+import ink.anh.lingo.utils.TypeText;
 import net.kyori.adventure.text.Component;
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
+import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class PacketSystemChat extends AbstractPacketListener {
 
@@ -124,8 +126,8 @@ public class PacketSystemChat extends AbstractPacketListener {
         }
     }
 
-    @Override
-    public String getTranslatedText(String key, String[] langs) {
-        return itemLingoPlugin.getLanguageSystemChat().getData(key, langs); 
-    }
+	@Override
+	public TypeText getTypeText() {
+		return TypeText.SYSTEM_CHAT;
+	}
 }

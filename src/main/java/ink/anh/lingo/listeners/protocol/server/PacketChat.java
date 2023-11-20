@@ -12,6 +12,8 @@ import com.comphenix.protocol.events.ListenerPriority;
 
 import ink.anh.lingo.ItemLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
+import ink.anh.lingo.listeners.protocol.ModificationState;
+import ink.anh.lingo.utils.TypeText;
 
 public class PacketChat extends AbstractPacketListener {
 
@@ -72,8 +74,8 @@ public class PacketChat extends AbstractPacketListener {
         }
     }
 
-    @Override
-    public String getTranslatedText(String key, String[] langs) {
-        return itemLingoPlugin.getLanguageChat().getData(key, langs); 
-    }
+	@Override
+	public TypeText getTypeText() {
+		return TypeText.CHAT;
+	}
 }
