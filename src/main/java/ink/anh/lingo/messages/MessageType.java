@@ -1,10 +1,10 @@
 package ink.anh.lingo.messages;
 
 public enum MessageType {
-    NORMAL("#1D87E4", "\u001B[94m"), // Звичайне, Світло-синій
-    ESPECIALLY("#FFFF00", "\u001B[33m"), // Особливе, Жовтий
-    IMPORTANT("#00FF00", "\u001B[32m"), // Важливе, Зелений
-    WARNING("#FFA500", "\u001B[33m"), // Попередження, Золотий
+    NORMAL("#0bdebb", "\u001B[94m"), // Звичайне
+    ESPECIALLY("#06d44e", "\u001B[32m"), // Особливе 
+    IMPORTANT("#FFFF00", "\u001B[33m"), // Важливе
+    WARNING("#f54900", "\u001B[33m"), // Попередження
     ERROR("#FF0000", "\u001B[91m"), // Помилка, Червоний
     CRITICAL_ERROR("#8B0000", "\u001B[31m"); // Критична помилка, Темно-червоний
 

@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class ItemLang {
 
+	private String lang;
 	private String name;
 	private String[] lore;
 	
@@ -31,6 +32,14 @@ public class ItemLang {
 
 	public void setLore(String[] lore) {
 		this.lore = lore;
+	}
+
+	public String getLang() {
+		return lang;
+	}
+
+	public void setLang(String lang) {
+		this.lang = lang;
 	}
 
 	@Override
@@ -70,5 +79,4 @@ public class ItemLang {
 
 	    return sb.toString().trim(); // використовуємо trim(), щоб видалити зайвий рядок на кінці, якщо він є
 	}
-
 }

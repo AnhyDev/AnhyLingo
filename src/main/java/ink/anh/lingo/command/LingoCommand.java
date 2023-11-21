@@ -139,6 +139,7 @@ public class LingoCommand implements CommandExecutor {
 
             // Якщо все добре, здійснюємо налаштування мови для гравця
             new PlayerData().setCustomData(player, langData, langs);
+            sendMessage(sender, "lingo_language_is_selected " + String.join(" ", langs), MessageType.NORMAL);
         }
         return true;
     }

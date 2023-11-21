@@ -25,4 +25,9 @@ public abstract class LanguageManager extends AbstractLanguage<String> {
         }
         return langMap;
     }
+
+	@Override
+	protected Map<String, String> extractData(FileConfiguration langConfig, String lang) {
+		return extractData(langConfig);
+	}
 }

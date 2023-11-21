@@ -25,6 +25,7 @@ public abstract class AbstractLanguage<T> {
         loadLanguages();
     }
     
+    protected abstract Map<String, T> extractData(FileConfiguration langConfig, String lang);
     protected abstract Map<String, T> extractData(FileConfiguration langConfig);
 
     protected String getDirectory() {
@@ -77,7 +78,7 @@ public abstract class AbstractLanguage<T> {
             String lang = fileName.substring(fileName.lastIndexOf('_') + 1, fileName.lastIndexOf('.'));
 
             FileConfiguration langConfig = YamlConfiguration.loadConfiguration(file);
-            Map<String, T> extractedData = extractData(langConfig); // Припустимо, що extractData повертає мапу, де ключ - це ключ об'єкта
+            Map<String, T> extractedData = extractData(langConfig, lang); // Припустимо, що extractData повертає мапу, де ключ - це ключ об'єкта
 
             for (Map.Entry<String, T> entry : extractedData.entrySet()) {
                 String key = entry.getKey();
@@ -145,6 +146,11 @@ public abstract class AbstractLanguage<T> {
         }
 
         return null;
+    }
+
+    public T getTranslate(String key, String lang) {
+        Map<String, T> dataMap = data.get(key);
+        return dataMap.get(lang);
     }
 
     public boolean dataContainsKey(String key, String[] langs) {

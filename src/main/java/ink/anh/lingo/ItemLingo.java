@@ -10,6 +10,7 @@ import ink.anh.lingo.lang.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageSystemChat;
 import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 public class ItemLingo extends JavaPlugin {
 
@@ -24,6 +25,7 @@ public class ItemLingo extends JavaPlugin {
     private LanguageItemStack languageItemStack;
     private LanguageChat languageChat;
     private ConfigurationManager configurationManager;
+    private static BukkitAudiences bukkitAudiences;
 
     @Override
     public void onLoad() {
@@ -34,6 +36,7 @@ public class ItemLingo extends JavaPlugin {
     public void onEnable() {
     	checkDepends("ProtocolLib");
     	checkServer();
+        
         configurationManager = new ConfigurationManager(this);
         languageSystemChat = LanguageSystemChat.getInstance(this);
         languageItemStack = LanguageItemStack.getInstance(this);
@@ -41,6 +44,7 @@ public class ItemLingo extends JavaPlugin {
         new PacketListenerManager().addListeners();
         new ListenerManager(this);
         this.getCommand("lingo").setExecutor(new LingoCommand(this));
+        bukkitAudiences = BukkitAudiences.create(this);
     }
 
     @Override
@@ -143,4 +147,8 @@ public class ItemLingo extends JavaPlugin {
     public LanguageSystemChat getLanguageSystemChat() {
     	return languageSystemChat;
     }
+
+	public static BukkitAudiences getBukkitAudiences() {
+		return bukkitAudiences;
+	}
 }

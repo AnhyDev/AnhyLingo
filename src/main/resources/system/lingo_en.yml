@@ -47,6 +47,8 @@ lingo_err_unknown_directory_type: "Unknown directory type: "
 #
 # 6 General for file operations
 lingo_file_operation_initiated: "File operation initiated for directory: "
+lingo_file_show_folder_contents: "Click to see the contents of the folder: "
+lingo_file_folder_contents: "Folder contents "
 #
 # 7 language commands
 lingo_err_language_code_2letters: "Language code must be 2 letters. "
@@ -56,6 +58,7 @@ lingo_you_have_not_set_language: "You have not chosen any language, using Minecr
 lingo_cleared_the_language: "You have cleared the language list, Minecraft settings will be used "
 lingo_err_no_item_data_found: "No data found for the specified language and key. "
 lingo_keys_for_language: "Keys for language "
+lingo_language_is_selected: "You have selected the following languages: "
 #
 # 8 NBT
 lingo_NBT_value_set: "NBT value has been set. "

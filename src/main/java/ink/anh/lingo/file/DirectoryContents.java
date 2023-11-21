@@ -8,8 +8,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.messages.MessageType;
+import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.utils.StringUtils;
+import net.md_5.bungee.api.ChatColor;
 
 public class DirectoryContents {
 
@@ -24,19 +27,22 @@ public class DirectoryContents {
             File[] fileList = directory.listFiles();
 
             if (fileList != null) {
+            	String iconFolder = "📁 ";
+            	String iconFile = "📄 ";
                 // Сортування файлів та папок
                 Arrays.sort(fileList, Comparator.comparing(File::isFile)
                                                 .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER));
 
+                Messenger.sendMessage(sender, "lingo_file_folder_contents " + ChatColor.YELLOW + iconFolder + directoryPath, MessageType.NORMAL);
                 for (File file : fileList) {
                     if (file.isDirectory()) {
-                    	sender.sendMessage("📁 " + file.getName());
+                    	Messenger.sendShowFolder(sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);
                     } else {
-                    	sender.sendMessage("📄 " + file.getName());
+                    	Messenger.sendMessageSimple(sender, file.getName(), iconFile, MessageType.ESPECIALLY);
                     }
                 }
             } else {
-            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty" , langs, true));
+            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty", langs, true));
             }
         } else {
         	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist ", langs, true));

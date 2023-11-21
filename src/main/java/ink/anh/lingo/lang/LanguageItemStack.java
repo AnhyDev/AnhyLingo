@@ -34,7 +34,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     }
 
     @Override
-    protected Map<String, ItemLang> extractData(FileConfiguration langConfig) {
+    protected Map<String, ItemLang> extractData(FileConfiguration langConfig, String lang) {
         Map<String, ItemLang> langMap = new HashMap<>();
 
         for (String key : langConfig.getKeys(false)) {
@@ -58,6 +58,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
                     String[] lore = loreList.toArray(new String[0]);
                     itemLang = new ItemLang(name, lore);
                 }
+                if (itemLang != null) itemLang.setLang(lang);
                 langMap.put(key, itemLang);
             }
         }
@@ -95,4 +96,9 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         String[] lore = loreList.toArray(new String[0]);
         return new ItemLang(name, lore);
     }
+
+	@Override
+	protected Map<String, ItemLang> extractData(FileConfiguration langConfig) {
+		return null;
+	}
 }
