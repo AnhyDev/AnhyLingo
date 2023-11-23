@@ -50,7 +50,6 @@ public class AnhyLingo extends JavaPlugin {
     @Override
     public void onDisable() {
 
-    	
     }
     
     public static boolean isVersionOrNewer(int minorVersionToCheck) {

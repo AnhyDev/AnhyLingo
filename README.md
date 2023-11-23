@@ -4,9 +4,9 @@
 
 <div class="content-container-y" style="box-sizing: border-box; margin: auto; padding: 30px; border-radius: 8px; max-width: 95%; min-width: 80%;">
 
-# ItemLingo
+# AnhyLingo
 
-ItemLingo is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, as well as see names and descriptions of items in their chosen language. Tested on servers with `Spigot`, `Paper`, `Purpur` cores version `1.20.2`. The latest version of the `ProtocolLib` plugin is required for operation.
+AnhyLingo is a plugin for Minecraft servers designed to create a multilingual interface. It allows players to receive system messages, messages from other plugins, as well as see names and descriptions of items in their chosen language. Tested on servers with `Spigot`, `Paper`, `Purpur` cores version `1.20.2`. The latest version of the `ProtocolLib` plugin is required for operation.
 
 </div>
 
@@ -75,9 +75,9 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
 ## Administrator Commands
 
-##### (with permission itemlingo.*)
+##### (with permission AnhyLingo.*)
 
-> The ItemLingo plugin for Minecraft servers is equipped with administrative commands to manage multilingualism on the server. These commands are only accessible to players with extended administrative rights and allow for customization and control over the plugin's language options. The administrators can use these tools to set the available languages on the server, modify translations of game elements and the interface, and adjust language settings as per the players' needs. This approach promotes inclusivity and accessibility of the game for players from different countries and ensures a more flexible approach to cultural and linguistic diversity on Minecraft
+> The AnhyLingo plugin for Minecraft servers is equipped with administrative commands to manage multilingualism on the server. These commands are only accessible to players with extended administrative rights and allow for customization and control over the plugin's language options. The administrators can use these tools to set the available languages on the server, modify translations of game elements and the interface, and adjust language settings as per the players' needs. This approach promotes inclusivity and accessibility of the game for players from different countries and ensures a more flexible approach to cultural and linguistic diversity on Minecraft
 
 </div>
 
@@ -87,20 +87,20 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
 1.  #### Reloading the plugin
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.reload)
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.reload)
 *   Reloads the general configuration and language files configurations
 *   `/lingo reload`
 
 1.  #### Information about available item localizations
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.items.info)
 *   Displays a list of "keys" for all items that have a translation in the specified language.
 
 `/lingo items list <lang>`
 
 1.  #### Show localization for key
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.items.info)
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.items.info)
 *   Shows the name and lore in the specified language for the given key.
 *   `/lingo item <lang> <key>`
 
@@ -110,25 +110,25 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
 ### Working with NBT tags:
 
-##### (with permission itemlingo.nbt.*)
+##### (with permission AnhyLingo.nbt.*)
 
 1.  #### Adding an NBT tag or changing its value
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.set")
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "AnhyLingo.nbt.set")
 *   `/lingo nbt set <nbt_key> <params...>`
 *   Setting the NBT tag nbt_key with parameters params, specifying the data type (e.g., `string:value, int:10`).
 *   Examples of value types: `int, double, intarray, string`.
 
 1.  #### View NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.list")
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "AnhyLingo.nbt.list")
 *   `/lingo nbt list`
 *   Displays a list of NBT tags for the item currently in the player's hand
 *   Examples of value types: `int, double, intarray, string`.
 
 1.  #### Viewing the value of NBT tags
 
-*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "itemlingo.nbt.info")
+*   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission , "AnhyLingo.nbt.info")
 *   `/lingo nbt info <nbt_key>`
 *   Shows the value of a specific NBT tag for the item in the player's hand.
 
@@ -138,17 +138,17 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
 ### Working with files
 
-##### (with permission itemlingo.file.*)
+##### (with permission AnhyLingo.file.*)
 
 1.  #### File Uploading
 
-    *   #### File YAML ItemLingo uploading
+    *   #### File YAML AnhyLingo uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.lingo)
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.file.lingo)
 
     `/lingo fl (flingo) link_to_file folder true|false`
 
-    *   Uploading language files to subfolders of the ItemLingo plugin directory.
+    *   Uploading language files to subfolders of the AnhyLingo plugin directory.
     *   `link_to_file`: Direct link to the file.
     *   `folder`: Folder where the file is uploaded `items|system`.
     *   `true|false`: Parameter to determine the possibility of overwriting the file.
@@ -156,7 +156,7 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
     *   #### File uploading
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.file.other)
 
     `/lingo fo (fother) link_to_file directory true|false`
 
@@ -171,7 +171,7 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
     *   #### Deleting a file
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.other)
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.file.other)
 
     `/lingo fd (fdel) directory file_name`
 
@@ -183,7 +183,7 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
 
     *   #### View folder contents
 
-    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission itemlingo.file.view)
+    *   <span class="perm" style="box-sizing: border-box; color: #5c5854;">(with permission AnhyLingo.file.view)
 
     `/lingo dir [directory]`
 
@@ -200,21 +200,21 @@ ItemLingo is a plugin for Minecraft servers designed to create a multilingual i
     *   Automatic setting of the NBT tag with the language during renaming to prevent unnecessary renamings.
     *   The item is not modified in cases where the language of the item matches the language of the player, or when more than one player is looking at the inventory simultaneously.
 
-> For the ItemLingo plugin to track and rename certain items, it is necessary to add a special NBT tag `ItemLingo`. This tag should contain a string value that corresponds to the key in the language file.
+> For the AnhyLingo plugin to track and rename certain items, it is necessary to add a special NBT tag `AnhyLingo`. This tag should contain a string value that corresponds to the key in the language file.
 > 
 > #### Adding an NBT Tag to an Item
 > 
 > *   *   Command for Adding Tag, example:
 >         
 >         
->         *   `/lingo nbt set ItemLingo string:magic_wand`
->             *   This command adds the NBT tag ItemLingo with the string value `magic_wand` to the item in the player's hand.
+>         *   `/lingo nbt set AnhyLingo string:magic_wand`
+>             *   This command adds the NBT tag AnhyLingo with the string value `magic_wand` to the item in the player's hand.
 >             *   The value `magic_wand` corresponds to the key that must be in the language file.
 >     *   Using Other Plugins:
 >         
 >         
 >         *   Administrators can also use the functionality of other plugins to add this NBT tag to items.
->         *   It is important that the NBT tag has the name `ItemLingo` and a string value that corresponds to the key from the language file.
+>         *   It is important that the NBT tag has the name `AnhyLingo` and a string value that corresponds to the key from the language file.
 > 
 > This feature provides the ability to rename certain items on the server according to the player's chosen language, making the gameplay more interactive and convenient for players who use different languages.
 
