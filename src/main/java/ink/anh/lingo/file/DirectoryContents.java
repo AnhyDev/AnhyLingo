@@ -33,7 +33,8 @@ public class DirectoryContents {
                 Arrays.sort(fileList, Comparator.comparing(File::isFile)
                                                 .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER));
 
-                Messenger.sendMessage(sender, "lingo_file_folder_contents " + ChatColor.YELLOW + iconFolder + directoryPath, MessageType.NORMAL);
+                
+                Messenger.sendMessage(sender, "lingo_file_folder_contents " + iconFolder + directoryPath, MessageType.IMPORTANT);
                 for (File file : fileList) {
                     if (file.isDirectory()) {
                     	Messenger.sendShowFolder(sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);

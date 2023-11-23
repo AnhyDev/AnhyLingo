@@ -10,6 +10,7 @@ import ink.anh.lingo.lang.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageSystemChat;
 import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
+import ink.anh.lingo.messages.ANSIColors;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 public class AnhyLingo extends JavaPlugin {
@@ -111,15 +112,15 @@ public class AnhyLingo extends JavaPlugin {
     }
 
     public static void info(String message) {
-    	instance.getLogger().info("\u001b[0;94m" + message + "\u001b[m");
+    	instance.getLogger().info(ANSIColors.CYAN_BRIGHT + message + ANSIColors.RESET);
     }
 
     public static void warn(String message) {
-    	instance.getLogger().warning("\u001b[0;93m" + message + "\u001b[m");
+    	instance.getLogger().warning(ANSIColors.YELLOW + message + ANSIColors.RESET);
     }
 
     public static void error(String message) {
-    	instance.getLogger().severe("\u001b[0;91m" + message + "\u001b[m");
+    	instance.getLogger().severe(ANSIColors.RED + message  + ANSIColors.RESET);
     }
 
     public static AnhyLingo getInstance() {

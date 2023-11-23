@@ -33,18 +33,7 @@ public class Messenger {
                                                  .color(color);
             bukkitAudiences.sender(player).sendMessage(pluginNameComponent.append(messageComponent));
         } else {
-            switch (type) {
-                case WARNING:
-                    AnhyLingo.warn(coloredMessage);
-                    break;
-                case ERROR:
-                case CRITICAL_ERROR:
-                    AnhyLingo.error(coloredMessage);
-                    break;
-                default:
-                    AnhyLingo.info(coloredMessage);
-                    break;
-            }
+            sendConsole(coloredMessage, type);
         }
     }
     
@@ -58,18 +47,7 @@ public class Messenger {
                                                  .color(color);
             bukkitAudiences.sender(player).sendMessage(messageComponent);
         } else {
-            switch (type) {
-                case WARNING:
-                    AnhyLingo.warn(coloredMessage);
-                    break;
-                case ERROR:
-                case CRITICAL_ERROR:
-                    AnhyLingo.error(coloredMessage);
-                    break;
-                default:
-                    AnhyLingo.info(coloredMessage);
-                    break;
-            }
+        	sendConsole(coloredMessage, type);
         }
     }
     
@@ -98,18 +76,30 @@ public class Messenger {
         } else {
             // Для консолі виводимо просте повідомлення без інтерактивності
             String coloredFolder = StringUtils.translateKyeWorld(icon + folder, null, true);
-            switch (type) {
-                case WARNING:
-                    AnhyLingo.warn(coloredFolder);
-                    break;
-                case ERROR:
-                case CRITICAL_ERROR:
-                    AnhyLingo.error(coloredFolder);
-                    break;
-                default:
-                    AnhyLingo.info(coloredFolder);
-                    break;
-            }
+            sendConsole(coloredFolder, type);
+        }
+    }
+    
+    private static void sendConsole(String message, MessageType type) {
+        switch (type) {
+            case CRITICAL_ERROR:
+                AnhyLingo.error(type.formatConsoleColor(message));
+                break;
+            case ERROR:
+                AnhyLingo.error(type.formatConsoleColor(message));
+                break;
+            case WARNING:
+                AnhyLingo.warn(type.formatConsoleColor(message));
+                break;
+            case IMPORTANT:
+                AnhyLingo.info(type.formatConsoleColor(message));
+                break;
+            case ESPECIALLY:
+                AnhyLingo.info(type.formatConsoleColor(message));
+                break;
+            default:
+                AnhyLingo.info(type.formatConsoleColor(message));
+                break;
         }
     }
 }
