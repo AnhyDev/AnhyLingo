@@ -12,10 +12,10 @@ import ink.anh.lingo.messages.Messenger;
 
 public abstract class AbstractFileManager {
 
-    protected AnhyLingo itemLingoPlugin;
+    protected AnhyLingo lingoPlugin;
 
     public AbstractFileManager(AnhyLingo plugin) {
-        this.itemLingoPlugin = plugin;
+        this.lingoPlugin = plugin;
     }
 
     public abstract void processingFile(CommandSender sender, String urlString, String directoryPath, boolean overwriteExisting);
@@ -32,9 +32,9 @@ public abstract class AbstractFileManager {
             }
 
         if (del) {
-            return itemLingoPlugin.getConfigurationManager().isPathDeleteAllowed(path);
+            return lingoPlugin.getConfigurationManager().isPathDeleteAllowed(path);
         } else {
-            return itemLingoPlugin.getConfigurationManager().isPathAllowed(path);
+            return lingoPlugin.getConfigurationManager().isPathAllowed(path);
         }
     }
 

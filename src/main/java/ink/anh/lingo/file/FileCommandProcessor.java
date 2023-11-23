@@ -8,10 +8,10 @@ import ink.anh.lingo.messages.Messenger;
 
 public class FileCommandProcessor {
     
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo lingoPlugin;
 
     public FileCommandProcessor(AnhyLingo plugin) {
-        this.itemLingoPlugin = plugin;
+        this.lingoPlugin = plugin;
     }
 
     public boolean processFile(CommandSender sender, String[] args, FileProcessType fileProcessType) {
@@ -65,11 +65,11 @@ public class FileCommandProcessor {
     private AbstractFileManager getFileManagerForType(FileProcessType fileProcessType) {
         switch (fileProcessType) {
             case YAML_LOADER:
-                return new YamlFileLoader(itemLingoPlugin);
+                return new YamlFileLoader(lingoPlugin);
             case SIMPLE_LOADER:
-                return new SimpleFileLoader(itemLingoPlugin);
+                return new SimpleFileLoader(lingoPlugin);
             case FILE_DELETER:
-                return new SimpleFileDeleter(itemLingoPlugin);
+                return new SimpleFileDeleter(lingoPlugin);
             default:
                 return null;
         }

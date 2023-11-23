@@ -21,11 +21,11 @@ import org.bukkit.entity.Player;
 public abstract class AbstractPacketListener {
     protected final PacketType packetType;
     protected PacketAdapter packetAdapter;
-	public AnhyLingo itemLingoPlugin;
+	public AnhyLingo lingoPlugin;
 
     protected AbstractPacketListener(PacketType packetType) {
         this.packetType = packetType;
-        this.itemLingoPlugin = AnhyLingo.getInstance();
+        this.lingoPlugin = AnhyLingo.getInstance();
     }
 
     protected abstract void handlePacket(PacketEvent event);

@@ -12,14 +12,14 @@ import java.util.Map;
 
 public abstract class AbstractLanguage<T> {
 
-    protected AnhyLingo itemLingoPlugin;
+    protected AnhyLingo lingoPlugin;
 
     public static final String[] DEFAULT_LANGS = {"en", "ua", "ru"}; // всі мови за замовчуванням
     protected Map<String, Map<String, T>> data = new HashMap<>();
     private String directory;
 
-    public AbstractLanguage(AnhyLingo itemLingoPlugin, String directory) {
-        this.itemLingoPlugin = itemLingoPlugin;
+    public AbstractLanguage(AnhyLingo lingoPlugin, String directory) {
+        this.lingoPlugin = lingoPlugin;
         this.directory = directory;
         saveDefaultLang();
         loadLanguages();
@@ -33,7 +33,7 @@ public abstract class AbstractLanguage<T> {
     }
 
     private void saveDefaultLang() {
-        File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
+        File dir = new File(lingoPlugin.getDataFolder() + File.separator + getDirectory());
         if (!dir.exists()) dir.mkdirs();
 
         String prefix = "lingo_";
@@ -42,8 +42,8 @@ public abstract class AbstractLanguage<T> {
             File file = new File(dir, filename);
 
             // Перевіряємо, чи існує файл у JAR-пакеті
-            if (!file.exists() && itemLingoPlugin.getResource(getDirectory() + "/" + filename) != null) {
-                itemLingoPlugin.saveResource(getDirectory() + "/" + filename, false);
+            if (!file.exists() && lingoPlugin.getResource(getDirectory() + "/" + filename) != null) {
+                lingoPlugin.saveResource(getDirectory() + "/" + filename, false);
             } else if (!file.exists()) {
                 // Логування чи інше повідомлення про те, що файл у пакеті не знайдено
             	AnhyLingo.error("The resource could not be found: " + filename);
@@ -52,9 +52,9 @@ public abstract class AbstractLanguage<T> {
     }
 
     private void loadLanguages() {
-        File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
+        File dir = new File(lingoPlugin.getDataFolder() + File.separator + getDirectory());
 
-        if (dir.listFiles() != null && dir.listFiles().length > 0 && itemLingoPlugin.getConfigurationManager().isDebug()) {
+        if (dir.listFiles() != null && dir.listFiles().length > 0 && lingoPlugin.getConfigurationManager().isDebug()) {
             AnhyLingo.info("List of directory files: ../" + dir + "/");
 
             for (File file : dir.listFiles()) {
@@ -87,7 +87,7 @@ public abstract class AbstractLanguage<T> {
                 data.computeIfAbsent(key, k -> new HashMap<>()).put(lang, value);
             }
             
-            if (itemLingoPlugin.getConfigurationManager().isDebug())
+            if (lingoPlugin.getConfigurationManager().isDebug())
             AnhyLingo.info("Upload file: " + dir + "/" + fileName);
         }
     }
@@ -107,7 +107,7 @@ public abstract class AbstractLanguage<T> {
             return null;
         }
 
-        String defaultLanguage = itemLingoPlugin.getConfigurationManager().getDefaultLang();
+        String defaultLanguage = lingoPlugin.getConfigurationManager().getDefaultLang();
         boolean defaultLangChecked = false;
         boolean englishLangChecked = false;
 

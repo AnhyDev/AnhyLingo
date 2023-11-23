@@ -29,13 +29,13 @@ public class PacketTITLE extends AbstractPacketListener {
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
 
-        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(itemLingoPlugin, ListenerPriority.NORMAL,
+        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL,
                 PacketType.Play.Server.TITLE) {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
 
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
             		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
@@ -69,12 +69,12 @@ public class PacketTITLE extends AbstractPacketListener {
         StructureModifier<WrappedChatComponent> componentModifier = packet.getChatComponents();
         WrappedChatComponent wrappedChatComponent = componentModifier.read(0);
         if (wrappedChatComponent != null) {
-        	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+        	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
         	AnhyLingo.info("contentField != null");
             jsonSystemChat = wrappedChatComponent.getJson();
         } else {
             StructureModifier<Object> modifier = packet.getModifier();
-        	if (itemLingoPlugin.isSpigot()) {
+        	if (lingoPlugin.isSpigot()) {
         		StructureModifier<BaseComponent[]> component = modifier.withType(BaseComponent[].class);
                 if (componentModifier.size() == 0) {
                     return;
@@ -97,14 +97,14 @@ public class PacketTITLE extends AbstractPacketListener {
         	}
         }
 
-    	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+    	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
     	AnhyLingo.info("jsonSystemChat: " + jsonSystemChat);
     	modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
 
         // Запис модифікованого рядка назад у компонент
         if (modState.isModified() && modifiedJson != null) {
         	componentModifier.write(0, WrappedChatComponent.fromJson(modifiedJson));
-        	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+        	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
         	AnhyLingo.info("modifiedJson: " + modifiedJson);
         }
     }

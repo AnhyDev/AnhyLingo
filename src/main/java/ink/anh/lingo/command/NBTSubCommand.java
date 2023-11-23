@@ -16,10 +16,10 @@ import com.comphenix.protocol.wrappers.nbt.NbtList;
 
 public class NBTSubCommand {
 	
-	private AnhyLingo itemLingoPlugin;
+	private AnhyLingo lingoPlugin;
 
 	public NBTSubCommand(AnhyLingo plugin) {
-		this.itemLingoPlugin = plugin;
+		this.lingoPlugin = plugin;
 	}
 	
     boolean execNBT(CommandSender sender, String[] args) {
@@ -79,7 +79,7 @@ public class NBTSubCommand {
             sendMessage(sender, "- " + key, MessageType.ESPECIALLY);
         }
         for (String key : compound.getKeys()) {
-        	itemLingoPlugin.getLogger().info("- " + key);
+        	lingoPlugin.getLogger().info("- " + key);
         }
 
         return true;
@@ -112,7 +112,7 @@ public class NBTSubCommand {
         sendMessage(sender, "NBT-" + nbtKey + ": " + value, MessageType.NORMAL);
 
         // Відправляємо інформацію в логи серверу
-        itemLingoPlugin.getLogger().info("NBT-" + nbtKey + " for player " + sender.getName() + ": " + value);
+        lingoPlugin.getLogger().info("NBT-" + nbtKey + " for player " + sender.getName() + ": " + value);
 
         return true;
     }

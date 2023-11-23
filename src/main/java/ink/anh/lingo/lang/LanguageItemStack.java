@@ -22,11 +22,11 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         super(plugin, DIRECTORY);
     }
 
-    public static LanguageItemStack getInstance(AnhyLingo itemLingoPlugin) {
+    public static LanguageItemStack getInstance(AnhyLingo lingoPlugin) {
         if (instance == null) {
             synchronized (LOCK) {
                 if (instance == null) {
-                    instance = new LanguageItemStack(itemLingoPlugin);
+                    instance = new LanguageItemStack(lingoPlugin);
                 }
             }
         }

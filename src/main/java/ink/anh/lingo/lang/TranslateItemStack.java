@@ -14,13 +14,13 @@ import ink.anh.lingo.nbt.NBTExplorer;
 
 public class TranslateItemStack {
 
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo lingoPlugin;
     private String lang_NBT;
     private String key_NBT;
     
     
-	public TranslateItemStack(AnhyLingo itemLingoPlugin) {
-		this.itemLingoPlugin = itemLingoPlugin;
+	public TranslateItemStack(AnhyLingo lingoPlugin) {
+		this.lingoPlugin = lingoPlugin;
 		this.lang_NBT = "Lingo";
 		this.key_NBT = "ItemLingo";
 	}
@@ -41,7 +41,7 @@ public class TranslateItemStack {
             String customID = String.valueOf(compound.getValue(key_NBT).getValue());
 
             // Якщо customID існує в нашому словнику, ми змінюємо ім'я та лор предмета
-            if (itemLingoPlugin.getLanguageItemStack().dataContainsKey(customID, langs)) {
+            if (lingoPlugin.getLanguageItemStack().dataContainsKey(customID, langs)) {
             	ItemLang itemLang = null;
             	boolean processed = false;
 
@@ -51,7 +51,7 @@ public class TranslateItemStack {
                     
                     for (String currentLang : langs) {
                     	
-                        itemLang = itemLingoPlugin.getLanguageItemStack().getTranslate(customID, currentLang);
+                        itemLang = lingoPlugin.getLanguageItemStack().getTranslate(customID, currentLang);
 
                         if (langID.equals(currentLang)) {
                         	processed = true;
@@ -64,7 +64,7 @@ public class TranslateItemStack {
                     }
                 }
                 if (!processed) {
-                	itemLang = itemLingoPlugin.getLanguageItemStack().getData(customID, langs);
+                	itemLang = lingoPlugin.getLanguageItemStack().getData(customID, langs);
                 	translateItemStack(item, itemLang);
                 }
             }

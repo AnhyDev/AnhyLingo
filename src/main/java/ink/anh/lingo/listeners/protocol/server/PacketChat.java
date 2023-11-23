@@ -24,13 +24,13 @@ public class PacketChat extends AbstractPacketListener {
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
 
-        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(itemLingoPlugin, ListenerPriority.NORMAL, 
+        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL, 
                 PacketType.Play.Server.CHAT) {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
 
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
             		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();

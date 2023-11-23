@@ -16,11 +16,11 @@ import ink.anh.lingo.lang.TranslateItemStack;
 
 public class InventoryLocalizationListener implements Listener {
 
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo lingoPlugin;
 
     
-    public InventoryLocalizationListener(AnhyLingo itemLingoPlugin) {
-		this.itemLingoPlugin = itemLingoPlugin;
+    public InventoryLocalizationListener(AnhyLingo lingoPlugin) {
+		this.lingoPlugin = lingoPlugin;
 	}
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -29,7 +29,7 @@ public class InventoryLocalizationListener implements Listener {
         String[] langs = getPlayerLanguage(player);
 
         if(event.getInventory().getViewers().size() == 1) {
-        	TranslateItemStack translater = new TranslateItemStack(itemLingoPlugin);
+        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
             for (ItemStack item : event.getInventory().getContents()) {
             	if (checkItem(item)) translater.modifyItem(langs, item);
             }
@@ -44,7 +44,7 @@ public class InventoryLocalizationListener implements Listener {
         String[] langs = getPlayerLanguage(player);
 
         if(event.getInventory().getViewers().size() == 1) {
-        	TranslateItemStack translater = new TranslateItemStack(itemLingoPlugin);
+        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
             ItemStack currentItem = event.getCurrentItem();
             
             if (checkItem(currentItem)) {
@@ -62,7 +62,7 @@ public class InventoryLocalizationListener implements Listener {
 
         ItemStack pickedItem = event.getItem().getItemStack();
         if (checkItem(pickedItem)) {
-        	TranslateItemStack translater = new TranslateItemStack(itemLingoPlugin);
+        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
         	translater.modifyItem(langs, pickedItem);
         }
     }

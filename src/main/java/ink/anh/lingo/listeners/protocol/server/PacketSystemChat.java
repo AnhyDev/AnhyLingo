@@ -27,13 +27,13 @@ public class PacketSystemChat extends AbstractPacketListener {
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
 
-        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(itemLingoPlugin, ListenerPriority.NORMAL,
+        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL,
                 PacketType.Play.Server.SYSTEM_CHAT) {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
 
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
             		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
@@ -65,7 +65,7 @@ public class PacketSystemChat extends AbstractPacketListener {
             StructureModifier<Boolean> booleans = packet.getBooleans();
             if (booleans.size() == 1) {
             	
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
                 	AnhyLingo.warn("booleans.read(0): " + booleans.read(0));
             	
                 if (booleans.read(0)) {
@@ -74,7 +74,7 @@ public class PacketSystemChat extends AbstractPacketListener {
                 }
             } else if (packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()) {
             	
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
             	AnhyLingo.warn("packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()");
             	
                 return;
@@ -90,14 +90,14 @@ public class PacketSystemChat extends AbstractPacketListener {
             
             if (contentField != null) {
             	
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
             	AnhyLingo.info("contentField != null");
             	
             	jsonSystemChat = contentField.toString();
 
             } else {
             	
-            	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
             	AnhyLingo.info("contentField == null");
             	
                 Component read = componentModifier.read(0);

@@ -5,13 +5,13 @@ import ink.anh.lingo.AnhyLingo;
 public class ListenerManager {
 
 	
-	public ListenerManager(AnhyLingo itemLingoPlugin) {
-		this.ativateAllListeners(itemLingoPlugin);
+	public ListenerManager(AnhyLingo lingoPlugin) {
+		this.ativateAllListeners(lingoPlugin);
 	}
 
-	private void ativateAllListeners(AnhyLingo itemLingoPlugin) {
+	private void ativateAllListeners(AnhyLingo lingoPlugin) {
 		
-		itemLingoPlugin.getServer().getPluginManager().registerEvents(new InventoryLocalizationListener(itemLingoPlugin), itemLingoPlugin);
+		lingoPlugin.getServer().getPluginManager().registerEvents(new InventoryLocalizationListener(lingoPlugin), lingoPlugin);
 		
 	}
 }

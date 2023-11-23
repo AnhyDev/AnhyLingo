@@ -23,14 +23,14 @@ public class StringUtils {
 	
 	public static String translateKyeWorld(String text, String[] langs, boolean isSystemChat) {
 	    String newText = null;
-	    AnhyLingo itemLingoPlugin = AnhyLingo.getInstance();
+	    AnhyLingo lingoPlugin = AnhyLingo.getInstance();
 	    
-	    if (itemLingoPlugin == null) {
+	    if (lingoPlugin == null) {
 	        return text;
 	    }
 
-	    if ((langs == null || langs.length == 0) && itemLingoPlugin.getConfigurationManager() != null) {
-	    	langs = new String[]{itemLingoPlugin.getConfigurationManager().getDefaultLang()};
+	    if ((langs == null || langs.length == 0) && lingoPlugin.getConfigurationManager() != null) {
+	    	langs = new String[]{lingoPlugin.getConfigurationManager().getDefaultLang()};
 	    }
 
 	    if ((langs == null || langs.length == 0)) {
@@ -39,9 +39,9 @@ public class StringUtils {
 	    
 	    LanguageManager langMan;
 	    if (isSystemChat) {
-	    	langMan = itemLingoPlugin.getLanguageSystemChat();
+	    	langMan = lingoPlugin.getLanguageSystemChat();
 	    } else {
-	    	langMan = itemLingoPlugin.getLanguageChat();
+	    	langMan = lingoPlugin.getLanguageChat();
 	    }
 	    
 	    newText = processText(text, langMan, langs);

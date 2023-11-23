@@ -25,10 +25,10 @@ public class YamlFileLoader extends AbstractFileManager {
 
     @Override
     public void processingFile(CommandSender sender, String urlString, String directory, boolean overwriteExisting) {
-        Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(lingoPlugin, () -> {
             try {
                 URL fileUrl = new URL(urlString);
-                File dir = new File(itemLingoPlugin.getDataFolder(), directory);
+                File dir = new File(lingoPlugin.getDataFolder(), directory);
                 if (!dir.exists()) {
                     sendMessage(sender, "lingo_err_folder_does_not_exist ./" + dir.getPath(), MessageType.ERROR);
                     return; // Вихід з методу, якщо папка не існує

@@ -10,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ConfigurationManager {
 
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo lingoPlugin;
     private File configFile;
     
     private String defaultLang = "en";
@@ -21,8 +21,8 @@ public class ConfigurationManager {
     private List<String> allowedDirectoriesForDeletion;
 
     ConfigurationManager(AnhyLingo plugin) {
-        this.itemLingoPlugin = plugin;
-        this.configFile = new File(itemLingoPlugin.getDataFolder(), "config.yml");
+        this.lingoPlugin = plugin;
+        this.configFile = new File(lingoPlugin.getDataFolder(), "config.yml");
         saveDefaultConfiguration();
         setDataConfig();
     }
@@ -47,11 +47,11 @@ public class ConfigurationManager {
 
     public boolean reload() {
         try {
-            this.itemLingoPlugin.reloadConfig();
+            this.lingoPlugin.reloadConfig();
             setDataConfig();
-            itemLingoPlugin.getLanguageSystemChat().reloadLanguages();
-            itemLingoPlugin.getLanguageItemStack().reloadLanguages();
-            itemLingoPlugin.getLanguageChat().reloadLanguages();
+            lingoPlugin.getLanguageSystemChat().reloadLanguages();
+            lingoPlugin.getLanguageItemStack().reloadLanguages();
+            lingoPlugin.getLanguageChat().reloadLanguages();
             AnhyLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, true));
             return true;
         } catch (Exception e) {
@@ -62,12 +62,12 @@ public class ConfigurationManager {
     }
     
     private void setDataConfig() {
-        defaultLang = itemLingoPlugin.getConfig().getString("language", "en");
-        pluginName = ChatColor.translateAlternateColorCodes('&',itemLingoPlugin.getConfig().getString("plugin_name", "ItemLingo"));
-        debug = itemLingoPlugin.getConfig().getBoolean("debug", false);
-        debugPacketShat = itemLingoPlugin.getConfig().getBoolean("debug_packet_chat", false);
-        allowedDirectories = itemLingoPlugin.getConfig().getStringList("allowed_directories");
-        allowedDirectoriesForDeletion = itemLingoPlugin.getConfig().getStringList("allowed_del_directories");
+        defaultLang = lingoPlugin.getConfig().getString("language", "en");
+        pluginName = ChatColor.translateAlternateColorCodes('&',lingoPlugin.getConfig().getString("plugin_name", "ItemLingo"));
+        debug = lingoPlugin.getConfig().getBoolean("debug", false);
+        debugPacketShat = lingoPlugin.getConfig().getBoolean("debug_packet_chat", false);
+        allowedDirectories = lingoPlugin.getConfig().getStringList("allowed_directories");
+        allowedDirectoriesForDeletion = lingoPlugin.getConfig().getStringList("allowed_del_directories");
     }
 
     public String getDefaultLang() {

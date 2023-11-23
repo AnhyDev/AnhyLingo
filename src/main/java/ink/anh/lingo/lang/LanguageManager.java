@@ -8,8 +8,8 @@ import java.util.Map;
 public abstract class LanguageManager extends AbstractLanguage<String> {
 	
 
-    public LanguageManager(AnhyLingo itemLingoPlugin, String directory) {
-        super(itemLingoPlugin, directory);
+    public LanguageManager(AnhyLingo lingoPlugin, String directory) {
+        super(lingoPlugin, directory);
     }
 
 	@Override
@@ -18,7 +18,7 @@ public abstract class LanguageManager extends AbstractLanguage<String> {
         for (String key : langConfig.getKeys(false)) {
             String value = langConfig.getString(key);
             
-            if (itemLingoPlugin.getConfigurationManager().isDebug())
+            if (lingoPlugin.getConfigurationManager().isDebug())
             	AnhyLingo.info("LanguageManager: " + key + ": " + value);
             
             langMap.put(key, value);

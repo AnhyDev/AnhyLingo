@@ -18,7 +18,7 @@ public class SimpleFileLoader extends AbstractFileManager {
 
     @Override
     public void processingFile(CommandSender sender, String urlString, String directoryPath, boolean overwriteExisting) {
-        Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(lingoPlugin, () -> {
             try {
                 if (!isPathAllowed(directoryPath, false)) {
                     sendMessage(sender, "lingo_err_uploading_not_allowed " + directoryPath, MessageType.ERROR);
@@ -27,7 +27,7 @@ public class SimpleFileLoader extends AbstractFileManager {
 
                 URL fileUrl = new URL(urlString);
                 // Вказуємо шлях до папки plugins
-                File dir = new File(itemLingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
+                File dir = new File(lingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
                 if (!dir.exists() && !dir.mkdirs()) {
                     sendMessage(sender, "lingo_err_failed_create_folder " + dir.getPath(), MessageType.ERROR);
                     return;

@@ -16,7 +16,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
     @Override
 	public void processingFile(CommandSender sender, String directoryPath, String fileName,
 			boolean overwriteExisting) {
-        Bukkit.getScheduler().runTaskAsynchronously(itemLingoPlugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(lingoPlugin, () -> {
             try {
                 if (!isPathAllowed(directoryPath, true)) {
                     sendMessage(sender, "lingo_err_not_allowed_to_delete " + directoryPath, MessageType.ERROR);
@@ -24,7 +24,7 @@ public class SimpleFileDeleter extends AbstractFileManager {
                 }
 
                 // Вказуємо шлях до папки plugins
-                File dir = new File(itemLingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
+                File dir = new File(lingoPlugin.getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
 
                 if (!dir.exists()) {
                     sendMessage(sender, "lingo_err_folder_does_not_exist " + dir.getPath(), MessageType.ERROR);

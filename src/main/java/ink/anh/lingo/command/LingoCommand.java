@@ -26,10 +26,10 @@ import ink.anh.lingo.utils.StringUtils;
 
 public class LingoCommand implements CommandExecutor {
 	
-	private AnhyLingo itemLingoPlugin;
+	private AnhyLingo lingoPlugin;
 
 	public LingoCommand(AnhyLingo plugin) {
-		this.itemLingoPlugin = plugin;
+		this.lingoPlugin = plugin;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class LingoCommand implements CommandExecutor {
 
             switch (args[0].toLowerCase()) {
             case "nbt":
-                return new NBTSubCommand(itemLingoPlugin).execNBT(sender, args);
+                return new NBTSubCommand(lingoPlugin).execNBT(sender, args);
             case "items":
                 return itemLang(sender, args);
             case "reload":
@@ -53,13 +53,13 @@ public class LingoCommand implements CommandExecutor {
                 return directory(sender, args);
             case "flingo":
             case "fl":
-                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.YAML_LOADER);
+                return new FileCommandProcessor(lingoPlugin).processFile(sender, args, FileProcessType.YAML_LOADER);
             case "fother":
             case "fo":
-                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.SIMPLE_LOADER);
+                return new FileCommandProcessor(lingoPlugin).processFile(sender, args, FileProcessType.SIMPLE_LOADER);
             case "fdel":
             case "fd":
-                return new FileCommandProcessor(itemLingoPlugin).processFile(sender, args, FileProcessType.FILE_DELETER);
+                return new FileCommandProcessor(lingoPlugin).processFile(sender, args, FileProcessType.FILE_DELETER);
             default:
                 return false;
             }
@@ -90,7 +90,7 @@ public class LingoCommand implements CommandExecutor {
             return true;
 	    }
 	    
-        if (itemLingoPlugin.getConfigurationManager().reload()) {
+        if (lingoPlugin.getConfigurationManager().reload()) {
             sendMessage(sender, StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true), MessageType.NORMAL);
             return true;
         }
@@ -209,7 +209,7 @@ public class LingoCommand implements CommandExecutor {
         String key = args[2];
 
         // Отримання об'єкта ItemLang
-        ItemLang itemLang = itemLingoPlugin.getLanguageItemStack().getData(key, langs);
+        ItemLang itemLang = lingoPlugin.getLanguageItemStack().getData(key, langs);
 
         if (itemLang == null) {
             sendMessage(sender, "lingo_err_no_item_data_found ", MessageType.WARNING);
@@ -218,7 +218,7 @@ public class LingoCommand implements CommandExecutor {
 
         // Виведення toString() об'єкта ItemLang
         sendMessage(sender, itemLang.toString(), MessageType.ESPECIALLY);
-        if (checkPlayer != null) itemLingoPlugin.getLogger().info(itemLang.toString());
+        if (checkPlayer != null) lingoPlugin.getLogger().info(itemLang.toString());
 
         return true;
     }
@@ -227,7 +227,7 @@ public class LingoCommand implements CommandExecutor {
 
         String lang = args[2];
         // Отримання мапи елементів з LanguageItemStack
-        Map<String, Map<String, ItemLang>> data = itemLingoPlugin.getLanguageItemStack().getDataMap();
+        Map<String, Map<String, ItemLang>> data = lingoPlugin.getLanguageItemStack().getDataMap();
 
         // Перебір усіх елементів, шукаючи ті, що відповідають вказаній мові
         List<String> keysForLang = new ArrayList<>();
@@ -247,7 +247,7 @@ public class LingoCommand implements CommandExecutor {
         for (String key : keysForLang) {
             sendMessage(sender, key, MessageType.ESPECIALLY);
             if (isPlayer) {
-                itemLingoPlugin.getLogger().info(key);
+                lingoPlugin.getLogger().info(key);
             }
         }
 
