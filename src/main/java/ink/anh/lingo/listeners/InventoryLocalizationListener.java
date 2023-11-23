@@ -10,16 +10,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.lang.TranslateItemStack;
 
 public class InventoryLocalizationListener implements Listener {
 
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo2 itemLingoPlugin;
 
     
-    public InventoryLocalizationListener(AnhyLingo itemLingoPlugin) {
+    public InventoryLocalizationListener(AnhyLingo2 itemLingoPlugin) {
 		this.itemLingoPlugin = itemLingoPlugin;
 	}
 

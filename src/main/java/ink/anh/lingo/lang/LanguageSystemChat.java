@@ -1,6 +1,6 @@
 package ink.anh.lingo.lang;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 
 public class LanguageSystemChat extends LanguageManager {
 
@@ -8,11 +8,11 @@ public class LanguageSystemChat extends LanguageManager {
     private static final Object LOCK = new Object();
     private static final String DIRECTORY = "system";
 
-    private LanguageSystemChat(AnhyLingo itemLingoPlugin) {
+    private LanguageSystemChat(AnhyLingo2 itemLingoPlugin) {
         super(itemLingoPlugin, DIRECTORY);
     }
 
-    public static LanguageSystemChat getInstance(AnhyLingo itemLingoPlugin) {
+    public static LanguageSystemChat getInstance(AnhyLingo2 itemLingoPlugin) {
         if (instance == null) {
             synchronized (LOCK) {
                 if (instance == null) {

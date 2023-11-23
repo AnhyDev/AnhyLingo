@@ -10,7 +10,7 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.events.ListenerPriority;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 import ink.anh.lingo.listeners.protocol.ModificationState;
 import ink.anh.lingo.utils.TypeText;
@@ -31,17 +31,17 @@ public class PacketChat extends AbstractPacketListener {
         	public void onPacketSending(PacketEvent event) {
 
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
-            		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
+            		AnhyLingo2.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
                     for(int i = 0; i < fields.size(); i++) {
                         if (fields.read(i) != null) {
                             Class<?> fieldType = fields.read(i).getClass();
-                            AnhyLingo.info("Field " + i + " is of type: " + fieldType.getName());
+                            AnhyLingo2.info("Field " + i + " is of type: " + fieldType.getName());
                         }
-                    	AnhyLingo.warn("Field " + i + ": " + fields.read(i));
+                    	AnhyLingo2.warn("Field " + i + ": " + fields.read(i));
                     }
-                    AnhyLingo.info("event.getPacket().getUUIDLists(): " + event.getPacket().getUUIDLists());
+                    AnhyLingo2.info("event.getPacket().getUUIDLists(): " + event.getPacket().getUUIDLists());
             	}
                 handlePacket(event);
         	}

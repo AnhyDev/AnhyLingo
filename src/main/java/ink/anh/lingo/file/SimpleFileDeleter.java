@@ -2,14 +2,14 @@ package ink.anh.lingo.file;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.messages.MessageType;
 
 import java.io.File;
 
 public class SimpleFileDeleter extends AbstractFileManager {
 
-    public SimpleFileDeleter(AnhyLingo plugin) {
+    public SimpleFileDeleter(AnhyLingo2 plugin) {
         super(plugin);
     }
 

@@ -7,7 +7,7 @@ import java.util.Comparator;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.utils.LangUtils;
@@ -19,9 +19,9 @@ public class DirectoryContents {
     public static void listDirectoryContents(CommandSender sender, String directoryPath) {
     	if (directoryPath.equals("0")) directoryPath = "";
     	String[] langs = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender) : null;
-    	String pluginName = AnhyLingo.getInstance().getConfigurationManager().getPluginName() + ": ";
+    	String pluginName = AnhyLingo2.getInstance().getConfigurationManager().getPluginName() + ": ";
 
-        File directory = new File(AnhyLingo.getInstance().getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
+        File directory = new File(AnhyLingo2.getInstance().getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);
 
         if (directory.exists() && directory.isDirectory()) {
             File[] fileList = directory.listFiles();

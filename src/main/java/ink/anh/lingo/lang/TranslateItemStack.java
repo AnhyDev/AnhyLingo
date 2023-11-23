@@ -9,17 +9,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.nbt.NBTExplorer;
 
 public class TranslateItemStack {
 
-    private AnhyLingo itemLingoPlugin;
+    private AnhyLingo2 itemLingoPlugin;
     private String lang_NBT;
     private String key_NBT;
     
     
-	public TranslateItemStack(AnhyLingo itemLingoPlugin) {
+	public TranslateItemStack(AnhyLingo2 itemLingoPlugin) {
 		this.itemLingoPlugin = itemLingoPlugin;
 		this.lang_NBT = "Lingo";
 		this.key_NBT = "ItemLingo";

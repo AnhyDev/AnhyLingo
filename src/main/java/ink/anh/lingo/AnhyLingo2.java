@@ -12,9 +12,9 @@ import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
-public class AnhyLingo extends JavaPlugin {
+public class AnhyLingo2 extends JavaPlugin {
 
-    private static AnhyLingo instance;
+    private static AnhyLingo2 instance;
 	
     private boolean isSpigot;
     private boolean isPaper;
@@ -122,7 +122,7 @@ public class AnhyLingo extends JavaPlugin {
     	instance.getLogger().severe("\u001b[0;91m" + message + "\u001b[m");
     }
 
-    public static AnhyLingo getInstance() {
+    public static AnhyLingo2 getInstance() {
     	return instance;
     }
 

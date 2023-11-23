@@ -1,6 +1,6 @@
 package ink.anh.lingo.command;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.Permissions;
 import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
@@ -16,9 +16,9 @@ import com.comphenix.protocol.wrappers.nbt.NbtList;
 
 public class NBTSubCommand {
 	
-	private AnhyLingo itemLingoPlugin;
+	private AnhyLingo2 itemLingoPlugin;
 
-	public NBTSubCommand(AnhyLingo plugin) {
+	public NBTSubCommand(AnhyLingo2 plugin) {
 		this.itemLingoPlugin = plugin;
 	}
 	

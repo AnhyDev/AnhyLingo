@@ -11,7 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.utils.StringUtils;
 import ink.anh.lingo.utils.TypeText;
@@ -21,11 +21,11 @@ import org.bukkit.entity.Player;
 public abstract class AbstractPacketListener {
     protected final PacketType packetType;
     protected PacketAdapter packetAdapter;
-	public AnhyLingo itemLingoPlugin;
+	public AnhyLingo2 itemLingoPlugin;
 
     protected AbstractPacketListener(PacketType packetType) {
         this.packetType = packetType;
-        this.itemLingoPlugin = AnhyLingo.getInstance();
+        this.itemLingoPlugin = AnhyLingo2.getInstance();
     }
 
     protected abstract void handlePacket(PacketEvent event);

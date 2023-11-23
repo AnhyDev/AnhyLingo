@@ -2,7 +2,7 @@ package ink.anh.lingo.lang;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -12,13 +12,13 @@ import java.util.Map;
 
 public abstract class AbstractLanguage<T> {
 
-    protected AnhyLingo itemLingoPlugin;
+    protected AnhyLingo2 itemLingoPlugin;
 
     public static final String[] DEFAULT_LANGS = {"en", "ua", "ru"}; // всі мови за замовчуванням
     protected Map<String, Map<String, T>> data = new HashMap<>();
     private String directory;
 
-    public AbstractLanguage(AnhyLingo itemLingoPlugin, String directory) {
+    public AbstractLanguage(AnhyLingo2 itemLingoPlugin, String directory) {
         this.itemLingoPlugin = itemLingoPlugin;
         this.directory = directory;
         saveDefaultLang();
@@ -46,7 +46,7 @@ public abstract class AbstractLanguage<T> {
                 itemLingoPlugin.saveResource(getDirectory() + "/" + filename, false);
             } else if (!file.exists()) {
                 // Логування чи інше повідомлення про те, що файл у пакеті не знайдено
-            	AnhyLingo.error("The resource could not be found: " + filename);
+            	AnhyLingo2.error("The resource could not be found: " + filename);
             }
         }
     }
@@ -55,10 +55,10 @@ public abstract class AbstractLanguage<T> {
         File dir = new File(itemLingoPlugin.getDataFolder() + File.separator + getDirectory());
 
         if (dir.listFiles() != null && dir.listFiles().length > 0 && itemLingoPlugin.getConfigurationManager().isDebug()) {
-            AnhyLingo.info("List of directory files: ../" + dir + "/");
+            AnhyLingo2.info("List of directory files: ../" + dir + "/");
 
             for (File file : dir.listFiles()) {
-                AnhyLingo.info(file.getName());
+                AnhyLingo2.info(file.getName());
             }
         }
 
@@ -69,7 +69,7 @@ public abstract class AbstractLanguage<T> {
         File[] files = dir.listFiles(filter);
 
         if (files == null || files.length == 0) {
-            AnhyLingo.error("No language files found in directory: " + dir);
+            AnhyLingo2.error("No language files found in directory: " + dir);
             return;
         }
 
@@ -88,7 +88,7 @@ public abstract class AbstractLanguage<T> {
             }
             
             if (itemLingoPlugin.getConfigurationManager().isDebug())
-            AnhyLingo.info("Upload file: " + dir + "/" + fileName);
+            AnhyLingo2.info("Upload file: " + dir + "/" + fileName);
         }
     }
     

@@ -14,7 +14,7 @@ import com.comphenix.protocol.wrappers.EnumWrappers;
 import ink.anh.lingo.utils.PaperUtils;
 import ink.anh.lingo.utils.TypeText;
 import net.kyori.adventure.text.Component;
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.AnhyLingo2;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 import ink.anh.lingo.listeners.protocol.ModificationState;
 
@@ -34,15 +34,15 @@ public class PacketSystemChat extends AbstractPacketListener {
         	public void onPacketSending(PacketEvent event) {
 
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
-            		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
+            		AnhyLingo2.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
                     for(int i = 0; i < fields.size(); i++) {
                         if (fields.read(i) != null) {
                             Class<?> fieldType = fields.read(i).getClass();
-                            AnhyLingo.warn("Field " + i + " is of type: " + fieldType.getName());
+                            AnhyLingo2.warn("Field " + i + " is of type: " + fieldType.getName());
                         }
-                    	AnhyLingo.info("Field " + i + ": " + fields.read(i));
+                    	AnhyLingo2.info("Field " + i + ": " + fields.read(i));
                     }
             	}
         	    
@@ -66,7 +66,7 @@ public class PacketSystemChat extends AbstractPacketListener {
             if (booleans.size() == 1) {
             	
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-                	AnhyLingo.warn("booleans.read(0): " + booleans.read(0));
+                	AnhyLingo2.warn("booleans.read(0): " + booleans.read(0));
             	
                 if (booleans.read(0)) {
                 	reSetActionBar(event, langs, modState);
@@ -75,7 +75,7 @@ public class PacketSystemChat extends AbstractPacketListener {
             } else if (packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()) {
             	
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-            	AnhyLingo.warn("packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()");
+            	AnhyLingo2.warn("packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()");
             	
                 return;
             }
@@ -91,14 +91,14 @@ public class PacketSystemChat extends AbstractPacketListener {
             if (contentField != null) {
             	
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-            	AnhyLingo.info("contentField != null");
+            	AnhyLingo2.info("contentField != null");
             	
             	jsonSystemChat = contentField.toString();
 
             } else {
             	
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-            	AnhyLingo.info("contentField == null");
+            	AnhyLingo2.info("contentField == null");
             	
                 Component read = componentModifier.read(0);
                 if (read == null) {
