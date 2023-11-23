@@ -1,16 +1,16 @@
 package ink.anh.lingo.file;
 
 import org.bukkit.command.CommandSender;
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
 import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
 
 public class FileCommandProcessor {
     
-    private AnhyLingo2 itemLingoPlugin;
+    private AnhyLingo itemLingoPlugin;
 
-    public FileCommandProcessor(AnhyLingo2 plugin) {
+    public FileCommandProcessor(AnhyLingo plugin) {
         this.itemLingoPlugin = plugin;
     }
 

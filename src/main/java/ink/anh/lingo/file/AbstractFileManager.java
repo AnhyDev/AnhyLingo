@@ -6,15 +6,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import org.bukkit.command.CommandSender;
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
 
 public abstract class AbstractFileManager {
 
-    protected AnhyLingo2 itemLingoPlugin;
+    protected AnhyLingo itemLingoPlugin;
 
-    public AbstractFileManager(AnhyLingo2 plugin) {
+    public AbstractFileManager(AnhyLingo plugin) {
         this.itemLingoPlugin = plugin;
     }
 

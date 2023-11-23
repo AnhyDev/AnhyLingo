@@ -1,15 +1,15 @@
 package ink.anh.lingo.listeners;
 
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 
 public class ListenerManager {
 
 	
-	public ListenerManager(AnhyLingo2 itemLingoPlugin) {
+	public ListenerManager(AnhyLingo itemLingoPlugin) {
 		this.ativateAllListeners(itemLingoPlugin);
 	}
 
-	private void ativateAllListeners(AnhyLingo2 itemLingoPlugin) {
+	private void ativateAllListeners(AnhyLingo itemLingoPlugin) {
 		
 		itemLingoPlugin.getServer().getPluginManager().registerEvents(new InventoryLocalizationListener(itemLingoPlugin), itemLingoPlugin);
 		

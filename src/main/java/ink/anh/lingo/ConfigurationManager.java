@@ -10,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class ConfigurationManager {
 
-    private AnhyLingo2 itemLingoPlugin;
+    private AnhyLingo itemLingoPlugin;
     private File configFile;
     
     private String defaultLang = "en";
@@ -20,7 +20,7 @@ public class ConfigurationManager {
     private List<String> allowedDirectories;
     private List<String> allowedDirectoriesForDeletion;
 
-    ConfigurationManager(AnhyLingo2 plugin) {
+    ConfigurationManager(AnhyLingo plugin) {
         this.itemLingoPlugin = plugin;
         this.configFile = new File(itemLingoPlugin.getDataFolder(), "config.yml");
         saveDefaultConfiguration();
@@ -38,7 +38,7 @@ public class ConfigurationManager {
             defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
             try {
                 defaultConfig.save(configFile);
-                AnhyLingo2.warn("Default configuration created. ");
+                AnhyLingo.warn("Default configuration created. ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,11 +52,11 @@ public class ConfigurationManager {
             itemLingoPlugin.getLanguageSystemChat().reloadLanguages();
             itemLingoPlugin.getLanguageItemStack().reloadLanguages();
             itemLingoPlugin.getLanguageChat().reloadLanguages();
-            AnhyLingo2.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, true));
+            AnhyLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, true));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            AnhyLingo2.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", new String[] {defaultLang}, true));
+            AnhyLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", new String[] {defaultLang}, true));
             return false;
         }
     }

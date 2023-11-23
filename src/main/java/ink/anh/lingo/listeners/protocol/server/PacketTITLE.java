@@ -15,7 +15,7 @@ import ink.anh.lingo.utils.TypeText;
 import ink.anh.lingo.utils.PaperUtils;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.chat.BaseComponent;
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 import ink.anh.lingo.listeners.protocol.ModificationState;
 
@@ -36,15 +36,15 @@ public class PacketTITLE extends AbstractPacketListener {
         	public void onPacketSending(PacketEvent event) {
 
             	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat()) {
-            		AnhyLingo2.warn("NBT event.getPacketType(): " + event.getPacketType().name());
+            		AnhyLingo.warn("NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
                     for(int i = 0; i < fields.size(); i++) {
                         if (fields.read(i) != null) {
                             Class<?> fieldType = fields.read(i).getClass();
-                            AnhyLingo2.info("Field " + i + " is of type: " + fieldType.getName());
+                            AnhyLingo.info("Field " + i + " is of type: " + fieldType.getName());
                         }
-                    	AnhyLingo2.warn("Field " + i + ": " + fields.read(i));
+                    	AnhyLingo.warn("Field " + i + ": " + fields.read(i));
                     }
             	}
         	    
@@ -70,7 +70,7 @@ public class PacketTITLE extends AbstractPacketListener {
         WrappedChatComponent wrappedChatComponent = componentModifier.read(0);
         if (wrappedChatComponent != null) {
         	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-        	AnhyLingo2.info("contentField != null");
+        	AnhyLingo.info("contentField != null");
             jsonSystemChat = wrappedChatComponent.getJson();
         } else {
             StructureModifier<Object> modifier = packet.getModifier();
@@ -98,14 +98,14 @@ public class PacketTITLE extends AbstractPacketListener {
         }
 
     	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-    	AnhyLingo2.info("jsonSystemChat: " + jsonSystemChat);
+    	AnhyLingo.info("jsonSystemChat: " + jsonSystemChat);
     	modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
 
         // Запис модифікованого рядка назад у компонент
         if (modState.isModified() && modifiedJson != null) {
         	componentModifier.write(0, WrappedChatComponent.fromJson(modifiedJson));
         	if (itemLingoPlugin.getConfigurationManager().isDebugPacketShat())
-        	AnhyLingo2.info("modifiedJson: " + modifiedJson);
+        	AnhyLingo.info("modifiedJson: " + modifiedJson);
         }
     }
 

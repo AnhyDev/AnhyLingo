@@ -3,14 +3,14 @@ package ink.anh.lingo.player;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 
 public class PlayerData {
 
-    private AnhyLingo2 itemLingoPlugin;
+    private AnhyLingo itemLingoPlugin;
 
     public PlayerData() {
-        this.itemLingoPlugin = AnhyLingo2.getInstance();
+        this.itemLingoPlugin = AnhyLingo.getInstance();
     }
 
  // Запис масиву рядків

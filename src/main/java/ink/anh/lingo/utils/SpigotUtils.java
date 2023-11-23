@@ -24,7 +24,7 @@ import net.md_5.bungee.chat.ScoreComponentSerializer;
 import net.md_5.bungee.chat.SelectorComponentSerializer;
 import net.md_5.bungee.chat.TextComponentSerializer;
 import net.md_5.bungee.chat.TranslatableComponentSerializer;
-import ink.anh.lingo.AnhyLingo2;
+import ink.anh.lingo.AnhyLingo;
 
 public class SpigotUtils {
 
@@ -62,8 +62,8 @@ public class SpigotUtils {
                 }
             }
         } catch (Throwable e) {
-        	if (AnhyLingo2.getInstance().getConfigurationManager().isDebugPacketShat())
-            	AnhyLingo2.error("Unable to disableHtmlEscaping for SpigotComponentSerializer:" + e);
+        	if (AnhyLingo.getInstance().getConfigurationManager().isDebugPacketShat())
+            	AnhyLingo.error("Unable to disableHtmlEscaping for SpigotComponentSerializer:" + e);
         }
         serializer = temp;
     }
