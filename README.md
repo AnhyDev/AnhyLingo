@@ -229,7 +229,6 @@
 
 <div class="code-container" style="box-sizing: border-box;">
 
-    # Main item
     magic_wand:
       name: "&bMagic Wand"
       lore:
@@ -243,48 +242,12 @@
       lines:
         1: "&cEnhanced Magic Wand"
 
-    # Another copy with changes in the first and third lines of the lore
-    magic_wand_2:
-      copy: magic_wand
-      lines:
-        1: "&dAdvanced Magic Wand"
-        3: "&dIt holds immense power."
-
-    # Other items
     eternal_sword:
       name: "&cEternal Sword"
       lore:
         - "&7A legendary sword that never dulls."
         - "&7Said to be forged from a fallen star."
         - "&7Its blade cuts through darkness."
-
-    phantom_cloak:
-      name: "&5Phantom Cloak"
-      lore:
-        - "&7A cloak woven from the threads of night."
-        - "&7Grants the wearer invisibility in shadows."
-        - "&7Whispers secrets of the ancient world."
-
-    skywalker_boots:
-      name: "&9Skywalker Boots"
-      lore:
-        - "&7Boots crafted from the essence of clouds."
-        - "&7Allows the wearer to walk on air."
-        - "&7Feels lighter than a feather."
-
-    sunshield_helmet:
-      name: "&eSunshield Helmet"
-      lore:
-        - "&7A helmet that shines like the sun."
-        - "&7Protects the wearer from all harm."
-        - "&7Radiates a warm, comforting glow."
-
-    galeforce_bow:
-      name: "&aGaleforce Bow"
-      lore:
-        - "&7A bow imbued with the spirit of the wind."
-        - "&7Arrows fly like swift gusts."
-        - "&7Said to never miss its target."
 
 </div>
 
@@ -293,12 +256,12 @@
 <div class="code-container" style="box-sizing: border-box;">
 
     #
-    # ██╗████████╗███████╗███╗░░░███╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
-    # ██║╚══██╔══╝██╔════╝████╗░████║██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
-    # ██║░░░██║░░░█████╗░░██╔████╔██║██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
-    # ██║░░░██║░░░██╔══╝░░██║╚██╔╝██║██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
-    # ██║░░░██║░░░███████╗██║░╚═╝░██║███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
-    # ╚═╝░░░╚═╝░░░╚══════╝╚═╝░░░░░╚═╝╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+	# ░█████╗░███╗░░██╗██╗░░██╗██╗░░░██╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+	# ██╔══██╗████╗░██║██║░░██║╚██╗░██╔╝██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+	# ███████║██╔██╗██║███████║░╚████╔╝░██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+	# ██╔══██║██║╚████║██╔══██║░░╚██╔╝░░██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+	# ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+	# ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
     #
     # Internal system messages of the ItemLingo plugin
     #
@@ -313,54 +276,6 @@
     lingo_created_default_configuration: "Default configuration created."
     lingo_configuration_reloaded: "Configuration reloaded."
     lingo_language_reloaded: "Language files and configuration reloaded."
-    #
-    # 3 Deleting files
-    lingo_err_not_allowed_to_delete: "Not allowed to delete files from this folder: "
-    lingo_err_folder_does_not_exist: "Folder does not exist: "
-    lingo_file_deleted_successfully: "File successfully deleted: "
-    lingo_err_not_allowed_delete_from_this_folder: "Failed to delete file: "
-    lingo_err_file_not_found: "File not found: "
-    lingo_err_error_deleting_file: "Error deleting file: "
-    #
-    # 4 Uploading various files
-    lingo_err_uploading_not_allowed: "Not allowed to upload to this folder: "
-    lingo_err_failed_create_folder: "Failed to create folder: "
-    lingo_err_error_loading_file: "Error loading file: "
-    lingo_err_file_already_exists: "File already exists: "
-    lingo_err_error_in_URL: "Error in URL: "
-    lingo_file_uploaded_successfully: "File uploaded successfully: "
-    lingo_file_updated_successfully: "File updated successfully: "
-    #
-    # 5 Loading ItemLingo language files
-    lingo_err_filename_not_pattern: "File name does not match the pattern: "
-    lingo_err_error_parsing_YAML: "Error parsing YAML: "
-    lingo_err_key_not_string: "Key is not a string: "
-    lingo_err_failed_create_ItemLang_key: "Failed to create ItemLang for key "
-    lingo_err_items_section_is_missing_file: "The 'items' section is missing in the file. "
-    lingo_err_unknown_directory_type: "Unknown directory type: "
-    #
-    # 6 General for file operations
-    lingo_file_operation_initiated: "File operation initiated for directory: "
-    lingo_file_show_folder_contents: "Click to see the contents of the folder: "
-    lingo_file_folder_contents: "Folder contents "
-    #
-    # 7 language commands
-    lingo_err_language_code_2letters: "Language code must be 2 letters. "
-    lingo_err_invalid_language_code: "Invalid language code: "
-    lingo_you_language: "List of languages you have chosen: "
-    lingo_you_have_not_set_language: "You have not chosen any language, using Minecraft settings "
-    lingo_cleared_the_language: "You have cleared the language list, Minecraft settings will be used "
-    lingo_err_no_item_data_found: "No data found for the specified language and key. "
-    lingo_keys_for_language: "Keys for language "
-    lingo_language_is_selected: "You have selected the following languages: "
-    #
-    # 8 NBT
-    lingo_NBT_value_set: "NBT value has been set. "
-    lingo_err_item_no_NBT_tags: "Your item has no NBT tags. "
-    lingo_NBT_keys_for_item: "NBT keys for your item: "
-    lingo_err_NBT_tag_not_exist: "NBT tag with such key does not exist. "
-    lingo_err_command_only_player: "This command can only be executed by a player. "
-    lingo_err_have_nothing_hand: "You have nothing in your hand. "
 
 </div>
 
