@@ -14,7 +14,7 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.lang.ItemLang;
 import ink.anh.lingo.utils.LangUtils;
 
@@ -23,10 +23,10 @@ import java.util.List;
 
 public class ItemsPacketListener {
 
-    private ItemLingo itemLingoPlugin;
+    private AnhyLingo itemLingoPlugin;
     private String key_NBT;
 
-    public ItemsPacketListener(ItemLingo plugin) {
+    public ItemsPacketListener(AnhyLingo plugin) {
         this.itemLingoPlugin = plugin;
         this.key_NBT = "ItemLingo";
 

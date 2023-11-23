@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
@@ -26,9 +26,9 @@ import ink.anh.lingo.utils.StringUtils;
 
 public class LingoCommand implements CommandExecutor {
 	
-	private ItemLingo itemLingoPlugin;
+	private AnhyLingo itemLingoPlugin;
 
-	public LingoCommand(ItemLingo plugin) {
+	public LingoCommand(AnhyLingo plugin) {
 		this.itemLingoPlugin = plugin;
 	}
 

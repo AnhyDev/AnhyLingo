@@ -2,7 +2,7 @@ package ink.anh.lingo.lang;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.utils.StringUtils;
 
 import java.util.Arrays;
@@ -18,11 +18,11 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     private static final Object LOCK = new Object();
     private static final String DIRECTORY = "items";
     
-    public LanguageItemStack(ItemLingo plugin) {
+    public LanguageItemStack(AnhyLingo plugin) {
         super(plugin, DIRECTORY);
     }
 
-    public static LanguageItemStack getInstance(ItemLingo itemLingoPlugin) {
+    public static LanguageItemStack getInstance(AnhyLingo itemLingoPlugin) {
         if (instance == null) {
             synchronized (LOCK) {
                 if (instance == null) {
@@ -71,7 +71,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         ItemLang baseItemLang = langMap.get(baseKey);
 
         if (baseItemLang == null) {
-            ItemLingo.error("Base item for copy not found: " + baseKey);
+            AnhyLingo.error("Base item for copy not found: " + baseKey);
             return null; // Повертаємо null, щоб уникнути подальшої обробки
         }
 

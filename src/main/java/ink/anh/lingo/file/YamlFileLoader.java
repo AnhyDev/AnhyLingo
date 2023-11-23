@@ -13,13 +13,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.lang.ItemLang;
 import ink.anh.lingo.messages.MessageType;
 
 public class YamlFileLoader extends AbstractFileManager {
     
-    public YamlFileLoader(ItemLingo plugin) {
+    public YamlFileLoader(AnhyLingo plugin) {
     	super(plugin);
 	}
 

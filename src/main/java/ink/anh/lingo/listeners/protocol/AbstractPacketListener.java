@@ -11,23 +11,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.utils.LangUtils;
 import ink.anh.lingo.utils.StringUtils;
 import ink.anh.lingo.utils.TypeText;
-
-import javax.annotation.Nonnull;
 
 import org.bukkit.entity.Player;
 
 public abstract class AbstractPacketListener {
     protected final PacketType packetType;
     protected PacketAdapter packetAdapter;
-	public ItemLingo itemLingoPlugin;
+	public AnhyLingo itemLingoPlugin;
 
-    protected AbstractPacketListener(@Nonnull PacketType packetType) {
+    protected AbstractPacketListener(PacketType packetType) {
         this.packetType = packetType;
-        this.itemLingoPlugin = ItemLingo.getInstance();
+        this.itemLingoPlugin = AnhyLingo.getInstance();
     }
 
     protected abstract void handlePacket(PacketEvent event);

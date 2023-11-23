@@ -8,7 +8,7 @@ import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.utils.StringUtils;
 
 public class Messenger {
@@ -16,11 +16,11 @@ public class Messenger {
 	private static BukkitAudiences bukkitAudiences;
 
 	static {
-		bukkitAudiences = ItemLingo.getBukkitAudiences();
+		bukkitAudiences = AnhyLingo.getBukkitAudiences();
 	}
 	
     public static void sendMessage(CommandSender sender, String message, MessageType type) {
-        String pluginName = "[" + ItemLingo.getInstance().getConfigurationManager().getPluginName() + "] ";
+        String pluginName = "[" + AnhyLingo.getInstance().getConfigurationManager().getPluginName() + "] ";
         String coloredMessage = StringUtils.translateKyeWorld(message, null, !(sender instanceof Player));
 
         if (sender instanceof Player) {
@@ -35,14 +35,14 @@ public class Messenger {
         } else {
             switch (type) {
                 case WARNING:
-                    ItemLingo.warn(coloredMessage);
+                    AnhyLingo.warn(coloredMessage);
                     break;
                 case ERROR:
                 case CRITICAL_ERROR:
-                    ItemLingo.error(coloredMessage);
+                    AnhyLingo.error(coloredMessage);
                     break;
                 default:
-                    ItemLingo.info(coloredMessage);
+                    AnhyLingo.info(coloredMessage);
                     break;
             }
         }
@@ -60,14 +60,14 @@ public class Messenger {
         } else {
             switch (type) {
                 case WARNING:
-                    ItemLingo.warn(coloredMessage);
+                    AnhyLingo.warn(coloredMessage);
                     break;
                 case ERROR:
                 case CRITICAL_ERROR:
-                    ItemLingo.error(coloredMessage);
+                    AnhyLingo.error(coloredMessage);
                     break;
                 default:
-                    ItemLingo.info(coloredMessage);
+                    AnhyLingo.info(coloredMessage);
                     break;
             }
         }
@@ -100,14 +100,14 @@ public class Messenger {
             String coloredFolder = StringUtils.translateKyeWorld(icon + folder, null, true);
             switch (type) {
                 case WARNING:
-                    ItemLingo.warn(coloredFolder);
+                    AnhyLingo.warn(coloredFolder);
                     break;
                 case ERROR:
                 case CRITICAL_ERROR:
-                    ItemLingo.error(coloredFolder);
+                    AnhyLingo.error(coloredFolder);
                     break;
                 default:
-                    ItemLingo.info(coloredFolder);
+                    AnhyLingo.info(coloredFolder);
                     break;
             }
         }

@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ink.anh</groupId>
-    <artifactId>ItemLingo</artifactId>
+    <artifactId>AnhyLingo</artifactId>
     <version>0.0.1</version>
-    <name>ItemLingo</name>
-    <description>ItemLingo projekt</description>
+    <name>AnhyLingo</name>
+    <description>AnhyLingo projekt</description>
     
     <build>
         <plugins>
@@ -30,7 +30,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ink.anh.lingo.ItemLingo</mainClass>
+                                    <mainClass>ink.anh.lingo.AnhyLingo</mainClass>
                                 </transformer>
                             </transformers>
                             <relocations>

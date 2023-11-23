@@ -3,7 +3,7 @@ package ink.anh.lingo.listeners.protocol;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.server.PacketTITLE;
 import ink.anh.lingo.listeners.protocol.server.PacketChat;
 import ink.anh.lingo.listeners.protocol.server.PacketSystemChat;
@@ -42,13 +42,13 @@ public class PacketListenerManager {
             try {
                 listener.register();
             } catch (Throwable throwable) {
-            	ItemLingo.warn("Unable to register listener " + listener.getClass().getSimpleName() + ":");
+            	AnhyLingo.warn("Unable to register listener " + listener.getClass().getSimpleName() + ":");
                 throwable.printStackTrace();
             }
         }
     }
 
     public void removeListeners() {
-        ProtocolLibrary.getProtocolManager().removePacketListeners(ItemLingo.getInstance());
+        ProtocolLibrary.getProtocolManager().removePacketListeners(AnhyLingo.getInstance());
     }
 }

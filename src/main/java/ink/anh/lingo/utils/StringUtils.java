@@ -1,6 +1,6 @@
 package ink.anh.lingo.utils;
 
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.lang.LanguageManager;
 import ink.anh.lingo.listeners.protocol.ModificationState;
 
@@ -23,7 +23,7 @@ public class StringUtils {
 	
 	public static String translateKyeWorld(String text, String[] langs, boolean isSystemChat) {
 	    String newText = null;
-	    ItemLingo itemLingoPlugin = ItemLingo.getInstance();
+	    AnhyLingo itemLingoPlugin = AnhyLingo.getInstance();
 	    
 	    if (itemLingoPlugin == null) {
 	        return text;

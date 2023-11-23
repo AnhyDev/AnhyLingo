@@ -12,9 +12,9 @@ import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
-public class ItemLingo extends JavaPlugin {
+public class AnhyLingo extends JavaPlugin {
 
-    private static ItemLingo instance;
+    private static AnhyLingo instance;
 	
     private boolean isSpigot;
     private boolean isPaper;
@@ -50,6 +50,21 @@ public class ItemLingo extends JavaPlugin {
     @Override
     public void onDisable() {
 
+    	
+    }
+    
+    public static boolean isVersionOrNewer(int minorVersionToCheck) {
+        String version = Bukkit.getBukkitVersion();
+        String[] splitVersion = version.split("-")[0].split("\\.");
+
+        int major = Integer.parseInt(splitVersion[0]);
+        int minor = 0;
+
+        if (splitVersion.length > 1) {
+            minor = Integer.parseInt(splitVersion[1]);
+        }
+
+        return major == 1 && minor >= minorVersionToCheck;
     }
 
     private void checkServer() {
@@ -108,7 +123,7 @@ public class ItemLingo extends JavaPlugin {
     	instance.getLogger().severe("\u001b[0;91m" + message + "\u001b[m");
     }
 
-    public static ItemLingo getInstance() {
+    public static AnhyLingo getInstance() {
     	return instance;
     }
 

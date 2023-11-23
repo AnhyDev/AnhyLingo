@@ -1,14 +1,14 @@
 package ink.anh.lingo.lang;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import ink.anh.lingo.ItemLingo;
+import ink.anh.lingo.AnhyLingo;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class LanguageManager extends AbstractLanguage<String> {
 	
 
-    public LanguageManager(ItemLingo itemLingoPlugin, String directory) {
+    public LanguageManager(AnhyLingo itemLingoPlugin, String directory) {
         super(itemLingoPlugin, directory);
     }
 
@@ -19,7 +19,7 @@ public abstract class LanguageManager extends AbstractLanguage<String> {
             String value = langConfig.getString(key);
             
             if (itemLingoPlugin.getConfigurationManager().isDebug())
-            	ItemLingo.info("LanguageManager: " + key + ": " + value);
+            	AnhyLingo.info("LanguageManager: " + key + ": " + value);
             
             langMap.put(key, value);
         }
