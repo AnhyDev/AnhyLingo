@@ -8,11 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.api.Translator;
 import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.utils.LangUtils;
-import ink.anh.lingo.utils.StringUtils;
-import net.md_5.bungee.api.ChatColor;
 
 public class DirectoryContents {
 
@@ -34,19 +33,19 @@ public class DirectoryContents {
                                                 .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER));
 
                 
-                Messenger.sendMessage(sender, "lingo_file_folder_contents " + iconFolder + directoryPath, MessageType.IMPORTANT);
+                Messenger.sendMessage(AnhyLingo.getInstance(), sender, "lingo_file_folder_contents " + iconFolder + directoryPath, MessageType.IMPORTANT);
                 for (File file : fileList) {
                     if (file.isDirectory()) {
-                    	Messenger.sendShowFolder(sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);
+                    	Messenger.sendShowFolder(AnhyLingo.getInstance(), sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);
                     } else {
-                    	Messenger.sendMessageSimple(sender, file.getName(), iconFile, MessageType.ESPECIALLY);
+                    	Messenger.sendMessageSimple(AnhyLingo.getInstance(), sender, file.getName(), iconFile, MessageType.ESPECIALLY);
                     }
                 }
             } else {
-            	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_empty", langs, true));
+            	sender.sendMessage(pluginName + Translator.translateKyeWorld("lingo_err_folder_is_empty", langs, AnhyLingo.getInstance().getLanguageSystemChat()));
             }
         } else {
-        	sender.sendMessage(pluginName + StringUtils.translateKyeWorld("lingo_err_folder_is_notexist ", langs, true));
+        	sender.sendMessage(pluginName + Translator.translateKyeWorld("lingo_err_folder_is_notexist ", langs, AnhyLingo.getInstance().getLanguageSystemChat()));
         }
     }
 }

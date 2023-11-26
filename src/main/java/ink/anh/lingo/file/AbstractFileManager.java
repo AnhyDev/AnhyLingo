@@ -50,6 +50,6 @@ public abstract class AbstractFileManager {
     }
 
     public void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(sender, message, type);
+    	Messenger.sendMessage(lingoPlugin, sender, message, type);
     }
 }

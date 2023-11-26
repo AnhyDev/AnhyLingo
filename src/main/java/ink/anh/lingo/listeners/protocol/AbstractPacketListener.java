@@ -12,10 +12,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.api.Translator;
+import ink.anh.lingo.api.lang.LanguageManager;
 import ink.anh.lingo.utils.LangUtils;
-import ink.anh.lingo.utils.StringUtils;
-import ink.anh.lingo.utils.TypeText;
-
 import org.bukkit.entity.Player;
 
 public abstract class AbstractPacketListener {
@@ -30,7 +29,7 @@ public abstract class AbstractPacketListener {
 
     protected abstract void handlePacket(PacketEvent event);
 
-    public abstract TypeText getTypeText();
+    public abstract LanguageManager getLangMan();
 
     protected void register() {
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter);
@@ -50,7 +49,7 @@ public abstract class AbstractPacketListener {
                 JsonObject element = extraArray.get(i).getAsJsonObject();
                 if (element.has(textBlock)) {
                     String text = element.get(textBlock).getAsString();
-                    modState = StringUtils.translateKyeWorldModificationState(text, langs, getTypeText(), modState);
+                    modState = Translator.translateKyeWorldModificationState(text, langs, getLangMan(), modState);
                     String modifiedText = modState.getTranslatedText();
                     if (modState.isModified()) {
                         element.addProperty(textBlock, modifiedText);

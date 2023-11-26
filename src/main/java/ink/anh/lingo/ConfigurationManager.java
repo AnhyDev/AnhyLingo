@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import ink.anh.lingo.utils.StringUtils;
+import ink.anh.lingo.api.Translator;
+import ink.anh.lingo.messages.Logger;
 import net.md_5.bungee.api.ChatColor;
 
 public class ConfigurationManager {
@@ -38,7 +39,7 @@ public class ConfigurationManager {
             defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
             try {
                 defaultConfig.save(configFile);
-                AnhyLingo.warn("Default configuration created. ");
+                Logger.warn(lingoPlugin, "Default configuration created. ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,11 +53,11 @@ public class ConfigurationManager {
             lingoPlugin.getLanguageSystemChat().reloadLanguages();
             lingoPlugin.getLanguageItemStack().reloadLanguages();
             lingoPlugin.getLanguageChat().reloadLanguages();
-            AnhyLingo.info(StringUtils.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, true));
+            Logger.info(lingoPlugin, Translator.translateKyeWorld("lingo_configuration_reloaded" , new String[] {defaultLang}, lingoPlugin.getLanguageSystemChat()));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-            AnhyLingo.error(StringUtils.translateKyeWorld("lingo_err_reloading_configuration ", new String[] {defaultLang}, true));
+            Logger.error(lingoPlugin, Translator.translateKyeWorld("lingo_err_reloading_configuration ", new String[] {defaultLang}, lingoPlugin.getLanguageSystemChat()));
             return false;
         }
     }

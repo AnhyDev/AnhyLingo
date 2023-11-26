@@ -10,7 +10,7 @@ import ink.anh.lingo.lang.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageSystemChat;
 import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
-import ink.anh.lingo.messages.ANSIColors;
+import ink.anh.lingo.messages.Logger;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 public class AnhyLingo extends JavaPlugin {
@@ -73,7 +73,7 @@ public class AnhyLingo extends JavaPlugin {
             isSpigot = true;
         } catch (Throwable tr) {
             isSpigot = false;
-            error("Console-Sender.Messages.Initialize.Require-Spigot");
+            Logger.error(this, "Console-Sender.Messages.Initialize.Require-Spigot");
             return;
         }
     	try {
@@ -101,7 +101,7 @@ public class AnhyLingo extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
         for (String depend : depends) {
             if (pluginManager.getPlugin(depend) == null) {
-            	error("Console-Sender.Messages.Initialize.Missing-Dependency " + depend);
+            	Logger.error(this, "Console-Sender.Messages.Initialize.Missing-Dependency " + depend);
                 missingDepend = true;
             }
         }
@@ -111,20 +111,12 @@ public class AnhyLingo extends JavaPlugin {
         return missingDepend;
     }
 
-    public static void info(String message) {
-    	instance.getLogger().info(ANSIColors.CYAN_BRIGHT + message + ANSIColors.RESET);
-    }
-
-    public static void warn(String message) {
-    	instance.getLogger().warning(ANSIColors.YELLOW + message + ANSIColors.RESET);
-    }
-
-    public static void error(String message) {
-    	instance.getLogger().severe(ANSIColors.RED + message  + ANSIColors.RESET);
-    }
-
     public static AnhyLingo getInstance() {
     	return instance;
+    }
+
+    public LanguageSystemChat getLanguageSystemChat() {
+    	return languageSystemChat;
     }
 
     public LanguageItemStack getLanguageItemStack() {
@@ -157,10 +149,6 @@ public class AnhyLingo extends JavaPlugin {
 
     public boolean hasPaperComponent() {
     	return hasPaperComponent;
-    }
-
-    public LanguageSystemChat getLanguageSystemChat() {
-    	return languageSystemChat;
     }
 
 	public static BukkitAudiences getBukkitAudiences() {

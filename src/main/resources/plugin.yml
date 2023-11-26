@@ -2,10 +2,10 @@ main: ink.anh.lingo.AnhyLingo
 name: AnhyLingo
 version: 0.0.1
 author: AnhyDev
-api-version: 1.19
+api-version: 1.13
 description: AnhyLingo projekt
 website: http://anh.ink
 commands:
     lingo:
         aliases: [anhylingo]
-        usage: "The command '/lingo (/itemlingo)' execution error, please check the arguments' correctness."
+        usage: "The command '/lingo (/anhylingo)' execution error, please check the arguments' correctness."

@@ -3,7 +3,9 @@ package ink.anh.lingo.lang;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.messages.Logger;
 import ink.anh.lingo.utils.StringUtils;
+import ink.anh.lingo.api.lang.AbstractLanguage;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     }
 
     @Override
-    protected Map<String, ItemLang> extractData(FileConfiguration langConfig, String lang) {
+	public Map<String, ItemLang> extractData(FileConfiguration langConfig, String lang) {
         Map<String, ItemLang> langMap = new HashMap<>();
 
         for (String key : langConfig.getKeys(false)) {
@@ -71,7 +73,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         ItemLang baseItemLang = langMap.get(baseKey);
 
         if (baseItemLang == null) {
-            AnhyLingo.error("Base item for copy not found: " + baseKey);
+        	Logger.error(plugin, "Base item for copy not found: " + baseKey);
             return null; // Повертаємо null, щоб уникнути подальшої обробки
         }
 
@@ -98,7 +100,7 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     }
 
 	@Override
-	protected Map<String, ItemLang> extractData(FileConfiguration langConfig) {
+	public Map<String, ItemLang> extractData(FileConfiguration langConfig) {
 		return null;
 	}
 }

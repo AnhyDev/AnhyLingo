@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
+import ink.anh.lingo.api.Translator;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.file.FileCommandProcessor;
@@ -22,7 +23,6 @@ import ink.anh.lingo.messages.MessageType;
 import ink.anh.lingo.messages.Messenger;
 import ink.anh.lingo.player.PlayerData;
 import ink.anh.lingo.utils.LangUtils;
-import ink.anh.lingo.utils.StringUtils;
 
 public class LingoCommand implements CommandExecutor {
 	
@@ -91,7 +91,7 @@ public class LingoCommand implements CommandExecutor {
 	    }
 	    
         if (lingoPlugin.getConfigurationManager().reload()) {
-            sendMessage(sender, StringUtils.translateKyeWorld("lingo_language_reloaded ", langs, true), MessageType.NORMAL);
+            sendMessage(sender, Translator.translateKyeWorld("lingo_language_reloaded ", langs, lingoPlugin.getLanguageSystemChat()), MessageType.NORMAL);
             return true;
         }
         return false;
@@ -271,7 +271,7 @@ public class LingoCommand implements CommandExecutor {
 
             // Перевіряємо наявність дозволу у гравця
             if (!player.hasPermission(permission)) {
-                sendMessage(sender, StringUtils.translateKyeWorld("lingo_err_not_have_permission ", langs, true), MessageType.ERROR);
+                sendMessage(sender, Translator.translateKyeWorld("lingo_err_not_have_permission ", langs, AnhyLingo.getInstance().getLanguageSystemChat()), MessageType.ERROR);
                 return langs;
             }
         }
@@ -280,6 +280,6 @@ public class LingoCommand implements CommandExecutor {
     }
 
 	private static void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(sender, message, type);
+    	Messenger.sendMessage(AnhyLingo.getInstance(), sender, message, type);
     }
 }

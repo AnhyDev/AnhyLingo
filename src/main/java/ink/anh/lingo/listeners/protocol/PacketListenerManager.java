@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.server.PacketTITLE;
+import ink.anh.lingo.messages.Logger;
 import ink.anh.lingo.listeners.protocol.server.PacketChat;
 import ink.anh.lingo.listeners.protocol.server.PacketSystemChat;
 
@@ -42,7 +43,7 @@ public class PacketListenerManager {
             try {
                 listener.register();
             } catch (Throwable throwable) {
-            	AnhyLingo.warn("Unable to register listener " + listener.getClass().getSimpleName() + ":");
+            	Logger.warn(AnhyLingo.getInstance(), "Unable to register listener " + listener.getClass().getSimpleName() + ":");
                 throwable.printStackTrace();
             }
         }
