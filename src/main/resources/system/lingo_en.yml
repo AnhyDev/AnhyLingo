@@ -6,11 +6,11 @@
 # ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
 # ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
 #
-# Internal system messages of the ItemLingo plugin
+# Internal system messages of the AnhyLingo plugin
 #
 # 1 General
 lingo_err_not_have_permission: "You do not have permission to use this command."
-lingo_err_not_alloved: "The command is not allowed in the configuration settings."
+lingo_err_not_alloved_config: "The command is not allowed in the configuration settings."
 lingo_err_command_format: "Command format: "
 #
 # 2 Loading configurations

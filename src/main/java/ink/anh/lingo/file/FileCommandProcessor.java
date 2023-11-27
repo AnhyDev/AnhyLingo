@@ -17,7 +17,7 @@ public class FileCommandProcessor {
     public boolean processFile(CommandSender sender, String[] args, FileProcessType fileProcessType) {
 
     	if (!isCommandAlloved(args[0])) {
-            sendMessage(sender, "lingo_err_not_alloved ", MessageType.WARNING);
+            sendMessage(sender, "lingo_err_not_alloved_config ", MessageType.WARNING);
     		return true;
     	}
     	
