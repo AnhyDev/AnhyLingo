@@ -34,6 +34,10 @@ public class PacketTITLE extends AbstractPacketListener {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
+        		
+        		if (!lingoPlugin.getConfigurationManager().isPacketLingo()) {
+        			return;
+        		}
 
             	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
             		Logger.warn(lingoPlugin, "NBT event.getPacketType(): " + event.getPacketType().name());

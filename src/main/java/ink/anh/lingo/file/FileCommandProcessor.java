@@ -15,6 +15,12 @@ public class FileCommandProcessor {
     }
 
     public boolean processFile(CommandSender sender, String[] args, FileProcessType fileProcessType) {
+
+    	if (!isCommandAlloved(args[0])) {
+            sendMessage(sender, "lingo_err_not_alloved ", MessageType.WARNING);
+    		return true;
+    	}
+    	
         String permission = getPermissionForFileType(fileProcessType);
         if (!sender.hasPermission(permission)) {
             sendMessage(sender, "lingo_err_not_have_permission: ", MessageType.WARNING);
@@ -75,4 +81,15 @@ public class FileCommandProcessor {
         }
     }
 
+    private boolean isCommandAlloved(String arg0) {
+    	switch (arg0.toLowerCase()) {
+        case "fl":
+            return lingoPlugin.getConfigurationManager().isAllowUpload();
+        case "fo":
+            return lingoPlugin.getConfigurationManager().isAllowUpload();
+        case "fd":
+            return lingoPlugin.getConfigurationManager().isAllowRemoval();
+        }
+		return false;
+    }
 }

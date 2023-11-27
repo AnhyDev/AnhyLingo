@@ -17,23 +17,28 @@ import ink.anh.lingo.lang.TranslateItemStack;
 public class InventoryLocalizationListener implements Listener {
 
     private AnhyLingo lingoPlugin;
+    private boolean itemLingo;
 
     
     public InventoryLocalizationListener(AnhyLingo lingoPlugin) {
 		this.lingoPlugin = lingoPlugin;
+		this.itemLingo = lingoPlugin.getConfigurationManager().isItemLingo();
 	}
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryOpen(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
-        String[] langs = getPlayerLanguage(player);
+		
+		if (itemLingo) {
+			String[] langs = getPlayerLanguage(player);
 
-        if(event.getInventory().getViewers().size() == 1) {
-        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
-            for (ItemStack item : event.getInventory().getContents()) {
-            	if (checkItem(item)) translater.modifyItem(langs, item);
-            }
-        }
+	        if(event.getInventory().getViewers().size() == 1) {
+	        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
+	            for (ItemStack item : event.getInventory().getContents()) {
+	            	if (checkItem(item)) translater.modifyItem(langs, item);
+	            }
+	        }
+		}   
     }
 
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -41,16 +46,19 @@ public class InventoryLocalizationListener implements Listener {
         if (event.getView().getType() == InventoryType.CREATIVE) return;
         
         Player player = (Player) event.getWhoClicked();
-        String[] langs = getPlayerLanguage(player);
+		
+		if (itemLingo) {
+	        String[] langs = getPlayerLanguage(player);
 
-        if(event.getInventory().getViewers().size() == 1) {
-        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
-            ItemStack currentItem = event.getCurrentItem();
-            
-            if (checkItem(currentItem)) {
-            	translater.modifyItem(langs, currentItem);
-            }
-        }
+	        if(event.getInventory().getViewers().size() == 1) {
+	        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
+	            ItemStack currentItem = event.getCurrentItem();
+	            
+	            if (checkItem(currentItem)) {
+	            	translater.modifyItem(langs, currentItem);
+	            }
+	        }
+		}
     }
     
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -58,13 +66,16 @@ public class InventoryLocalizationListener implements Listener {
     	if (!(event.getEntity() instanceof Player)) return;
     	
         Player player = (Player) event.getEntity();
-        String[] langs = getPlayerLanguage(player);
+		
+		if (itemLingo) {
+	        String[] langs = getPlayerLanguage(player);
 
-        ItemStack pickedItem = event.getItem().getItemStack();
-        if (checkItem(pickedItem)) {
-        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
-        	translater.modifyItem(langs, pickedItem);
-        }
+	        ItemStack pickedItem = event.getItem().getItemStack();
+	        if (checkItem(pickedItem)) {
+	        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
+	        	translater.modifyItem(langs, pickedItem);
+	        }
+		}
     }
 
     private String[] getPlayerLanguage(Player player) {

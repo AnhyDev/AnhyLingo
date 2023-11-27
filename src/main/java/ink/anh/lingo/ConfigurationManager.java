@@ -3,6 +3,7 @@ package ink.anh.lingo;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import ink.anh.lingo.api.Translator;
@@ -18,7 +19,12 @@ public class ConfigurationManager {
     private String pluginName = "ItemLingo";
     private boolean debug;
     private boolean debugPacketShat;
+    private boolean itemLingo;
+    private boolean packetLingo;
+    private boolean allowBrowsing;
+    private boolean allowUpload;
     private List<String> allowedDirectories;
+    private boolean allowRemoval;
     private List<String> allowedDirectoriesForDeletion;
 
     ConfigurationManager(AnhyLingo plugin) {
@@ -31,12 +37,17 @@ public class ConfigurationManager {
     void saveDefaultConfiguration() {
         if (!configFile.exists()) {
             YamlConfiguration defaultConfig = new YamlConfiguration();
+            defaultConfig.options().setHeader(logo());
             defaultConfig.set("language", "en");
-            defaultConfig.set("plugin_name", "ItemLingo");
+            defaultConfig.set("plugin_name", "AnhyLingo");
             defaultConfig.set("debug", false);
-            defaultConfig.set("debug_packet_chat", false);
-            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
-            defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo/items/tmpfile"));
+            defaultConfig.set("item_lingo", false);
+            defaultConfig.set("packet_lingo", false);
+            defaultConfig.set("allow_browsing", false);
+            defaultConfig.set("allow_upload", false);
+            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo", "MythicMobs"));
+            defaultConfig.set("allow_removal", false);
+            defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo", "MythicMobs"));
             try {
                 defaultConfig.save(configFile);
                 Logger.warn(lingoPlugin, "Default configuration created. ");
@@ -66,8 +77,13 @@ public class ConfigurationManager {
         defaultLang = lingoPlugin.getConfig().getString("language", "en");
         pluginName = ChatColor.translateAlternateColorCodes('&',lingoPlugin.getConfig().getString("plugin_name", "ItemLingo"));
         debug = lingoPlugin.getConfig().getBoolean("debug", false);
+        allowBrowsing = lingoPlugin.getConfig().getBoolean("allow_browsing", false);
+        itemLingo = lingoPlugin.getConfig().getBoolean("item_lingo", false);
+        packetLingo = lingoPlugin.getConfig().getBoolean("packet_lingo", false);
+        allowUpload = lingoPlugin.getConfig().getBoolean("allow_upload", false);
         debugPacketShat = lingoPlugin.getConfig().getBoolean("debug_packet_chat", false);
         allowedDirectories = lingoPlugin.getConfig().getStringList("allowed_directories");
+        allowRemoval = lingoPlugin.getConfig().getBoolean("allow_removal", false);
         allowedDirectoriesForDeletion = lingoPlugin.getConfig().getStringList("allowed_del_directories");
     }
 
@@ -112,4 +128,39 @@ public class ConfigurationManager {
 	public List<String> getAllowedDirectoriesForDeletion() {
 		return allowedDirectoriesForDeletion;
 	}
+
+	public boolean isItemLingo() {
+		return itemLingo;
+	}
+
+	public boolean isPacketLingo() {
+		return packetLingo;
+	}
+
+	public boolean isAllowBrowsing() {
+		return allowBrowsing;
+	}
+
+	public boolean isAllowUpload() {
+		return allowUpload;
+	}
+
+	public boolean isAllowRemoval() {
+		return allowRemoval;
+	}
+	
+    public static List<String> logo() {
+        List<String> asciiArt = new ArrayList<>();
+
+        asciiArt.add("");
+        asciiArt.add(" ░█████╗░███╗░░██╗██╗░░██╗██╗░░░██╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░");
+        asciiArt.add(" ██╔══██╗████╗░██║██║░░██║╚██╗░██╔╝██║░░░░░██║████╗░██║██╔════╝░██╔══██╗");
+        asciiArt.add(" ███████║██╔██╗██║███████║░╚████╔╝░██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║");
+        asciiArt.add(" ██╔══██║██║╚████║██╔══██║░░╚██╔╝░░██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║");
+        asciiArt.add(" ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝");
+        asciiArt.add(" ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░");
+        asciiArt.add("");
+
+        return asciiArt;
+    }
 }

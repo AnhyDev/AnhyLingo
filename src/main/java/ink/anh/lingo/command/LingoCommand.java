@@ -68,6 +68,11 @@ public class LingoCommand implements CommandExecutor {
 	}
 
     private boolean directory(CommandSender sender, String[] args) {
+    	if (!lingoPlugin.getConfigurationManager().isAllowBrowsing()) {
+            sendMessage(sender, "lingo_err_not_alloved ", MessageType.WARNING);
+    		return true;
+    	}
+    	
     	String[] langs = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
 	    if (langs != null && langs[0] == null) {
             return true;
