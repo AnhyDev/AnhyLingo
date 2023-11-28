@@ -1,0 +1,70 @@
+#
+# ░█████╗░███╗░░██╗██╗░░██╗██╗░░░██╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+# ██╔══██╗████╗░██║██║░░██║╚██╗░██╔╝██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+# ███████║██╔██╗██║███████║░╚████╔╝░██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+# ██╔══██║██║╚████║██╔══██║░░╚██╔╝░░██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+# ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+# ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+#
+# Messaggi di sistema interni del plugin AnhyLingo
+#
+# 1 Generale
+lingo_err_not_have_permission: "Non hai il permesso di utilizzare questo comando."
+lingo_err_not_alloved_config: "Il comando non è consentito nelle impostazioni di configurazione."
+lingo_err_command_format: "Formato del comando: "
+#
+# 2 Caricamento configurazioni
+lingo_err_folder_is_empty: "La cartella è vuota o si è verificato un errore durante la lettura."
+lingo_err_folder_is_notexist: "La cartella non esiste o non è una cartella."
+lingo_err_reloading_configuration: "Errore nel ricaricare la configurazione."
+lingo_created_default_configuration: "Configurazione predefinita creata."
+lingo_configuration_reloaded: "Configurazione ricaricata."
+lingo_language_reloaded: "File di lingua e configurazione ricaricati."
+#
+# 3 Eliminazione file
+lingo_err_not_allowed_to_delete: "Non è consentito eliminare file da questa cartella: "
+lingo_err_folder_does_not_exist: "La cartella non esiste: "
+lingo_file_deleted_successfully: "File eliminato con successo: "
+lingo_err_not_allowed_delete_from_this_folder: "Impossibile eliminare il file: "
+lingo_err_file_not_found: "File non trovato: "
+lingo_err_error_deleting_file: "Errore nell'eliminazione del file: "
+#
+# 4 Caricamento di vari file
+lingo_err_uploading_not_allowed: "Non è consentito caricare in questa cartella: "
+lingo_err_failed_create_folder: "Impossibile creare la cartella: "
+lingo_err_error_loading_file: "Errore nel caricamento del file: "
+lingo_err_file_already_exists: "Il file esiste già: "
+lingo_err_error_in_URL: "Errore nell'URL: "
+lingo_file_uploaded_successfully: "File caricato con successo: "
+lingo_file_updated_successfully: "File aggiornato con successo: "
+#
+# 5 Caricamento file di lingua ItemLingo
+lingo_err_filename_not_pattern: "Il nome del file non corrisponde al modello: "
+lingo_err_error_parsing_YAML: "Errore nell'analizzare YAML: "
+lingo_err_key_not_string: "La chiave non è una stringa: "
+lingo_err_failed_create_ItemLang_key: "Impossibile creare ItemLang per la chiave "
+lingo_err_items_section_is_missing_file: "La sezione 'items' manca nel file. "
+lingo_err_unknown_directory_type: "Tipo di directory sconosciuto: "
+#
+# 6 Generale per operazioni sui file
+lingo_file_operation_initiated: "Operazione su file avviata per la directory: "
+lingo_file_show_folder_contents: "Clicca per vedere il contenuto della cartella: "
+lingo_file_folder_contents: "Contenuto della cartella "
+#
+# 7 Comandi lingua
+lingo_err_language_code_2letters: "Il codice della lingua deve essere di 2 lettere. "
+lingo_err_invalid_language_code: "Codice lingua non valido: "
+lingo_you_language: "Elenco delle lingue che hai scelto: "
+lingo_you_have_not_set_language: "Non hai scelto nessuna lingua, verranno utilizzate le impostazioni di Minecraft "
+lingo_cleared_the_language: "Hai cancellato l'elenco delle lingue, verranno utilizzate le impostazioni di Minecraft "
+lingo_err_no_item_data_found: "Nessun dato trovato per la lingua e la chiave specificate. "
+lingo_keys_for_language: "Chiavi per la lingua "
+lingo_language_is_selected: "Hai selezionato le seguenti lingue: "
+#
+# 8 NBT
+lingo_NBT_value_set: "Valore NBT impostato. "
+lingo_err_item_no_NBT_tags: "Il tuo oggetto non ha tag NBT. "
+lingo_NBT_keys_for_item: "Chiavi NBT per il tuo oggetto: "
+lingo_err_NBT_tag_not_exist: "Il tag NBT con questa chiave non esiste. "
+lingo_err_command_only_player: "Questo comando può essere eseguito solo da un giocatore. "
+lingo_err_have_nothing_hand: "Non hai nulla in mano. "

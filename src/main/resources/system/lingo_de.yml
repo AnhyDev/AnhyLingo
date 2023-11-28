@@ -1,0 +1,70 @@
+#
+# ░█████╗░███╗░░██╗██╗░░██╗██╗░░░██╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+# ██╔══██╗████╗░██║██║░░██║╚██╗░██╔╝██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+# ███████║██╔██╗██║███████║░╚████╔╝░██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+# ██╔══██║██║╚████║██╔══██║░░╚██╔╝░░██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+# ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+# ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+#
+# Interne Systemnachrichten des AnhyLingo-Plugins
+#
+# 1 Allgemein
+lingo_err_not_have_permission: "Sie haben keine Berechtigung, diesen Befehl zu verwenden."
+lingo_err_not_alloved_config: "Der Befehl ist in den Konfigurationseinstellungen nicht erlaubt."
+lingo_err_command_format: "Befehlsformat: "
+#
+# 2 Konfigurationen laden
+lingo_err_folder_is_empty: "Der Ordner ist leer oder ein Fehler ist beim Lesen aufgetreten."
+lingo_err_folder_is_notexist: "Der Ordner existiert nicht oder ist kein Ordner."
+lingo_err_reloading_configuration: "Fehler beim Neuladen der Konfiguration."
+lingo_created_default_configuration: "Standardkonfiguration erstellt."
+lingo_configuration_reloaded: "Konfiguration neu geladen."
+lingo_language_reloaded: "Sprachdateien und Konfiguration neu geladen."
+#
+# 3 Dateien löschen
+lingo_err_not_allowed_to_delete: "Das Löschen von Dateien aus diesem Ordner ist nicht erlaubt: "
+lingo_err_folder_does_not_exist: "Ordner existiert nicht: "
+lingo_file_deleted_successfully: "Datei erfolgreich gelöscht: "
+lingo_err_not_allowed_delete_from_this_folder: "Datei konnte nicht gelöscht werden: "
+lingo_err_file_not_found: "Datei nicht gefunden: "
+lingo_err_error_deleting_file: "Fehler beim Löschen der Datei: "
+#
+# 4 Verschiedene Dateien hochladen
+lingo_err_uploading_not_allowed: "Das Hochladen in diesen Ordner ist nicht erlaubt: "
+lingo_err_failed_create_folder: "Ordner konnte nicht erstellt werden: "
+lingo_err_error_loading_file: "Fehler beim Laden der Datei: "
+lingo_err_file_already_exists: "Datei existiert bereits: "
+lingo_err_error_in_URL: "Fehler in der URL: "
+lingo_file_uploaded_successfully: "Datei erfolgreich hochgeladen: "
+lingo_file_updated_successfully: "Datei erfolgreich aktualisiert: "
+#
+# 5 Laden von ItemLingo-Sprachdateien
+lingo_err_filename_not_pattern: "Dateiname entspricht nicht dem Muster: "
+lingo_err_error_parsing_YAML: "Fehler beim Parsen von YAML: "
+lingo_err_key_not_string: "Schlüssel ist kein String: "
+lingo_err_failed_create_ItemLang_key: "ItemLang für Schlüssel konnte nicht erstellt werden "
+lingo_err_items_section_is_missing_file: "Der 'items'-Abschnitt fehlt in der Datei. "
+lingo_err_unknown_directory_type: "Unbekannter Verzeichnistyp: "
+#
+# 6 Allgemein für Dateioperationen
+lingo_file_operation_initiated: "Dateioperation für Verzeichnis gestartet: "
+lingo_file_show_folder_contents: "Klicken Sie, um den Inhalt des Ordners zu sehen: "
+lingo_file_folder_contents: "Ordnerinhalt "
+#
+# 7 Sprachbefehle
+lingo_err_language_code_2letters: "Sprachcode muss aus 2 Buchstaben bestehen. "
+lingo_err_invalid_language_code: "Ungültiger Sprachcode: "
+lingo_you_language: "Liste der von Ihnen gewählten Sprachen: "
+lingo_you_have_not_set_language: "Sie haben keine Sprache ausgewählt, es werden Minecraft-Einstellungen verwendet "
+lingo_cleared_the_language: "Sie haben die Sprachliste gelöscht, es werden Minecraft-Einstellungen verwendet "
+lingo_err_no_item_data_found: "Keine Daten für die angegebene Sprache und Schlüssel gefunden. "
+lingo_keys_for_language: "Schlüssel für Sprache "
+lingo_language_is_selected: "Sie haben folgende Sprachen ausgewählt: "
+#
+# 8 NBT
+lingo_NBT_value_set: "NBT-Wert wurde gesetzt. "
+lingo_err_item_no_NBT_tags: "Ihr Gegenstand hat keine NBT-Tags. "
+lingo_NBT_keys_for_item: "NBT-Schlüssel für Ihren Gegenstand: "
+lingo_err_NBT_tag_not_exist: "NBT-Tag mit diesem Schlüssel existiert nicht. "
+lingo_err_command_only_player: "Dieser Befehl kann nur von einem Spieler ausgeführt werden. "
+lingo_err_have_nothing_hand: "Sie haben nichts in der Hand. "
