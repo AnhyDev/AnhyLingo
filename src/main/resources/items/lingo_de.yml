@@ -1,0 +1,52 @@
+magic_wand:
+  name: "&bZauberstab"
+  lore:
+    - "&7Dies ist ein Zauberstab."
+    - "&7Er kann magische Taten vollbringen."
+    - "&7Nutze ihn weise."
+
+magic_wand_1:
+  copy: magic_wand
+  lines:
+    1: "&cVerbesserter Zauberstab"
+
+magic_wand_2:
+  copy: magic_wand
+  lines:
+    1: "&dFortgeschrittener Zauberstab"
+    3: "&dEr besitzt immense Macht."
+
+eternal_sword:
+  name: "&cEwiges Schwert"
+  lore:
+    - "&7Ein legendäres Schwert, das nie stumpf wird."
+    - "&7Es soll aus einem gefallenen Stern geschmiedet worden sein."
+    - "&7Seine Klinge schneidet durch die Dunkelheit."
+
+phantom_cloak:
+  name: "&5Phantomumhang"
+  lore:
+    - "&7Ein Umhang, gewoben aus den Fäden der Nacht."
+    - "&7Verleiht dem Träger Unsichtbarkeit in Schatten."
+    - "&7Flüstert Geheimnisse der alten Welt."
+
+skywalker_boots:
+  name: "&9Himmelswanderer-Stiefel"
+  lore:
+    - "&7Stiefel, geschaffen aus der Essenz der Wolken."
+    - "&7Ermöglichen es dem Träger, auf Luft zu gehen."
+    - "&7Leichter als eine Feder."
+
+sunshield_helmet:
+  name: "&eSonnenhelm"
+  lore:
+    - "&7Ein Helm, der wie die Sonne leuchtet."
+    - "&7Schützt den Träger vor allem Schaden."
+    - "&7Strahlt eine warme, tröstliche Glut aus."
+
+galeforce_bow:
+  name: "&aSturmbogen"
+  lore:
+    - "&7Ein Bogen, erfüllt vom Geist des Windes."
+    - "&7Pfeile fliegen wie schnelle Böen."
+    - "&7Sagt man, verfehlt nie sein Ziel."

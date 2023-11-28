@@ -1,0 +1,52 @@
+magic_wand:
+  name: "&bVarita Mágica"
+  lore:
+    - "&7Esta es una varita mágica."
+    - "&7Puede realizar proezas mágicas."
+    - "&7Úsala sabiamente."
+
+magic_wand_1:
+  copy: magic_wand
+  lines:
+    1: "&cVarita Mágica Mejorada"
+
+magic_wand_2:
+  copy: magic_wand
+  lines:
+    1: "&dVarita Mágica Avanzada"
+    3: "&dPosee un poder inmenso."
+
+eternal_sword:
+  name: "&cEspada Eterna"
+  lore:
+    - "&7Una espada legendaria que nunca se desafila."
+    - "&7Se dice que fue forjada de una estrella caída."
+    - "&7Su hoja corta a través de la oscuridad."
+
+phantom_cloak:
+  name: "&5Capa Fantasma"
+  lore:
+    - "&7Una capa tejida con hilos de la noche."
+    - "&7Otorga invisibilidad en las sombras al portador."
+    - "&7Susurra secretos del mundo antiguo."
+
+skywalker_boots:
+  name: "&9Botas del Caminante del Cielo"
+  lore:
+    - "&7Botas creadas con la esencia de las nubes."
+    - "&7Permite al portador caminar sobre el aire."
+    - "&7Más ligeras que una pluma."
+
+sunshield_helmet:
+  name: "&eCasco Protector Solar"
+  lore:
+    - "&7Un casco que brilla como el sol."
+    - "&7Protege al portador de todo daño."
+    - "&7Irradia un cálido y reconfortante resplandor."
+
+galeforce_bow:
+  name: "&aArco Fuerza del Viento"
+  lore:
+    - "&7Un arco imbuido con el espíritu del viento."
+    - "&7Las flechas vuelan como ráfagas veloces."
+    - "&7Se dice que nunca falla su objetivo."

@@ -54,7 +54,10 @@ public abstract class AbstractLanguage<T> {
             for (String filename : files) {
                 // Видаляємо початковий слеш, якщо він є
                 String resourcePath = filename.startsWith("/") ? filename.substring(1) : filename;
-                plugin.saveResource(resourcePath, false);
+                File file = new File(plugin.getDataFolder(), resourcePath);
+                if (!file.exists()) {
+                    plugin.saveResource(resourcePath, false);
+                }
             }
         } catch (IOException | URISyntaxException e) {
             e.printStackTrace();

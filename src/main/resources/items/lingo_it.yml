@@ -1,0 +1,52 @@
+magic_wand:
+  name: "&bBacchetta Magica"
+  lore:
+    - "&7Questa è una bacchetta magica."
+    - "&7Può compiere imprese magiche."
+    - "&7Usala saggiamente."
+
+magic_wand_1:
+  copy: magic_wand
+  lines:
+    1: "&cBacchetta Magica Potenziata"
+
+magic_wand_2:
+  copy: magic_wand
+  lines:
+    1: "&dBacchetta Magica Avanzata"
+    3: "&dDetiene un immenso potere."
+
+eternal_sword:
+  name: "&cSpada Eterna"
+  lore:
+    - "&7Una spada leggendaria che non si smussa mai."
+    - "&7Si dice sia stata forgiata da una stella caduta."
+    - "&7La sua lama taglia attraverso l'oscurità."
+
+phantom_cloak:
+  name: "&5Mantello Fantasma"
+  lore:
+    - "&7Un mantello tessuto con i fili della notte."
+    - "&7Conferisce all'indossatore invisibilità nelle ombre."
+    - "&7Sussurra segreti del mondo antico."
+
+skywalker_boots:
+  name: "&9Stivali del Camminatore del Cielo"
+  lore:
+    - "&7Stivali creati dall'essenza delle nuvole."
+    - "&7Permettono all'indossatore di camminare sull'aria."
+    - "&7Più leggeri di una piuma."
+
+sunshield_helmet:
+  name: "&eElmo del Protettore Solare"
+  lore:
+    - "&7Un elmo che brilla come il sole."
+    - "&7Protegge l'indossatore da ogni danno."
+    - "&7Irradia un caldo, confortante bagliore."
+
+galeforce_bow:
+  name: "&aArco della Forza del Vento"
+  lore:
+    - "&7Un arco imbevuto dello spirito del vento."
+    - "&7Le frecce volano come rapide folate."
+    - "&7Si dice che non manchi mai il suo bersaglio."
