@@ -8,4 +8,4 @@ website: http://anh.ink
 commands:
     lingo:
         aliases: [anhylingo]
-        usage: "The command '/lingo (/anhylingo)' execution error, please check the arguments' correctness."
+        usage: "[AnhyLingo] TThe command '/lingo (/anhylingo)' execution error, please check the arguments' correctness."
