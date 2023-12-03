@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ink.anh</groupId>
     <artifactId>AnhyLingo</artifactId>
-    <version>0.1</version>
+    <version>0.1.1</version>
     <name>AnhyLingo</name>
     <description>AnhyLingo projekt</description>
     
@@ -14,7 +14,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>11</release>
+                    <source>17</source>
+        			<target>17</target>
+        			<release>17</release>
                 </configuration>
             </plugin>
             <plugin>
