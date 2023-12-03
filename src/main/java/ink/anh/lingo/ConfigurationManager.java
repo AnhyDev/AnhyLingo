@@ -36,24 +36,8 @@ public class ConfigurationManager {
 
     void saveDefaultConfiguration() {
         if (!configFile.exists()) {
-            YamlConfiguration defaultConfig = new YamlConfiguration();
-            defaultConfig.options().setHeader(logo());
-            defaultConfig.set("language", "en");
-            defaultConfig.set("plugin_name", "AnhyLingo");
-            defaultConfig.set("debug", false);
-            defaultConfig.set("item_lingo", false);
-            defaultConfig.set("packet_lingo", false);
-            defaultConfig.set("allow_browsing", false);
-            defaultConfig.set("allow_upload", false);
-            defaultConfig.set("allowed_directories", List.of("Denizen/scripts", "ItemLingo", "MythicMobs"));
-            defaultConfig.set("allow_removal", false);
-            defaultConfig.set("allowed_del_directories", List.of("Denizen/scripts", "ItemLingo", "MythicMobs"));
-            try {
-                defaultConfig.save(configFile);
-                Logger.warn(lingoPlugin, "Default configuration created. ");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        	lingoPlugin.getConfig().options().copyDefaults(true);
+        	lingoPlugin.saveDefaultConfig();
         }
     }
 
@@ -75,7 +59,7 @@ public class ConfigurationManager {
     
     private void setDataConfig() {
         defaultLang = lingoPlugin.getConfig().getString("language", "en");
-        pluginName = ChatColor.translateAlternateColorCodes('&',lingoPlugin.getConfig().getString("plugin_name", "ItemLingo"));
+        pluginName = ChatColor.translateAlternateColorCodes('&',lingoPlugin.getConfig().getString("plugin_name", "AnhyLingo"));
         debug = lingoPlugin.getConfig().getBoolean("debug", false);
         allowBrowsing = lingoPlugin.getConfig().getBoolean("allow_browsing", false);
         itemLingo = lingoPlugin.getConfig().getBoolean("item_lingo", false);

@@ -1,0 +1,30 @@
+#
+#  ░█████╗░███╗░░██╗██╗░░██╗██╗░░░██╗██╗░░░░░██╗███╗░░██╗░██████╗░░█████╗░
+#  ██╔══██╗████╗░██║██║░░██║╚██╗░██╔╝██║░░░░░██║████╗░██║██╔════╝░██╔══██╗
+#  ███████║██╔██╗██║███████║░╚████╔╝░██║░░░░░██║██╔██╗██║██║░░██╗░██║░░██║
+#  ██╔══██║██║╚████║██╔══██║░░╚██╔╝░░██║░░░░░██║██║╚████║██║░░╚██╗██║░░██║
+#  ██║░░██║██║░╚███║██║░░██║░░░██║░░░███████╗██║██║░╚███║╚██████╔╝╚█████╔╝
+#  ╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝╚═╝░░╚══╝░╚═════╝░░╚════╝░
+#
+# Default language to be used in case a translation is not found in the desired language:
+language: en
+# Name of the plugin for display to users in chat:
+plugin_name: AnhyLingo
+# Enable translation of custom items:
+item_lingo: true
+# Enable translation of packets where language keys are found:
+packet_lingo: true
+# Allow viewing of files and folders:
+allow_browsing: true
+# Allow file uploads:
+allow_upload: false
+# Directories where file uploads are allowed:
+allowed_directories:
+- Denizen/scripts
+- AnhyLingo
+# Allow file removal:
+allow_removal: false
+# Directories where file removal is allowed:
+allowed_del_directories:
+- Denizen/scripts
+- AnhyLingo

@@ -1,10 +1,10 @@
 main: ink.anh.lingo.AnhyLingo
 name: AnhyLingo
-version: 0.0.1
+version: 0.1
 author: AnhyDev
 api-version: 1.13
 description: AnhyLingo projekt
-website: http://anh.ink
+website: http://dev.anh.ink/anhylingo
 commands:
     lingo:
         aliases: [anhylingo]
