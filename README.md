@@ -56,7 +56,8 @@ To include AnhyLingo in your Maven project, insert these lines into your `pom.x
     <dependency>
         <groupId>com.github.AnhyDev</groupId>
         <artifactId>AnhyLingo</artifactId>
-        <version>v0.1.2</version> 
+        <version>v0.1.2</version>
+        <scope>provided</scope>
     </dependency>
 ```
 
