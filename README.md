@@ -26,31 +26,27 @@ To use AnhyLingo in your Gradle project, add the following lines to your project
 
 <div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
 
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">dependencyResolutionManagement {
+```groovy
+dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
         maven { url 'https://jitpack.io' }
     }
-}</pre>
+}
+```
 
-</div>
-
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
-
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">dependencies {
+```groovy
+dependencyResolutionManagementdependencies {
     implementation 'com.github.AnhyDev:AnhyLingo:v0.1.2'
-}</pre>
-
-</div>
+}
+```
 
 #### Adding Using Maven
 
 To include AnhyLingo in your Maven project, insert these lines into your `pom.xml` file:
 
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
-
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">
+```xml
 &lt;repositories&gt;
     &lt;repository&gt;
         &lt;id&gt;jitpack.io&lt;/id&gt;
@@ -58,29 +54,22 @@ To include AnhyLingo in your Maven project, insert these lines into your `pom.x
     &lt;/repository&gt;
 &lt;/repositories&gt;</pre>
 
-</div>
+```
 
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
-
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">&lt;dependency&gt;
+```xml
+dependency&gt;
     &lt;groupId&gt;com.github.AnhyDev&lt;/groupId&gt;
     &lt;artifactId&gt;AnhyLingo&lt;/artifactId&gt;
     &lt;version&gt;v0.1.2&lt;/version&gt; 
-&lt;/dependency&gt;</pre>
-
-</div>
-
-</div>
-
-<div class="container content-container-y" style="box-sizing: border-box; width: 1256.41px; padding: 30px; margin: auto; max-width: 95%; border-radius: 8px; min-width: 80%; font-family: Arial, sans-serif; font-size: 16px; background-color: #151515;">
+&lt;/dependency&gt;
+```
 
 ### An example of using the repository
 
 #### Class for Language Management:
 
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
-
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">package myplugin.lang;
+```java
+package myplugin.lang;
 
 import myplugin.MyPlugin;
 import ink.anh.lingo.api.lang.LanguageManager;
@@ -104,9 +93,9 @@ public class LangMessage extends LanguageManager {
         }
         return instance;
     }
-}</pre>
+}
+```
 
-</div>
 
 `lang` is the name of the folder containing language files.
 
@@ -116,9 +105,9 @@ The contents of the files must conform to the YAML standard, and have the form 
 
 #### Initialization in the Plugin Main Class:
 
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
 
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">import myplugin.lang.LangMessage;
+```java
+import myplugin.lang.LangMessage;
 import ink.anh.lingo.api.lang.LanguageManager;
 
 public class MyPlugin extends JavaPlugin {
@@ -140,15 +129,12 @@ public class MyPlugin extends JavaPlugin {
         return languageManager;
     }
 }
-</pre>
-
-</div>
+```
 
 #### Example Use in Other Classes:
 
-<div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
-
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">import org.bukkit.command.CommandSender;
+```java
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import ink.anh.lingo.api.Translator;
@@ -187,7 +173,7 @@ public class OtherClass {
         Messenger.sendMessage(MyPlugin.getInstance(), sender, message, type);
     }
 }
-</pre>
+```
 
 </div>
 
