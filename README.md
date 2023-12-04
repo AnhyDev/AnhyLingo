@@ -170,8 +170,3 @@ public class OtherClass {
     }
 }
 ```
-
-
-</div>
-
-</div>
