@@ -47,21 +47,20 @@ dependencyResolutionManagementdependencies {
 To include AnhyLingo in your Maven project, insert these lines into your `pom.xml` file:
 
 ```xml
-&lt;repositories&gt;
-    &lt;repository&gt;
-        &lt;id&gt;jitpack.io&lt;/id&gt;
-        &lt;url&gt;https://jitpack.io&lt;/url&gt;
-    &lt;/repository&gt;
-&lt;/repositories&gt;</pre>
-
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
 
 ```xml
-dependency&gt;
-    &lt;groupId&gt;com.github.AnhyDev&lt;/groupId&gt;
-    &lt;artifactId&gt;AnhyLingo&lt;/artifactId&gt;
-    &lt;version&gt;v0.1.2&lt;/version&gt; 
-&lt;/dependency&gt;
+<dependency>
+    <groupId>com.github.AnhyDev</groupId>
+    <artifactId>AnhyLingo</artifactId>
+    <version>v0.1.2</version> 
+</dependency>
 ```
 
 ### An example of using the repository
@@ -174,6 +173,8 @@ public class OtherClass {
     }
 }
 ```
+
+</div>
 
 </div>
 
