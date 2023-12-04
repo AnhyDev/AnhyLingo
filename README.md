@@ -50,22 +50,23 @@ To include AnhyLingo in your Maven project, insert these lines into your `pom.x
 
 <div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
 
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;"><repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories></pre>
+<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;jitpack.io&lt;/id&gt;
+        &lt;url&gt;https://jitpack.io&lt;/url&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;</pre>
 
 </div>
 
 <div class="code-block" style="box-sizing: border-box; margin-top: 10px; text-wrap: nowrap;">
 
-<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;"><dependency>
-    <groupId>com.github.AnhyDev</groupId>
-    <artifactId>AnhyLingo</artifactId>
-    <version>v0.1.2</version> 
-</dependency></pre>
+<pre style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 14px; margin-top: 0px; margin-bottom: 1rem; overflow: auto; color: #057c68; overflow-wrap: break-word; background-color: #050505; border: 1px solid #4e4141; border-radius: 4px; width: 1016.93px; padding: 10px 10px 10px 50px; margin-left: 50px;">&lt;dependency&gt;
+    &lt;groupId&gt;com.github.AnhyDev&lt;/groupId&gt;
+    &lt;artifactId&gt;AnhyLingo&lt;/artifactId&gt;
+    &lt;version&gt;v0.1.2&lt;/version&gt; 
+&lt;/dependency&gt;</pre>
 
 </div>
 
