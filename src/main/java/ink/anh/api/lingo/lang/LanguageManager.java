@@ -1,4 +1,4 @@
-package ink.anh.lingo.api.lang;
+package ink.anh.api.lingo.lang;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;

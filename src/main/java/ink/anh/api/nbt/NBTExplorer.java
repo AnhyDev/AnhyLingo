@@ -1,4 +1,4 @@
-package ink.anh.lingo.nbt;
+package ink.anh.api.nbt;
 
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;

@@ -7,8 +7,9 @@ import java.net.URL;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+
+import ink.anh.api.messages.MessageType;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.messages.MessageType;
 
 public class SimpleFileLoader extends AbstractFileManager {
 

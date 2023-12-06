@@ -1,10 +1,11 @@
 package ink.anh.lingo.file;
 
 import org.bukkit.command.CommandSender;
+
+import ink.anh.api.messages.MessageType;
+import ink.anh.api.messages.Messenger;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
-import ink.anh.lingo.messages.MessageType;
-import ink.anh.lingo.messages.Messenger;
 
 public class FileCommandProcessor {
     

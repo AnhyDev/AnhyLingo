@@ -1,4 +1,4 @@
-package ink.anh.lingo.nbt;
+package ink.anh.api.nbt;
 
 public class NBTValueParser {
 

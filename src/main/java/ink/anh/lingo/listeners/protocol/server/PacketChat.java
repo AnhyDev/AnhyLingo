@@ -10,10 +10,10 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.events.ListenerPriority;
 
-import ink.anh.lingo.api.lang.LanguageManager;
+import ink.anh.api.lingo.lang.LanguageManager;
+import ink.anh.api.messages.Logger;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 import ink.anh.lingo.listeners.protocol.ModificationState;
-import ink.anh.lingo.messages.Logger;
 
 public class PacketChat extends AbstractPacketListener {
 

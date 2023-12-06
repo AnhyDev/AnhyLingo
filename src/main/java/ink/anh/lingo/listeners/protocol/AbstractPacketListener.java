@@ -11,10 +11,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import ink.anh.api.lingo.Translator;
+import ink.anh.api.lingo.lang.LanguageManager;
+import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.api.Translator;
-import ink.anh.lingo.api.lang.LanguageManager;
-import ink.anh.lingo.utils.LangUtils;
+
 import org.bukkit.entity.Player;
 
 public abstract class AbstractPacketListener {

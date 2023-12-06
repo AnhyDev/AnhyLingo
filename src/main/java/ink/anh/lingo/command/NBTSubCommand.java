@@ -1,10 +1,10 @@
 package ink.anh.lingo.command;
 
+import ink.anh.api.messages.MessageType;
+import ink.anh.api.messages.Messenger;
+import ink.anh.api.nbt.NBTExplorer;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
-import ink.anh.lingo.messages.MessageType;
-import ink.anh.lingo.messages.Messenger;
-import ink.anh.lingo.nbt.NBTExplorer;
 
 import java.util.Arrays;
 import org.bukkit.command.CommandSender;

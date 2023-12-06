@@ -3,9 +3,9 @@ package ink.anh.lingo.listeners.protocol;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 
+import ink.anh.api.messages.Logger;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.server.PacketTITLE;
-import ink.anh.lingo.messages.Logger;
 import ink.anh.lingo.listeners.protocol.server.PacketChat;
 import ink.anh.lingo.listeners.protocol.server.PacketSystemChat;
 

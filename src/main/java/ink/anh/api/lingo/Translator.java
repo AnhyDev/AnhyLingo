@@ -1,7 +1,7 @@
-package ink.anh.lingo.api;
+package ink.anh.api.lingo;
 
+import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.api.lang.LanguageManager;
 import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class Translator {

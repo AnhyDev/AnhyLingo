@@ -1,4 +1,4 @@
-package ink.anh.lingo.messages;
+package ink.anh.api.messages;
 
 import org.bukkit.plugin.Plugin;
 

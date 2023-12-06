@@ -1,11 +1,11 @@
-package ink.anh.lingo.api.lang;
+package ink.anh.api.lingo.lang;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import ink.anh.api.messages.Logger;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.messages.Logger;
 
 import java.io.File;
 import java.io.FilenameFilter;

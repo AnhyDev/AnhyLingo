@@ -11,12 +11,13 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.EnumWrappers;
-import ink.anh.lingo.utils.PaperUtils;
+
 import net.kyori.adventure.text.Component;
-import ink.anh.lingo.api.lang.LanguageManager;
+import ink.anh.api.lingo.lang.LanguageManager;
+import ink.anh.api.messages.Logger;
+import ink.anh.api.utils.PaperUtils;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 import ink.anh.lingo.listeners.protocol.ModificationState;
-import ink.anh.lingo.messages.Logger;
 
 public class PacketSystemChat extends AbstractPacketListener {
 

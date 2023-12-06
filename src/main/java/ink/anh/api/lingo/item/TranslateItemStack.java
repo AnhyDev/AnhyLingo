@@ -1,4 +1,4 @@
-package ink.anh.lingo.lang;
+package ink.anh.api.lingo.item;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 
+import ink.anh.api.nbt.NBTExplorer;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.nbt.NBTExplorer;
 
 public class TranslateItemStack {
 

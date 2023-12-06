@@ -1,4 +1,4 @@
-package ink.anh.lingo.utils;
+package ink.anh.api.utils;
 
 import java.lang.reflect.Field;
 
@@ -24,8 +24,8 @@ import net.md_5.bungee.chat.ScoreComponentSerializer;
 import net.md_5.bungee.chat.SelectorComponentSerializer;
 import net.md_5.bungee.chat.TextComponentSerializer;
 import net.md_5.bungee.chat.TranslatableComponentSerializer;
+import ink.anh.api.messages.Logger;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.messages.Logger;
 
 public class SpigotUtils {
 

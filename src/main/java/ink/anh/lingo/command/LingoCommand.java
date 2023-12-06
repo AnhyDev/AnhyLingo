@@ -12,17 +12,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
+import ink.anh.api.lingo.Translator;
+import ink.anh.api.lingo.item.ItemLang;
+import ink.anh.api.messages.MessageType;
+import ink.anh.api.messages.Messenger;
+import ink.anh.api.player.PlayerData;
+import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
-import ink.anh.lingo.api.Translator;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.file.FileCommandProcessor;
-import ink.anh.lingo.lang.ItemLang;
-import ink.anh.lingo.messages.MessageType;
-import ink.anh.lingo.messages.Messenger;
-import ink.anh.lingo.player.PlayerData;
-import ink.anh.lingo.utils.LangUtils;
 
 public class LingoCommand implements CommandExecutor {
 	

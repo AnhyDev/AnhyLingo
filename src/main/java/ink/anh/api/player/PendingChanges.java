@@ -1,4 +1,4 @@
-package ink.anh.lingo.player;
+package ink.anh.api.player;
 
 import java.util.HashMap;
 import java.util.Map;

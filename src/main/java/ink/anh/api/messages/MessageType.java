@@ -1,4 +1,4 @@
-package ink.anh.lingo.messages;
+package ink.anh.api.messages;
 
 public enum MessageType {
     NORMAL("#0bdebb", ANSIColors.CYAN_BRIGHT), // Звичайне

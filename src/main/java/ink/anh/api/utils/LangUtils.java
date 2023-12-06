@@ -1,8 +1,8 @@
-package ink.anh.lingo.utils;
+package ink.anh.api.utils;
 
 import org.bukkit.entity.Player;
 
-import ink.anh.lingo.player.PlayerData;
+import ink.anh.api.player.PlayerData;
 
 public class LangUtils {
 

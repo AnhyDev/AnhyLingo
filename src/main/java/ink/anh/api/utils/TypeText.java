@@ -1,4 +1,4 @@
-package ink.anh.lingo.utils;
+package ink.anh.api.utils;
 
 public enum TypeText {
 	CHAT,

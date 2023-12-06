@@ -1,4 +1,4 @@
-package ink.anh.lingo.utils;
+package ink.anh.api.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

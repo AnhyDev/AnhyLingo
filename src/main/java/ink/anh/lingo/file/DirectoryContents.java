@@ -7,11 +7,11 @@ import java.util.Comparator;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import ink.anh.api.lingo.Translator;
+import ink.anh.api.messages.MessageType;
+import ink.anh.api.messages.Messenger;
+import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.api.Translator;
-import ink.anh.lingo.messages.MessageType;
-import ink.anh.lingo.messages.Messenger;
-import ink.anh.lingo.utils.LangUtils;
 
 public class DirectoryContents {
 

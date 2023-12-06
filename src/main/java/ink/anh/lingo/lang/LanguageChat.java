@@ -1,7 +1,7 @@
 package ink.anh.lingo.lang;
 
+import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.api.lang.LanguageManager;
 
 public class LanguageChat extends LanguageManager {
 

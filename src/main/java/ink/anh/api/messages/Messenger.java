@@ -1,4 +1,4 @@
-package ink.anh.lingo.messages;
+package ink.anh.api.messages;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,10 +10,10 @@ import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import ink.anh.api.lingo.Translator;
+import ink.anh.api.lingo.lang.LanguageManager;
+import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.api.Translator;
-import ink.anh.lingo.api.lang.LanguageManager;
-import ink.anh.lingo.utils.LangUtils;
 
 public class Messenger {
 

@@ -6,9 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import org.bukkit.command.CommandSender;
+
+import ink.anh.api.messages.MessageType;
+import ink.anh.api.messages.Messenger;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.messages.MessageType;
-import ink.anh.lingo.messages.Messenger;
 
 public abstract class AbstractFileManager {
 

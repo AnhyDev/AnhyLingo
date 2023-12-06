@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.ArrayList;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import ink.anh.lingo.api.Translator;
-import ink.anh.lingo.messages.Logger;
+import ink.anh.api.lingo.Translator;
+import ink.anh.api.messages.Logger;
 import net.md_5.bungee.api.ChatColor;
 
 public class ConfigurationManager {

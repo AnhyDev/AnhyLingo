@@ -1,4 +1,4 @@
-package ink.anh.lingo.player;
+package ink.anh.api.player;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
