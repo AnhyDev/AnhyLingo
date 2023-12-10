@@ -14,9 +14,9 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 
-import ink.anh.api.lingo.item.ItemLang;
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.item.ItemLang;
 
 import java.util.Arrays;
 import java.util.List;

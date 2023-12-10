@@ -13,9 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import ink.anh.api.lingo.item.ItemLang;
 import ink.anh.api.messages.MessageType;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.item.ItemLang;
 
 public class YamlFileLoader extends AbstractFileManager {
     

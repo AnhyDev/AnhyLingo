@@ -6,8 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.command.LingoCommand;
+import ink.anh.lingo.item.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageChat;
-import ink.anh.lingo.lang.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageSystemChat;
 import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;

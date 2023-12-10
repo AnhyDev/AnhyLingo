@@ -1,9 +1,8 @@
-package ink.anh.lingo.lang;
+package ink.anh.lingo.item;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import ink.anh.api.lingo.item.ItemLang;
 import ink.anh.api.lingo.lang.AbstractLanguage;
 import ink.anh.api.messages.Logger;
 import ink.anh.api.utils.StringUtils;

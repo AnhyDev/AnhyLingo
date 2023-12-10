@@ -1,4 +1,4 @@
-package ink.anh.api.lingo.item;
+package ink.anh.lingo.item;
 
 import java.util.Arrays;
 import java.util.List;
