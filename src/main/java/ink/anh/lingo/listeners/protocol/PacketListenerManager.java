@@ -5,8 +5,6 @@ import com.comphenix.protocol.events.ListenerPriority;
 
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.listeners.protocol.server.PacketTITLE;
-import ink.anh.lingo.listeners.protocol.server.PacketChat;
 import ink.anh.lingo.listeners.protocol.server.PacketSystemChat;
 
 import java.util.ArrayList;
@@ -34,9 +32,8 @@ public class PacketListenerManager {
     public void addListeners() {
         List<AbstractPacketListener> listeners = new ArrayList<>();
 
-        listeners.add(new PacketChat());
+        //listeners.add(new PacketChat());
         listeners.add(new PacketSystemChat());
-        listeners.add(new PacketTITLE());
         // ... додати інших слухачів
 
         for (AbstractPacketListener listener : listeners) {

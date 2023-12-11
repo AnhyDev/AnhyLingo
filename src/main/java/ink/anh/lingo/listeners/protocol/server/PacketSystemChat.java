@@ -13,11 +13,11 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 
 import net.kyori.adventure.text.Component;
+import ink.anh.api.lingo.ModificationState;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
 import ink.anh.api.utils.PaperUtils;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
-import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class PacketSystemChat extends AbstractPacketListener {
 
@@ -34,11 +34,11 @@ public class PacketSystemChat extends AbstractPacketListener {
         	@Override
         	public void onPacketSending(PacketEvent event) {
         		
-        		if (!lingoPlugin.getConfigurationManager().isPacketLingo()) {
+        		if (!lingoPlugin.getGlobalManager().isPacketLingo()) {
         			return;
         		}
 
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
             		Logger.warn(lingoPlugin, "NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
@@ -70,7 +70,7 @@ public class PacketSystemChat extends AbstractPacketListener {
             StructureModifier<Boolean> booleans = packet.getBooleans();
             if (booleans.size() == 1) {
             	
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
                 	Logger.warn(lingoPlugin, "booleans.read(0): " + booleans.read(0));
             	
                 if (booleans.read(0)) {
@@ -79,7 +79,7 @@ public class PacketSystemChat extends AbstractPacketListener {
                 }
             } else if (packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()) {
             	
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
             	Logger.warn(lingoPlugin, "packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()");
             	
                 return;
@@ -95,14 +95,14 @@ public class PacketSystemChat extends AbstractPacketListener {
             
             if (contentField != null) {
             	
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
             		Logger.info(lingoPlugin, "contentField != null");
             	
             	jsonSystemChat = contentField.toString();
 
             } else {
             	
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat())
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
             		Logger.info(lingoPlugin, "contentField == null");
             	
                 Component read = componentModifier.read(0);
@@ -133,6 +133,6 @@ public class PacketSystemChat extends AbstractPacketListener {
 
 	@Override
 	public LanguageManager getLangMan() {
-		return lingoPlugin.getLanguageSystemChat();
+		return lingoPlugin.getGlobalManager().getLanguageManager();
 	}
 }

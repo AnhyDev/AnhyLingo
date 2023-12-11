@@ -10,10 +10,10 @@ import com.comphenix.protocol.reflect.StructureModifier;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.events.ListenerPriority;
 
+import ink.anh.api.lingo.ModificationState;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
-import ink.anh.lingo.listeners.protocol.ModificationState;
 
 public class PacketChat extends AbstractPacketListener {
 
@@ -30,11 +30,11 @@ public class PacketChat extends AbstractPacketListener {
         	@Override
         	public void onPacketSending(PacketEvent event) {
         		
-        		if (!lingoPlugin.getConfigurationManager().isPacketLingo()) {
+        		if (!lingoPlugin.getGlobalManager().isPacketLingo()) {
         			return;
         		}
 
-            	if (lingoPlugin.getConfigurationManager().isDebugPacketShat()) {
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
             		Logger.warn(lingoPlugin, "NBT event.getPacketType(): " + event.getPacketType().name());
                     PacketContainer packet = event.getPacket();
                     StructureModifier<Object> fields = packet.getModifier();
@@ -80,6 +80,6 @@ public class PacketChat extends AbstractPacketListener {
 
 	@Override
 	public LanguageManager getLangMan() {
-		return lingoPlugin.getLanguageChat();
+		return lingoPlugin.getGlobalManager().getLanguageManager();
 	}
 }

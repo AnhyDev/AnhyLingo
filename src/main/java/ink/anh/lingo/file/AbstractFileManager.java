@@ -33,9 +33,9 @@ public abstract class AbstractFileManager {
             }
 
         if (del) {
-            return lingoPlugin.getConfigurationManager().isPathDeleteAllowed(path);
+            return lingoPlugin.getGlobalManager().isPathDeleteAllowed(path);
         } else {
-            return lingoPlugin.getConfigurationManager().isPathAllowed(path);
+            return lingoPlugin.getGlobalManager().isPathAllowed(path);
         }
     }
 
@@ -51,6 +51,6 @@ public abstract class AbstractFileManager {
     }
 
     public void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(lingoPlugin, sender, message, type);
+    	Messenger.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type);
     }
 }

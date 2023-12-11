@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import ink.anh.api.lingo.lang.AbstractLanguage;
 import ink.anh.api.messages.Logger;
 import ink.anh.api.utils.StringUtils;
-import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.GlobalManager;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -21,15 +21,15 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
     private static final Object LOCK = new Object();
     private static final String DIRECTORY = "items";
     
-    public LanguageItemStack(AnhyLingo plugin) {
-        super(plugin, DIRECTORY);
+    public LanguageItemStack(GlobalManager globalManager) {
+        super(globalManager, DIRECTORY);
     }
 
-    public static LanguageItemStack getInstance(AnhyLingo lingoPlugin) {
+    public static LanguageItemStack getInstance(GlobalManager globalManager) {
         if (instance == null) {
             synchronized (LOCK) {
                 if (instance == null) {
-                    instance = new LanguageItemStack(lingoPlugin);
+                    instance = new LanguageItemStack(globalManager);
                 }
             }
         }

@@ -18,6 +18,7 @@ import ink.anh.api.messages.Messenger;
 import ink.anh.api.player.PlayerData;
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.GlobalManager;
 import ink.anh.lingo.Permissions;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
@@ -27,9 +28,11 @@ import ink.anh.lingo.file.FileCommandProcessor;
 public class LingoCommand implements CommandExecutor {
 	
 	private AnhyLingo lingoPlugin;
+    private GlobalManager globalManager;
 
-	public LingoCommand(AnhyLingo plugin) {
-		this.lingoPlugin = plugin;
+	public LingoCommand(AnhyLingo lingoPlugin) {
+		this.lingoPlugin = lingoPlugin;
+		this.globalManager = lingoPlugin.getGlobalManager();
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class LingoCommand implements CommandExecutor {
 	}
 
     private boolean directory(CommandSender sender, String[] args) {
-    	if (!lingoPlugin.getConfigurationManager().isAllowBrowsing()) {
+    	if (!lingoPlugin.getGlobalManager().isAllowBrowsing()) {
             sendMessage(sender, "lingo_err_not_alloved ", MessageType.WARNING);
     		return true;
     	}
@@ -95,8 +98,8 @@ public class LingoCommand implements CommandExecutor {
             return true;
 	    }
 	    
-        if (lingoPlugin.getConfigurationManager().reload()) {
-            sendMessage(sender, Translator.translateKyeWorld("lingo_language_reloaded ", langs, lingoPlugin.getLanguageSystemChat()), MessageType.NORMAL);
+        if (lingoPlugin.getGlobalManager().reload()) {
+            sendMessage(sender, Translator.translateKyeWorld(globalManager, "lingo_language_reloaded ", langs), MessageType.NORMAL);
             return true;
         }
         return false;
@@ -143,7 +146,7 @@ public class LingoCommand implements CommandExecutor {
             }
 
             // Якщо все добре, здійснюємо налаштування мови для гравця
-            new PlayerData().setCustomData(player, langData, langs);
+            new PlayerData(lingoPlugin).setCustomData(player, langData, langs);
             sendMessage(sender, "lingo_language_is_selected " + String.join(" ", langs), MessageType.NORMAL);
         }
         return true;
@@ -156,7 +159,7 @@ public class LingoCommand implements CommandExecutor {
         	String langs;
         	String langData = "Lingo";
         	
-        	PlayerData data = new PlayerData();
+        	PlayerData data = new PlayerData(lingoPlugin);
         	if (data.hasCustomData(player, langData)) {
         		langs = data.getStringData(player, langData).replace(',', ' ');
                 sendMessage(sender, "lingo_you_language " + langs, MessageType.NORMAL);
@@ -174,7 +177,7 @@ public class LingoCommand implements CommandExecutor {
             Player player = (Player) sender;
         	String langData = "Lingo";
         	
-        	PlayerData data = new PlayerData();
+        	PlayerData data = new PlayerData(lingoPlugin);
         	if (data.hasCustomData(player, langData)) {
         		data.removeCustomData(player, langData);
                 sendMessage(sender, "lingo_cleared_the_language ", MessageType.NORMAL);
@@ -214,7 +217,7 @@ public class LingoCommand implements CommandExecutor {
         String key = args[2];
 
         // Отримання об'єкта ItemLang
-        ItemLang itemLang = lingoPlugin.getLanguageItemStack().getData(key, langs);
+        ItemLang itemLang = globalManager.getLanguageItemStack().getData(key, langs);
 
         if (itemLang == null) {
             sendMessage(sender, "lingo_err_no_item_data_found ", MessageType.WARNING);
@@ -232,7 +235,7 @@ public class LingoCommand implements CommandExecutor {
 
         String lang = args[2];
         // Отримання мапи елементів з LanguageItemStack
-        Map<String, Map<String, ItemLang>> data = lingoPlugin.getLanguageItemStack().getDataMap();
+        Map<String, Map<String, ItemLang>> data = globalManager.getLanguageItemStack().getDataMap();
 
         // Перебір усіх елементів, шукаючи ті, що відповідають вказаній мові
         List<String> keysForLang = new ArrayList<>();
@@ -259,7 +262,7 @@ public class LingoCommand implements CommandExecutor {
         return true;
     }
 	
-    public static String[] checkPlayerPermissions(CommandSender sender, String permission) {
+    private String[] checkPlayerPermissions(CommandSender sender, String permission) {
         // Перевірка, чи команду виконує консоль
         if (sender instanceof ConsoleCommandSender) {
             return null;
@@ -272,11 +275,11 @@ public class LingoCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             // Отримуємо мови для гравця
-            langs = LangUtils.getPlayerLanguage(player);
+            langs = LangUtils.getPlayerLanguage(player, lingoPlugin);
 
             // Перевіряємо наявність дозволу у гравця
             if (!player.hasPermission(permission)) {
-                sendMessage(sender, Translator.translateKyeWorld("lingo_err_not_have_permission ", langs, AnhyLingo.getInstance().getLanguageSystemChat()), MessageType.ERROR);
+                sendMessage(sender, Translator.translateKyeWorld(globalManager, "lingo_err_not_have_permission ", langs), MessageType.ERROR);
                 return langs;
             }
         }
@@ -284,7 +287,7 @@ public class LingoCommand implements CommandExecutor {
         return langs;
     }
 
-	private static void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(AnhyLingo.getInstance(), sender, message, type);
+	private void sendMessage(CommandSender sender, String message, MessageType type) {
+    	Messenger.sendMessage(globalManager, sender, message, type);
     }
 }

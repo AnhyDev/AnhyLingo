@@ -182,7 +182,7 @@ public class NBTSubCommand {
     }
 
 	private static void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(AnhyLingo.getInstance(), sender, message, type);
+    	Messenger.sendMessage(AnhyLingo.getInstance().getGlobalManager(), sender, message, type);
     }
 
 }

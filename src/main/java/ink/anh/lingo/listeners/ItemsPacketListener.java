@@ -16,6 +16,7 @@ import com.comphenix.protocol.wrappers.nbt.NbtFactory;
 
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.GlobalManager;
 import ink.anh.lingo.item.ItemLang;
 
 import java.util.Arrays;
@@ -24,16 +25,18 @@ import java.util.List;
 public class ItemsPacketListener {
 
     private AnhyLingo lingoPlugin;
+    private GlobalManager globalManager;
     private String key_NBT;
 
-    public ItemsPacketListener(AnhyLingo plugin) {
-        this.lingoPlugin = plugin;
+    public ItemsPacketListener(AnhyLingo lingoPlugin) {
+        this.lingoPlugin = lingoPlugin;
+		this.globalManager = lingoPlugin.getGlobalManager();
         this.key_NBT = "ItemLingo";
 
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
 
-        protocolManager.addPacketListener(new PacketAdapter(plugin, ListenerPriority.NORMAL, 
+        protocolManager.addPacketListener(new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL, 
                 PacketType.Play.Server.WINDOW_ITEMS, 
                 PacketType.Play.Server.SET_SLOT) {
             
@@ -121,7 +124,7 @@ public class ItemsPacketListener {
             lingoPlugin.getLogger().info("Found customID in NBT: " + customID);
 
             // Якщо customID існує в нашому словнику, ми змінюємо ім'я та лор предмета
-            if (lingoPlugin.getLanguageItemStack().dataContainsKey(customID, langs)) {
+            if (globalManager.getLanguageItemStack().dataContainsKey(customID, langs)) {
             	
                 ItemMeta meta = item.getItemMeta();
                 
@@ -141,16 +144,16 @@ public class ItemsPacketListener {
 
 
     private String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player);
+        return LangUtils.getPlayerLanguage(player, lingoPlugin);
     }
 
     private String getTranslatedName(String customID, String[] langs) {
-        ItemLang itemLang = lingoPlugin.getLanguageItemStack().getData(customID, langs);
+        ItemLang itemLang = globalManager.getLanguageItemStack().getData(customID, langs);
         return itemLang != null ? itemLang.getName() : null; 
     }
 
     private List<String> getTranslatedLore(String customID, String[] langs) {
-        ItemLang itemLang = lingoPlugin.getLanguageItemStack().getData(customID, langs);
+        ItemLang itemLang = globalManager.getLanguageItemStack().getData(customID, langs);
         return itemLang != null && itemLang.getLore() != null ? Arrays.asList(itemLang.getLore()) : null;
     }
 }

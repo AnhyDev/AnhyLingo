@@ -66,7 +66,7 @@ public class FileCommandProcessor {
     }
 
     private void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(lingoPlugin, sender, message, type);
+    	Messenger.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type);
     }
 
     private AbstractFileManager getFileManagerForType(FileProcessType fileProcessType) {
@@ -85,11 +85,11 @@ public class FileCommandProcessor {
     private boolean isCommandAlloved(String arg0) {
     	switch (arg0.toLowerCase()) {
         case "fl":
-            return lingoPlugin.getConfigurationManager().isAllowUpload();
+            return lingoPlugin.getGlobalManager().isAllowUpload();
         case "fo":
-            return lingoPlugin.getConfigurationManager().isAllowUpload();
+            return lingoPlugin.getGlobalManager().isAllowUpload();
         case "fd":
-            return lingoPlugin.getConfigurationManager().isAllowRemoval();
+            return lingoPlugin.getGlobalManager().isAllowRemoval();
         }
 		return false;
     }

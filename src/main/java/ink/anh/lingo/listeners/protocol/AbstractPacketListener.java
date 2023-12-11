@@ -11,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import ink.anh.api.lingo.ModificationState;
 import ink.anh.api.lingo.Translator;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.utils.LangUtils;
@@ -37,7 +38,7 @@ public abstract class AbstractPacketListener {
     }
 
     public String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player);
+        return LangUtils.getPlayerLanguage(player, lingoPlugin);
     }
 
     public String modifyChat(String originalJson, String[] langs, ModificationState modState, String textBlock) {
@@ -50,7 +51,7 @@ public abstract class AbstractPacketListener {
                 JsonObject element = extraArray.get(i).getAsJsonObject();
                 if (element.has(textBlock)) {
                     String text = element.get(textBlock).getAsString();
-                    modState = Translator.translateKyeWorldModificationState(text, langs, getLangMan(), modState);
+                    modState = Translator.translateKyeWorldModificationState(lingoPlugin.getGlobalManager(), text, langs, modState);
                     String modifiedText = modState.getTranslatedText();
                     if (modState.isModified()) {
                         element.addProperty(textBlock, modifiedText);

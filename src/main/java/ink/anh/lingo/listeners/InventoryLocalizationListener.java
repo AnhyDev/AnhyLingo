@@ -23,7 +23,7 @@ public class InventoryLocalizationListener implements Listener {
     
     public InventoryLocalizationListener(AnhyLingo lingoPlugin) {
 		this.lingoPlugin = lingoPlugin;
-		this.itemLingo = lingoPlugin.getConfigurationManager().isItemLingo();
+		this.itemLingo = lingoPlugin.getGlobalManager().isItemLingo();
 	}
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -80,7 +80,7 @@ public class InventoryLocalizationListener implements Listener {
     }
 
     private String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player);
+        return LangUtils.getPlayerLanguage(player, lingoPlugin);
     }
     
     private boolean checkItem(ItemStack item) {

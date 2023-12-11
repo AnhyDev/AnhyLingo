@@ -6,12 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.command.LingoCommand;
-import ink.anh.lingo.item.LanguageItemStack;
-import ink.anh.lingo.lang.LanguageChat;
-import ink.anh.lingo.lang.LanguageSystemChat;
 import ink.anh.lingo.listeners.ListenerManager;
 import ink.anh.lingo.listeners.protocol.PacketListenerManager;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 
 public class AnhyLingo extends JavaPlugin {
 
@@ -22,11 +18,7 @@ public class AnhyLingo extends JavaPlugin {
     private boolean isFolia;
     private boolean hasPaperComponent;
     
-    private LanguageSystemChat languageSystemChat;
-    private LanguageItemStack languageItemStack;
-    private LanguageChat languageChat;
-    private ConfigurationManager configurationManager;
-    private static BukkitAudiences bukkitAudiences;
+    private GlobalManager globalManager;
 
     @Override
     public void onLoad() {
@@ -38,14 +30,10 @@ public class AnhyLingo extends JavaPlugin {
     	checkDepends("ProtocolLib");
     	checkServer();
         
-        configurationManager = new ConfigurationManager(this);
-        languageSystemChat = LanguageSystemChat.getInstance(this);
-        languageItemStack = LanguageItemStack.getInstance(this);
-        languageChat = LanguageChat.getInstance(this);
+        globalManager = GlobalManager.getManager(this);
         new PacketListenerManager().addListeners();
         new ListenerManager(this);
         this.getCommand("lingo").setExecutor(new LingoCommand(this));
-        bukkitAudiences = BukkitAudiences.create(this);
     }
 
     @Override
@@ -114,25 +102,8 @@ public class AnhyLingo extends JavaPlugin {
     public static AnhyLingo getInstance() {
     	return instance;
     }
-
-    public LanguageSystemChat getLanguageSystemChat() {
-    	return languageSystemChat;
-    }
-
-    public LanguageItemStack getLanguageItemStack() {
-    	return languageItemStack;
-    }
-
-    public LanguageChat getLanguageChat() {
-    	return languageChat;
-    }
-
-    public ConfigurationManager getConfigurationManager() {
-    	return configurationManager;
-    }
-
-    public void setConfigurationManager(ConfigurationManager configurationManager) {
-    	this.configurationManager = configurationManager;
+    public GlobalManager getGlobalManager() {
+    	return globalManager;
     }
 
     public boolean isSpigot() {
@@ -150,8 +121,4 @@ public class AnhyLingo extends JavaPlugin {
     public boolean hasPaperComponent() {
     	return hasPaperComponent;
     }
-
-	public static BukkitAudiences getBukkitAudiences() {
-		return bukkitAudiences;
-	}
 }
