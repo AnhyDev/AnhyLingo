@@ -14,14 +14,30 @@ import org.bukkit.inventory.ItemStack;
 import com.comphenix.protocol.wrappers.nbt.NbtCompound;
 import com.comphenix.protocol.wrappers.nbt.NbtList;
 
+/**
+ * Class handling the NBT (Named Binary Tag) related subcommands for the AnhyLingo plugin.
+ * This class provides functionality to manipulate and retrieve NBT data from items in-game.
+ */
 public class NBTSubCommand {
 	
 	private AnhyLingo lingoPlugin;
 
+    /**
+     * Constructor for NBTSubCommand.
+     *
+     * @param plugin The AnhyLingo plugin instance.
+     */
 	public NBTSubCommand(AnhyLingo plugin) {
 		this.lingoPlugin = plugin;
 	}
-	
+
+    /**
+     * Executes the appropriate NBT related command based on the arguments.
+     *
+     * @param sender The sender of the command.
+     * @param args Arguments passed with the command.
+     * @return true if the command was successfully executed, otherwise false.
+     */
     boolean execNBT(CommandSender sender, String[] args) {
         if (args.length < 2) {
             return false;
@@ -141,7 +157,16 @@ public class NBTSubCommand {
 
         return itemInHand;
     }
-    
+
+    /**
+     * Converts the NBT value associated with the given key in the provided NbtCompound to a String.
+     * This method handles various types of NBT data and formats them into a human-readable string.
+     * It's useful for displaying NBT data in commands or logs.
+     *
+     * @param compound The NbtCompound from which to retrieve the value.
+     * @param key The key corresponding to the NBT value to convert.
+     * @return A String representation of the NBT value, or null if the key does not exist or the value is null.
+     */
     public String nbtValueToString(NbtCompound compound, String key) {
         if (compound == null || !compound.containsKey(key)) {
             return null;

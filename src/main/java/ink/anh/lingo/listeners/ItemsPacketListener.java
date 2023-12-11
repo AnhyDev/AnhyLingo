@@ -22,12 +22,21 @@ import ink.anh.lingo.item.ItemLang;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Listener for packet events related to items, handling the localization of ItemStacks based on player language settings.
+ * This class intercepts and modifies packets to translate item names and lore for players.
+ */
 public class ItemsPacketListener {
 
     private AnhyLingo lingoPlugin;
     private GlobalManager globalManager;
     private String key_NBT;
 
+    /**
+     * Constructor for ItemsPacketListener.
+     *
+     * @param lingoPlugin The instance of AnhyLingo plugin.
+     */
     public ItemsPacketListener(AnhyLingo lingoPlugin) {
         this.lingoPlugin = lingoPlugin;
 		this.globalManager = lingoPlugin.getGlobalManager();
@@ -109,6 +118,16 @@ public class ItemsPacketListener {
         }
     }
 
+    // Methods for handling specific packet events
+
+    /**
+     * Modifies the provided ItemStack based on the specified languages.
+     * Updates the item's name and lore to match the translation defined for the selected languages.
+     *
+     * @param langs The languages to use for translation.
+     * @param item The ItemStack to be modified.
+     * @return The modified ItemStack.
+     */
     private ItemStack modifyItem(String[] langs, ItemStack item) {
         if (item == null || !item.hasItemMeta()) {
             return item; // Якщо предмета немає або немає метаданих, просто повертаємо його.

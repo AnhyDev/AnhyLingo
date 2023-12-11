@@ -15,9 +15,18 @@ import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 
+/**
+ * Currently not in use. 
+ * Listens to chat packets and modifies them for language localization.
+ * Extends AbstractPacketListener to implement specific functionality for chat packet modification.
+ */
 public class PacketChat extends AbstractPacketListener {
 
 
+    /**
+     * Constructor for PacketChat.
+     * Sets up the listener for Server.CHAT packet type with normal priority.
+     */
     public PacketChat() {
         super(PacketType.Play.Server.CHAT);
 
@@ -53,6 +62,12 @@ public class PacketChat extends AbstractPacketListener {
         register(); 
     }
 
+    /**
+     * Handles the modification of chat packets.
+     * This method is called when a chat packet is being sent to a player, allowing modification of its content.
+     *
+     * @param event The PacketEvent to be handled.
+     */
     @Override
 	protected void handlePacket(PacketEvent event) {
         
@@ -77,6 +92,11 @@ public class PacketChat extends AbstractPacketListener {
         }
     }
 
+    /**
+     * Gets the LanguageManager instance from the plugin.
+     *
+     * @return The LanguageManager instance.
+     */
 	@Override
 	public LanguageManager getLangMan() {
 		return lingoPlugin.getGlobalManager().getLanguageManager();

@@ -14,13 +14,25 @@ import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
 
+/**
+ * Utility class for managing and displaying directory contents in the AnhyLingo plugin.
+ */
 public class DirectoryContents {
 
 	private static GlobalManager globalManager;
 	
-	static {
-		globalManager = AnhyLingo.getInstance().getGlobalManager();
-	}
+    // Static initializer to obtain the GlobalManager instance from the AnhyLingo plugin.
+    static {
+        globalManager = AnhyLingo.getInstance().getGlobalManager();
+    }
+
+    /**
+     * Lists the contents of a specified directory and sends the list to the CommandSender.
+     * This method handles both files and directories, sorting them and presenting them in a user-friendly format.
+     *
+     * @param sender The CommandSender to whom the directory contents will be sent.
+     * @param directoryPath The path to the directory whose contents are to be listed.
+     */
     public static void listDirectoryContents(CommandSender sender, String directoryPath) {
     	if (directoryPath.equals("0")) directoryPath = "";
     	String[] langs = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender, globalManager.getPlugin()) : null;

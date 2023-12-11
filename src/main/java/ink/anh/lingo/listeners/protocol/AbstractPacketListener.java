@@ -19,28 +19,65 @@ import ink.anh.lingo.AnhyLingo;
 
 import org.bukkit.entity.Player;
 
+/**
+ * Abstract base class for packet listeners in the AnhyLingo plugin.
+ * This class provides common functionalities for handling packet modifications based on language settings.
+ */
 public abstract class AbstractPacketListener {
     protected final PacketType packetType;
     protected PacketAdapter packetAdapter;
 	public AnhyLingo lingoPlugin;
 
+    /**
+     * Constructor for AbstractPacketListener.
+     *
+     * @param packetType The PacketType that this listener will handle.
+     */
     protected AbstractPacketListener(PacketType packetType) {
         this.packetType = packetType;
         this.lingoPlugin = AnhyLingo.getInstance();
     }
 
+    /**
+     * Abstract method to handle the packet event.
+     *
+     * @param event The PacketEvent to be handled.
+     */
     protected abstract void handlePacket(PacketEvent event);
 
+    /**
+     * Gets the LanguageManager instance.
+     *
+     * @return The LanguageManager instance.
+     */
     public abstract LanguageManager getLangMan();
 
+    /**
+     * Registers the packet listener with the ProtocolManager.
+     */
     protected void register() {
         ProtocolLibrary.getProtocolManager().addPacketListener(packetAdapter);
     }
 
+    /**
+     * Retrieves the language settings for a player.
+     *
+     * @param player The player whose language settings are to be retrieved.
+     * @return An array of language codes for the player.
+     */
     public String[] getPlayerLanguage(Player player) {
         return LangUtils.getPlayerLanguage(player, lingoPlugin);
     }
 
+    /**
+     * Modifies chat components in a packet's JSON structure based on language translations.
+     *
+     * @param originalJson The original JSON string from the packet.
+     * @param langs The language codes for translation.
+     * @param modState The current state of modification.
+     * @param textBlock The JSON key where the text resides.
+     * @return The modified JSON string.
+     */
     public String modifyChat(String originalJson, String[] langs, ModificationState modState, String textBlock) {
         Gson gson = new Gson();
         JsonElement chatElement = gson.fromJson(originalJson, JsonElement.class);
@@ -61,7 +98,14 @@ public abstract class AbstractPacketListener {
         }
         return gson.toJson(chatElement);
     }
-    
+
+    /**
+     * Resets and translates the action bar text in a packet event.
+     *
+     * @param event The PacketEvent to be modified.
+     * @param langs The language codes for translation.
+     * @param modState The current state of modification.
+     */
     public void reSetActionBar(PacketEvent event, String[] langs, ModificationState modState) {
     	PacketContainer packet = event.getPacket();
         StructureModifier<Object> fields = packet.getModifier();

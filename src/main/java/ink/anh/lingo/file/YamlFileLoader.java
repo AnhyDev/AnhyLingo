@@ -1,6 +1,5 @@
 package ink.anh.lingo.file;
 
-
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.File;
@@ -17,12 +16,31 @@ import ink.anh.api.messages.MessageType;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.item.ItemLang;
 
+/**
+ * Handles the loading of YAML files from a URL into the server's file system as part of the AnhyLingo plugin.
+ * This class extends AbstractFileManager and provides specific implementation for downloading and processing YAML files.
+ */
 public class YamlFileLoader extends AbstractFileManager {
-    
+
+    /**
+     * Constructor for YamlFileLoader.
+     *
+     * @param plugin The instance of AnhyLingo plugin.
+     */
     public YamlFileLoader(AnhyLingo plugin) {
     	super(plugin);
 	}
 
+    /**
+     * Processes the YAML file loading command.
+     * Downloads a YAML file from the specified URL and saves it to the given directory path on the server.
+     * Additionally, performs validation checks on the YAML file.
+     *
+     * @param sender The command sender who initiated the file loading.
+     * @param urlString The URL of the YAML file to download.
+     * @param directory The directory path where the YAML file will be saved.
+     * @param overwriteExisting Determines whether to overwrite an existing file.
+     */
     @Override
     public void processingFile(CommandSender sender, String urlString, String directory, boolean overwriteExisting) {
         Bukkit.getScheduler().runTaskAsynchronously(lingoPlugin, () -> {

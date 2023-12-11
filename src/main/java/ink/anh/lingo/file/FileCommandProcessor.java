@@ -7,14 +7,31 @@ import ink.anh.api.messages.Messenger;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
 
+/**
+ * Processes file-related commands for the AnhyLingo plugin.
+ * This class serves as a handler for commands that involve file operations like loading and deleting.
+ */
 public class FileCommandProcessor {
     
     private AnhyLingo lingoPlugin;
 
+    /**
+     * Constructor for FileCommandProcessor.
+     *
+     * @param plugin The instance of AnhyLingo plugin.
+     */
     public FileCommandProcessor(AnhyLingo plugin) {
         this.lingoPlugin = plugin;
     }
 
+    /**
+     * Processes file-related commands based on the specified FileProcessType.
+     *
+     * @param sender The command sender.
+     * @param args Arguments of the command.
+     * @param fileProcessType The type of file processing to perform.
+     * @return true if the command was processed successfully, otherwise false.
+     */
     public boolean processFile(CommandSender sender, String[] args, FileProcessType fileProcessType) {
 
     	if (!isCommandAlloved(args[0])) {

@@ -8,12 +8,30 @@ import ink.anh.lingo.AnhyLingo;
 
 import java.io.File;
 
+/**
+ * Handles the deletion of files as part of the AnhyLingo plugin's file management functionality.
+ * This class extends AbstractFileManager and provides specific implementation for deleting files.
+ */
 public class SimpleFileDeleter extends AbstractFileManager {
 
+    /**
+     * Constructor for SimpleFileDeleter.
+     *
+     * @param plugin The instance of AnhyLingo plugin.
+     */
     public SimpleFileDeleter(AnhyLingo plugin) {
         super(plugin);
     }
 
+    /**
+     * Processes the file deletion command.
+     * Deletes a specified file within a given directory if allowed and if the file exists.
+     *
+     * @param sender The command sender who initiated the file deletion.
+     * @param directoryPath The path to the directory containing the file.
+     * @param fileName The name of the file to delete.
+     * @param overwriteExisting This parameter is not used in file deletion.
+     */
     @Override
 	public void processingFile(CommandSender sender, String directoryPath, String fileName,
 			boolean overwriteExisting) {

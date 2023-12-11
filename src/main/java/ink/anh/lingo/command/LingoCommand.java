@@ -25,16 +25,34 @@ import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.item.ItemLang;
 import ink.anh.lingo.file.FileCommandProcessor;
 
+/**
+ * Command executor for the 'lingo' command in the AnhyLingo plugin.
+ * This class processes and executes various subcommands related to language settings and file management.
+ */
 public class LingoCommand implements CommandExecutor {
 	
 	private AnhyLingo lingoPlugin;
     private GlobalManager globalManager;
 
+    /**
+     * Constructor for the LingoCommand class.
+     *
+     * @param lingoPlugin The instance of AnhyLingo plugin.
+     */
 	public LingoCommand(AnhyLingo lingoPlugin) {
 		this.lingoPlugin = lingoPlugin;
 		this.globalManager = lingoPlugin.getGlobalManager();
 	}
 
+	/**
+     * Executes the given command, returning its success.
+     *
+     * @param sender Source of the command.
+     * @param cmd The command which was executed.
+     * @param label Alias of the command which was used.
+     * @param args Passed command arguments.
+     * @return true if a valid command, otherwise false.
+     */
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length > 0) {

@@ -13,13 +13,22 @@ import ink.anh.api.nbt.NBTExplorer;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
 
+/**
+ * Handles the translation of ItemStacks based on language settings in the AnhyLingo plugin.
+ * This class modifies ItemStacks by updating their name and lore according to the specified language.
+ */
 public class TranslateItemStack {
 
     private GlobalManager globalManager;
     private String lang_NBT;
     private String key_NBT;
     
-    
+
+    /**
+     * Constructor for TranslateItemStack.
+     *
+     * @param lingoPlugin The instance of AnhyLingo plugin.
+     */
 	public TranslateItemStack(AnhyLingo lingoPlugin) {
 		this.globalManager = lingoPlugin.getGlobalManager();
 		this.lang_NBT = "Lingo";
@@ -27,6 +36,13 @@ public class TranslateItemStack {
 	}
 
 
+    /**
+     * Modifies the provided ItemStack based on the specified languages.
+     * Updates the item's name and lore to match the translation defined for the selected languages.
+     *
+     * @param langs The languages to use for translation.
+     * @param item The ItemStack to be modified.
+     */
     public void modifyItem(String[] langs, ItemStack item) {
 
         if (langs == null) {
@@ -71,7 +87,14 @@ public class TranslateItemStack {
             }
         }
     }
-    
+
+    /**
+     * Translates the given ItemStack using the specified ItemLang.
+     * Updates the item's name and lore according to the ItemLang's properties.
+     *
+     * @param item The ItemStack to be translated.
+     * @param itemLang The ItemLang containing the translation details.
+     */
     private void translateItemStack(ItemStack item, ItemLang itemLang) {
 
         // Встановлюємо значення NBT

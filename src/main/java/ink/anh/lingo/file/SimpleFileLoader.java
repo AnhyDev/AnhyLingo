@@ -11,12 +11,31 @@ import org.bukkit.command.CommandSender;
 import ink.anh.api.messages.MessageType;
 import ink.anh.lingo.AnhyLingo;
 
+/**
+ * Handles the loading of files from a URL into the server's file system as part of the AnhyLingo plugin.
+ * This class extends AbstractFileManager and provides specific implementation for downloading and saving files.
+ */
 public class SimpleFileLoader extends AbstractFileManager {
 
+    /**
+     * Constructor for SimpleFileLoader.
+     *
+     * @param plugin The instance of AnhyLingo plugin.
+     */
     public SimpleFileLoader(AnhyLingo plugin) {
         super(plugin);
     }
 
+    /**
+     * Processes the file loading command.
+     * Downloads a file from the specified URL and saves it to the given directory path on the server.
+     * If the file already exists, it will be overwritten if 'overwriteExisting' is true.
+     *
+     * @param sender The command sender who initiated the file loading.
+     * @param urlString The URL of the file to download.
+     * @param directoryPath The path to the directory where the file will be saved.
+     * @param overwriteExisting Determines whether to overwrite an existing file.
+     */
     @Override
     public void processingFile(CommandSender sender, String urlString, String directoryPath, boolean overwriteExisting) {
         Bukkit.getScheduler().runTaskAsynchronously(lingoPlugin, () -> {

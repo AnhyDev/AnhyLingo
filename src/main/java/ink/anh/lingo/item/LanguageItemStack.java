@@ -15,16 +15,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a language-specific item stack, handling the loading and processing of item language data.
+ * This class extends AbstractLanguage and is tailored for managing item-specific language information.
+ */
 public class LanguageItemStack extends AbstractLanguage<ItemLang> {
 
     private static LanguageItemStack instance = null;
     private static final Object LOCK = new Object();
     private static final String DIRECTORY = "items";
-    
+
+    /**
+     * Constructor for LanguageItemStack.
+     *
+     * @param globalManager The global manager instance from the AnhyLingo plugin.
+     */
     public LanguageItemStack(GlobalManager globalManager) {
         super(globalManager, DIRECTORY);
     }
 
+    /**
+     * Singleton instance getter for LanguageItemStack.
+     * Ensures that only one instance of this class is created.
+     *
+     * @param globalManager The global manager instance from the AnhyLingo plugin.
+     * @return The singleton instance of LanguageItemStack.
+     */
     public static LanguageItemStack getInstance(GlobalManager globalManager) {
         if (instance == null) {
             synchronized (LOCK) {
@@ -36,6 +52,14 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         return instance;
     }
 
+    /**
+     * Extracts and processes item language data from the given file configuration.
+     * This implementation handles both regular items and items that copy data from other items.
+     *
+     * @param langConfig The file configuration from which to extract item data.
+     * @param lang The language code for which the data is being extracted.
+     * @return A map of item keys to their corresponding ItemLang objects.
+     */
     @Override
 	public Map<String, ItemLang> extractData(FileConfiguration langConfig, String lang) {
         Map<String, ItemLang> langMap = new HashMap<>();
@@ -69,6 +93,13 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         return langMap;
     }
 
+    /**
+     * Processes items that are marked to copy data from another item, allowing for shared language properties.
+     *
+     * @param section The configuration section of the item to process.
+     * @param langMap The current map of processed language items.
+     * @return An ItemLang instance representing the processed item, or null if base item is not found.
+     */
     private ItemLang processCopiedItem(ConfigurationSection section, Map<String, ItemLang> langMap) {
         String baseKey = section.getString("copy");
         ItemLang baseItemLang = langMap.get(baseKey);
@@ -100,6 +131,12 @@ public class LanguageItemStack extends AbstractLanguage<ItemLang> {
         return new ItemLang(name, lore);
     }
 
+    /**
+     * Override of extractData method from AbstractLanguage class. Not implemented in this subclass.
+     *
+     * @param langConfig The file configuration from which to extract data.
+     * @return Always returns null as this method is not implemented.
+     */
 	@Override
 	public Map<String, ItemLang> extractData(FileConfiguration langConfig) {
 		return null;
