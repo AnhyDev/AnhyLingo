@@ -23,7 +23,6 @@ public class PacketChat extends AbstractPacketListener {
 
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
-
         protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL, 
                 PacketType.Play.Server.CHAT) {
             
