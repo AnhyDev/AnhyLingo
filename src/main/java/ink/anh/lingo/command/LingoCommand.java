@@ -164,7 +164,7 @@ public class LingoCommand implements CommandExecutor {
             }
 
             // Якщо все добре, здійснюємо налаштування мови для гравця
-            new PlayerData(lingoPlugin).setCustomData(player, langData, langs);
+            new PlayerData().setCustomData(player, langData, langs);
             sendMessage(sender, "lingo_language_is_selected " + String.join(" ", langs), MessageType.NORMAL);
         }
         return true;
@@ -177,7 +177,7 @@ public class LingoCommand implements CommandExecutor {
         	String langs;
         	String langData = "Lingo";
         	
-        	PlayerData data = new PlayerData(lingoPlugin);
+        	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
         		langs = data.getStringData(player, langData).replace(',', ' ');
                 sendMessage(sender, "lingo_you_language " + langs, MessageType.NORMAL);
@@ -195,7 +195,7 @@ public class LingoCommand implements CommandExecutor {
             Player player = (Player) sender;
         	String langData = "Lingo";
         	
-        	PlayerData data = new PlayerData(lingoPlugin);
+        	PlayerData data = new PlayerData();
         	if (data.hasCustomData(player, langData)) {
         		data.removeCustomData(player, langData);
                 sendMessage(sender, "lingo_cleared_the_language ", MessageType.NORMAL);
@@ -293,7 +293,7 @@ public class LingoCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             // Отримуємо мови для гравця
-            langs = LangUtils.getPlayerLanguage(player, lingoPlugin);
+            langs = LangUtils.getPlayerLanguage(player);
 
             // Перевіряємо наявність дозволу у гравця
             if (!player.hasPermission(permission)) {

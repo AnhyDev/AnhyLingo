@@ -163,7 +163,7 @@ public class ItemsPacketListener {
 
 
     private String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player, lingoPlugin);
+        return LangUtils.getPlayerLanguage(player);
     }
 
     private String getTranslatedName(String customID, String[] langs) {

@@ -66,7 +66,7 @@ public abstract class AbstractPacketListener {
      * @return An array of language codes for the player.
      */
     public String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player, lingoPlugin);
+        return LangUtils.getPlayerLanguage(player);
     }
 
     /**

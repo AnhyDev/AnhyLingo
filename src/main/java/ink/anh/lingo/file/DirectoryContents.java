@@ -35,7 +35,7 @@ public class DirectoryContents {
      */
     public static void listDirectoryContents(CommandSender sender, String directoryPath) {
     	if (directoryPath.equals("0")) directoryPath = "";
-    	String[] langs = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender, globalManager.getPlugin()) : null;
+    	String[] langs = (sender instanceof Player) ? LangUtils.getPlayerLanguage((Player) sender) : null;
     	String pluginName = AnhyLingo.getInstance().getGlobalManager().getPluginName() + ": ";
 
         File directory = new File(AnhyLingo.getInstance().getServer().getWorldContainer(), "plugins" + File.separator + directoryPath);

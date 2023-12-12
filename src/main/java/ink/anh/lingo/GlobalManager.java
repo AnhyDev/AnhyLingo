@@ -21,7 +21,7 @@ import net.md_5.bungee.api.ChatColor;
  * Manages global settings and states for the AnhyLingo plugin.
  * This class handles configurations, language management, and plugin-wide settings.
  */
-public class GlobalManager implements LibraryManager {
+public class GlobalManager extends LibraryManager {
 
     private static GlobalManager instance;
 	private AnhyLingo lingoPlugin;

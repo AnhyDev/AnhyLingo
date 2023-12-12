@@ -111,7 +111,7 @@ public class InventoryLocalizationListener implements Listener {
      * @return An array of language codes for the player.
      */
     private String[] getPlayerLanguage(Player player) {
-        return LangUtils.getPlayerLanguage(player, lingoPlugin);
+        return LangUtils.getPlayerLanguage(player);
     }
 
     /**
