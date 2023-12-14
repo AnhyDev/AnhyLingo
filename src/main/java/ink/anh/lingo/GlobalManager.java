@@ -53,6 +53,7 @@ public class GlobalManager extends LibraryManager {
      * @param lingoPlugin The instance of AnhyLingo plugin.
      */
 	private GlobalManager(AnhyLingo lingoPlugin) {
+		super(lingoPlugin);
 		this.lingoPlugin = lingoPlugin;
 		this.saveDefaultConfig();
 		this.loadFields(lingoPlugin);

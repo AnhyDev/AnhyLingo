@@ -3,7 +3,6 @@ package ink.anh.lingo.command;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Map;
 
 import org.bukkit.command.Command;
@@ -15,7 +14,6 @@ import org.bukkit.entity.Player;
 import ink.anh.api.lingo.Translator;
 import ink.anh.api.messages.MessageType;
 import ink.anh.api.messages.Messenger;
-import ink.anh.api.player.PlayerData;
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
@@ -123,88 +121,103 @@ public class LingoCommand implements CommandExecutor {
         return false;
     }
 
+    /**
+     * Handles the 'set' command to set player's language preferences.
+     * 
+     * @param sender The sender of the command.
+     * @param args Arguments provided with the command.
+     * @return true if the operation was successful, false otherwise.
+     */
     private boolean setLang(CommandSender sender, String[] args) {
-        String langData = "Lingo";
-        String ua = "ua";
-        String uk = "uk";
-
-        // Перевіряємо, чи є викликач команди гравцем
+        // Check if the command is executed by a player
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            // Перевірка, чи є достатньо аргументів (мінімум 2)
+
+            // Check if enough arguments are provided (minimum 2)
             if (args.length < 2) {
-                sendMessage(sender, "lingo_err_command_format /lingo set <lang1> <lang2> ...", MessageType.WARNING);
+                sendMessage(sender, "lingo_err_command_format /example set <lang1> <lang2> ...", MessageType.WARNING);
                 return true;
             }
 
-            // Створюємо масив для зберігання мовних кодів
-            String[] langs = Arrays.copyOfRange(args, 1, args.length);
-
-            // Отримуємо масив доступних мовних кодів ISO 639-1
-            String[] isoLanguages = Locale.getISOLanguages();
+            // Create an array to store language codes
+            String[] newlangs = Arrays.copyOfRange(args, 1, args.length);
             
-            for (int i = 0; i < langs.length; i++) {
-                String lang = langs[i].toLowerCase(); // Переведення до нижнього регістру
-
-                // Перевірка на довжину мовного коду
-                if (lang.length() != 2) {
-                    sendMessage(sender, "lingo_err_language_code_2letters ", MessageType.WARNING);
-                    return true;
-                }
-
-                // Перевірка, чи є код мови дійсним ISO мовним кодом або спеціальним випадком "ua"
-                if (!Arrays.asList(isoLanguages).contains(lang) && !lang.equals(ua)) {
-                    sendMessage(sender, "lingo_err_invalid_language_code " + lang, MessageType.WARNING);
-                    return true;
-                }
-
-                if (lang.equals(uk)) {
-                    langs[i] = ua;
-                }
+            // Attempt to set the player's language preferences
+            int result = LangUtils.setLangs(player, newlangs);
+            
+            // Handling the result of the language setting operation
+            if (result == 1) {
+                // Successful operation
+                String[] langs = LangUtils.getPlayerLanguage(player);
+                sendMessage(sender, "lingo_language_is_selected " + String.join(", ", langs), MessageType.NORMAL);
+            } else if (result == 0) {
+                // Invalid language code length
+                sendMessage(sender, "lingo_err_language_code_2letters ", MessageType.WARNING);
+            } else {
+                // Other errors
+                sendMessage(sender, "lingo_err_invalid_language_code ", MessageType.WARNING);
             }
-
-            // Якщо все добре, здійснюємо налаштування мови для гравця
-            new PlayerData().setCustomData(player, langData, langs);
-            sendMessage(sender, "lingo_language_is_selected " + String.join(" ", langs), MessageType.NORMAL);
+        } else {
+            // Command can only be executed by a player
+            sendMessage(sender, "lingo_err_command_only_player", MessageType.WARNING);
         }
         return true;
     }
 
+    /**
+     * Handles the 'get' command to retrieve the player's current language settings.
+     * 
+     * @param sender The sender of the command.
+     * @return true if the operation was successful, false otherwise.
+     */
     private boolean getLang(CommandSender sender) {
-        // Перевіряємо, чи є викликач команди гравцем
+        // Check if the command is executed by a player
         if (sender instanceof Player) {
             Player player = (Player) sender;
-        	String langs;
-        	String langData = "Lingo";
-        	
-        	PlayerData data = new PlayerData();
-        	if (data.hasCustomData(player, langData)) {
-        		langs = data.getStringData(player, langData).replace(',', ' ');
-                sendMessage(sender, "lingo_you_language " + langs, MessageType.NORMAL);
-                return true;
-        	}
-            sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
-            return true;
+            
+            // Retrieve the player's current language settings
+            String[] langs = LangUtils.getLangs(player);
+            if (langs != null) {
+                // Display the current language settings to the player
+                sendMessage(sender, "lingo_you_language " + String.join(", ", langs), MessageType.NORMAL);
+            } else {
+                // No language settings found
+                sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
+            }
+        } else {
+            // Command can only be executed by a player
+            sendMessage(sender, "lingo_err_command_only_player", MessageType.WARNING);
         }
-        return false;
+        return true;
     }
 
+    /**
+     * Handles the 'reset' command to reset the player's language settings.
+     * 
+     * @param sender The sender of the command.
+     * @return true if the operation was successful, false otherwise.
+     */
     private boolean resetLang(CommandSender sender) {
-        // Перевіряємо, чи є викликач команди гравцем
+        // Check if the command is executed by a player
         if (sender instanceof Player) {
             Player player = (Player) sender;
-        	String langData = "Lingo";
-        	
-        	PlayerData data = new PlayerData();
-        	if (data.hasCustomData(player, langData)) {
-        		data.removeCustomData(player, langData);
+            
+            // Attempt to reset the player's language settings
+            int result = LangUtils.resetLangs(player);
+            
+            // Handling the result of the reset operation
+            if (result == 1) {
+                // Successful reset
                 sendMessage(sender, "lingo_cleared_the_language ", MessageType.NORMAL);
-                return true;
-        	}
-            sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
-            return true;
+            } else {
+                // No language settings to reset
+                sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
+            }
+        } else {
+            // Command can only be executed by a player
+            sendMessage(sender, "lingo_err_command_only_player", MessageType.WARNING);
         }
-        return false;
+        return true;
     }
 
     private boolean itemLang(CommandSender sender, String[] args) {
