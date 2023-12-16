@@ -6,6 +6,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -55,11 +56,15 @@ public class YamlFileLoader extends AbstractFileManager {
                 String fileName = extractFileName(fileUrl); // Отримайте назву файлу з URL
                 File destinationFile = new File(dir, fileName);
 
+                if (!isValidFile(sender, destinationFile, fileUrl, directory)) {
+                    return;
+                }
+                
                 // Перевіряємо, чи потрібно оновлювати або створювати файл
                 if (!destinationFile.exists()) {
                     saveFileFromUrl(fileUrl, destinationFile);
                     sendMessage(sender, "lingo_file_uploaded_successfully ./" + destinationFile.getPath(), MessageType.NORMAL);
-                } else if (overwriteExisting && needsUpdate(sender, destinationFile, fileUrl, directory)) {
+                } else if (overwriteExisting) {
                     saveFileFromUrl(fileUrl, destinationFile);
                     sendMessage(sender, "lingo_file_updated_successfully ./" + destinationFile.getPath(), MessageType.NORMAL);
                 } else {
@@ -73,7 +78,7 @@ public class YamlFileLoader extends AbstractFileManager {
         });
     }
 
-    private boolean needsUpdate(CommandSender sender, File file, URL url, String directory) {
+    private boolean isValidFile(CommandSender sender, File file, URL url, String directory) {
         String langFileRegex = ".*_[a-zA-Z]{2}\\.yml";
         
         // Перевірте, чи назва файлу відповідає шаблону
@@ -101,48 +106,46 @@ public class YamlFileLoader extends AbstractFileManager {
     }
 
     private boolean parseAndCheckYaml(CommandSender sender, YamlConfiguration yamlConfig, String directory) {
-        if ("system".equals(directory) || "chat".equals(directory)) {
-            // Перевіряємо, чи всі ключі у файлі конфігурації є рядками
+        String DIRECTORY_SYSTEM = "system";
+        String DIRECTORY_ITEMS = "items";
+        boolean truthFormat = false;
+        String errorMessage = null;
+
+        if (DIRECTORY_SYSTEM.equals(directory)) {
+            // Перевіряємо, чи yamlConfig містить хоча б один ключ з рядковим значенням
             for (String key : yamlConfig.getKeys(true)) {
-                if (!(yamlConfig.get(key) instanceof String)) {
-                    sendMessage(sender, "lingo_err_key_not_string " + key + " - " + directory, MessageType.ERROR);
-                    return false;
+                if (yamlConfig.isString(key)) {
+                    truthFormat = true;
+                    break;
                 }
             }
-        } else if ("items".equals(directory)) {
-            // Перевіряємо, чи можна дані конвертувати в об'єкти ItemLang
-            ConfigurationSection itemsSection = yamlConfig.getConfigurationSection("items");
-            if (itemsSection != null) {
-                for (String key : itemsSection.getKeys(false)) {
-                    if (!itemsSection.isConfigurationSection(key)) {
-                        continue; // Якщо не секція, пропускаємо
-                    }
+            if (!truthFormat) {
+                errorMessage = "lingo_err_key_not_string ";
+            }
+        } else if (DIRECTORY_ITEMS.equals(directory)) {
+            Set<String> blockKeys = yamlConfig.getKeys(false);
 
-                    ConfigurationSection section = itemsSection.getConfigurationSection(key);
-                    if (section.contains("copy")) {
-                        continue; // Пропускаємо ключі з під-ключем "copy"
-                    }
+            for (String blockKey : blockKeys) {
+                ConfigurationSection blockSection = yamlConfig.getConfigurationSection(blockKey);
 
-                    try {
-                        String name = section.getString("name");
-                        List<String> lore = section.getStringList("lore");
-
-                        // Спроба створення ItemLang для перевірки
-                        new ItemLang(name, lore.toArray(new String[0]));
-                    } catch (Exception e) {
-                        sendMessage(sender, "lingo_err_failed_create_ItemLang_key '" + key + "': " + e.getMessage(), MessageType.CRITICAL_ERROR);
-                        return false;
+                if (blockSection != null) {
+                    if (blockSection.isString("name") || (blockSection.isString("copy") && blockSection.isConfigurationSection("lines") && !blockSection.getConfigurationSection("lines").getKeys(false).isEmpty())) {
+                        truthFormat = true;
+                        break;
                     }
                 }
-            } else {
-                sendMessage(sender, "lingo_err_items_section_is_missing_file ", MessageType.ERROR);
-                return false;
+            }
+            if (!truthFormat) {
+                errorMessage = "lingo_err_items_section_is_missing_file ";
             }
         } else {
-            sendMessage(sender, "lingo_err_unknown_directory_type " + directory, MessageType.ERROR);
-            return false;
+            errorMessage = "lingo_err_unknown_directory_type " + directory;
         }
-        return true;
+
+        if (errorMessage != null) {
+            sendMessage(sender, errorMessage, MessageType.ERROR);
+        }
+        return truthFormat;
     }
 
 }
