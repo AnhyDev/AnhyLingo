@@ -43,7 +43,7 @@ public class TranslateItemStack {
      * @param langs The languages to use for translation.
      * @param item The ItemStack to be modified.
      */
-    public void modifyItem(String[] langs, ItemStack item) {
+    public void modifyItem(String[] langs, ItemStack item, boolean forceTranslation) {
 
         if (langs == null) {
             return;
@@ -70,7 +70,7 @@ public class TranslateItemStack {
                     	
                         itemLang = globalManager.getLanguageItemStack().getTranslate(customID, currentLang);
 
-                        if (langID.equals(currentLang)) {
+                        if (langID.equals(currentLang) && !forceTranslation) {
                         	processed = true;
                             return;
                             

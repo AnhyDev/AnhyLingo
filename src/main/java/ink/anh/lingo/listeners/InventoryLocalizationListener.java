@@ -51,7 +51,7 @@ public class InventoryLocalizationListener implements Listener {
 	        if(event.getInventory().getViewers().size() == 1) {
 	        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
 	            for (ItemStack item : event.getInventory().getContents()) {
-	            	if (checkItem(item)) translater.modifyItem(langs, item);
+	            	if (checkItem(item)) translater.modifyItem(langs, item, false);
 	            }
 	        }
 		}   
@@ -76,7 +76,7 @@ public class InventoryLocalizationListener implements Listener {
 	            ItemStack currentItem = event.getCurrentItem();
 	            
 	            if (checkItem(currentItem)) {
-	            	translater.modifyItem(langs, currentItem);
+	            	translater.modifyItem(langs, currentItem, false);
 	            }
 	        }
 		}
@@ -99,7 +99,7 @@ public class InventoryLocalizationListener implements Listener {
 	        ItemStack pickedItem = event.getItem().getItemStack();
 	        if (checkItem(pickedItem)) {
 	        	TranslateItemStack translater = new TranslateItemStack(lingoPlugin);
-	        	translater.modifyItem(langs, pickedItem);
+	        	translater.modifyItem(langs, pickedItem, false);
 	        }
 		}
     }

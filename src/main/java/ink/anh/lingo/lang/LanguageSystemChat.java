@@ -1,7 +1,7 @@
 package ink.anh.lingo.lang;
 
-import ink.anh.api.LibraryManager;
 import ink.anh.api.lingo.lang.LanguageManager;
+import ink.anh.lingo.GlobalManager;
 
 /**
  * Manages the system chat language for the AnhyLingo plugin.
@@ -20,8 +20,8 @@ public class LanguageSystemChat extends LanguageManager {
      *
      * @param libraryManager The LibraryManager instance, typically the main plugin instance.
      */
-    private LanguageSystemChat(LibraryManager libraryManager) {
-        super(libraryManager, DIRECTORY);
+    private LanguageSystemChat(GlobalManager manager) {
+        super(manager, DIRECTORY);
     }
 
     /**
@@ -31,11 +31,11 @@ public class LanguageSystemChat extends LanguageManager {
      * @param libraryManager The LibraryManager instance, typically the main plugin instance.
      * @return The singleton instance of LanguageSystemChat.
      */
-    public static LanguageSystemChat getInstance(LibraryManager libraryManager) {
+    public static LanguageSystemChat getInstance(GlobalManager manager) {
         if (instance == null) {
             synchronized (LOCK) {
                 if (instance == null) {
-                    instance = new LanguageSystemChat(libraryManager);
+                    instance = new LanguageSystemChat(manager);
                 }
             }
         }

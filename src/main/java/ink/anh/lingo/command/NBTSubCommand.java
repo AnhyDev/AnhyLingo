@@ -90,7 +90,7 @@ public class NBTSubCommand {
         }
 
         // Виводимо список ключів
-        sendMessage(sender, "lingo_NBT keys_for_item ", MessageType.NORMAL);
+        sendMessage(sender, "lingo_NBT_keys_for_item ", MessageType.NORMAL);
         for (String key : compound.getKeys()) {
             sendMessage(sender, "- " + key, MessageType.ESPECIALLY);
         }

@@ -21,6 +21,7 @@ import ink.anh.lingo.Permissions;
 import ink.anh.lingo.file.DirectoryContents;
 import ink.anh.lingo.file.FileProcessType;
 import ink.anh.lingo.item.ItemLang;
+import net.md_5.bungee.api.ChatColor;
 import ink.anh.lingo.file.FileCommandProcessor;
 
 /**
@@ -88,12 +89,12 @@ public class LingoCommand implements CommandExecutor {
 
     private boolean directory(CommandSender sender, String[] args) {
     	if (!lingoPlugin.getGlobalManager().isAllowBrowsing()) {
-            sendMessage(sender, "lingo_err_not_alloved ", MessageType.WARNING);
+            sendMessage(sender, "lingo_err_not_alloved_config ", MessageType.WARNING);
     		return true;
     	}
     	
-    	String[] langs = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
-	    if (langs != null && langs[0] == null) {
+    	int perm = checkPlayerPermissions(sender, Permissions.DIR_VIEW);
+	    if (perm != 0 && perm != 1) {
             return true;
 	    }
 
@@ -109,13 +110,13 @@ public class LingoCommand implements CommandExecutor {
     }
 
     private boolean reload(CommandSender sender) {
-    	String[] langs = checkPlayerPermissions(sender, Permissions.RELOAD);
-	    if (langs != null && langs[0] == null) {
+    	int perm = checkPlayerPermissions(sender, Permissions.RELOAD);
+	    if (perm != 0 && perm != 1) {
             return true;
 	    }
 	    
         if (lingoPlugin.getGlobalManager().reload()) {
-            sendMessage(sender, Translator.translateKyeWorld(globalManager, "lingo_language_reloaded ", langs), MessageType.NORMAL);
+            sendMessage(sender, "lingo_language_reloaded ", MessageType.NORMAL);
             return true;
         }
         return false;
@@ -182,7 +183,7 @@ public class LingoCommand implements CommandExecutor {
                 sendMessage(sender, "lingo_you_language " + String.join(", ", langs), MessageType.NORMAL);
             } else {
                 // No language settings found
-                sendMessage(sender, "lingo_you_have_not set_language ", MessageType.WARNING);
+                sendMessage(sender, "lingo_you_have_not_set_language ", MessageType.WARNING);
             }
         } else {
             // Command can only be executed by a player
@@ -222,10 +223,9 @@ public class LingoCommand implements CommandExecutor {
 
     private boolean itemLang(CommandSender sender, String[] args) {
     	
-    	String[] checkPlayer = checkPlayerPermissions(sender, Permissions.RELOAD);
-    	if (checkPlayer != null) {
-    	    if (checkPlayer[1] == null) {
-                sendMessage(sender, "lingo_err_not_have_permission ", MessageType.WARNING);
+    	int checkPlayer = checkPlayerPermissions(sender, Permissions.RELOAD);
+    	if (checkPlayer != 0) {
+    	    if (checkPlayer == 2) {
                 return true;
 
     	    }
@@ -239,7 +239,7 @@ public class LingoCommand implements CommandExecutor {
         String lang = args[1];
 
         if (lang.equalsIgnoreCase("list")) {
-    		return listKeysForLang(sender, args, checkPlayer != null);
+    		return listKeysForLang(sender, args, checkPlayer != 0);
     	}
         
 
@@ -256,8 +256,8 @@ public class LingoCommand implements CommandExecutor {
         }
 
         // Виведення toString() об'єкта ItemLang
-        sendMessage(sender, itemLang.toString(), MessageType.ESPECIALLY);
-        if (checkPlayer != null) lingoPlugin.getLogger().info(itemLang.toString());
+        sendMessage(sender, "\n" + ChatColor.RESET + itemLang.toString(), MessageType.ESPECIALLY);
+        if (checkPlayer != 0) lingoPlugin.getLogger().info(itemLang.toString());
 
         return true;
     }
@@ -293,32 +293,31 @@ public class LingoCommand implements CommandExecutor {
         return true;
     }
 	
-    private String[] checkPlayerPermissions(CommandSender sender, String permission) {
+    private int checkPlayerPermissions(CommandSender sender, String permission) {
         // Перевірка, чи команду виконує консоль
         if (sender instanceof ConsoleCommandSender) {
-            return null;
+            return 0;
         }
 
-        // Ініціалізація масиву з одним елементом null
-        String[] langs = new String[] {null};
-
         if (sender instanceof Player) {
-            Player player = (Player) sender;
-
-            // Отримуємо мови для гравця
-            langs = LangUtils.getPlayerLanguage(player);
 
             // Перевіряємо наявність дозволу у гравця
-            if (!player.hasPermission(permission)) {
-                sendMessage(sender, Translator.translateKyeWorld(globalManager, "lingo_err_not_have_permission ", langs), MessageType.ERROR);
-                return langs;
+            if (!sender.hasPermission(permission)) {
+                sendMessage(sender, "lingo_err_not_have_permission ", MessageType.ERROR);
+                return 2;
             }
         }
 
-        return langs;
+        return 1;
     }
 
 	private void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(globalManager, sender, message, type);
+		String[] langs = new String[] {globalManager.getDefaultLang()};
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            langs = LangUtils.getPlayerLanguage(player);
+        }
+
+    	Messenger.sendMessage(globalManager, sender, Translator.translateKyeWorld(globalManager, message, langs), type);
     }
 }
