@@ -68,3 +68,4 @@ lingo_NBT_keys_for_item: "NBT-ключі для вашого предмета: "
 lingo_err_NBT_tag_not_exist: "NBT-тег з таким ключем не існує. "
 lingo_err_command_only_player: "Дану команду може виконувати лише гравець. "
 lingo_err_have_nothing_hand: "У вас в руці нічого немає. "
+#
