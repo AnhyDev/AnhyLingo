@@ -1,6 +1,6 @@
 main: ink.anh.lingo.AnhyLingo
 name: AnhyLingo
-version: 0.3.2
+version: 0.3.4
 author: AnhyDev
 api-version: 1.13
 depend: [AnhyLibAPI]

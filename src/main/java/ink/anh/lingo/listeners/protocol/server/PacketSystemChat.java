@@ -2,6 +2,8 @@ package ink.anh.lingo.listeners.protocol.server;
 
 import java.util.Optional;
 
+import org.bukkit.Bukkit;
+
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
@@ -10,13 +12,14 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.reflect.StructureModifier;
-import com.comphenix.protocol.wrappers.EnumWrappers;
+import com.comphenix.protocol.wrappers.WrappedChatComponent;
 
 import net.kyori.adventure.text.Component;
 import ink.anh.api.lingo.ModificationState;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
 import ink.anh.api.utils.PaperUtils;
+import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
 
 /**
@@ -24,20 +27,17 @@ import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
  * Extends AbstractPacketListener to implement specific functionality for system chat packet modification.
  */
 public class PacketSystemChat extends AbstractPacketListener {
-
-
     /**
      * Constructor for PacketSystemChat.
      * Sets up the listener for Server.SYSTEM_CHAT packet type with normal priority.
      */
     public PacketSystemChat() {
-        super(PacketType.Play.Server.SYSTEM_CHAT);
+        super(getPacketType());
 
         ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
         
 
-        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL,
-                PacketType.Play.Server.SYSTEM_CHAT) {
+        protocolManager.addPacketListener(this.packetAdapter = new PacketAdapter(lingoPlugin, ListenerPriority.NORMAL, packetType) {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
@@ -45,24 +45,25 @@ public class PacketSystemChat extends AbstractPacketListener {
         		if (!lingoPlugin.getGlobalManager().isPacketLingo()) {
         			return;
         		}
-
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
-            		Logger.warn(lingoPlugin, "NBT event.getPacketType(): " + event.getPacketType().name());
-                    PacketContainer packet = event.getPacket();
-                    StructureModifier<Object> fields = packet.getModifier();
-                    for(int i = 0; i < fields.size(); i++) {
-                        if (fields.read(i) != null) {
-                            Class<?> fieldType = fields.read(i).getClass();
-                            Logger.warn(lingoPlugin, "Field " + i + " is of type: " + fieldType.getName());
-                        }
-                        Logger.info(lingoPlugin, "Field " + i + ": " + fields.read(i));
-                    }
-            	}
         	    
                 handlePacket(event);
         	}
         });
     }
+	
+	private static PacketType getPacketType() {
+		double ver = getCurrentServerVersion();
+
+		if (AnhyLingo.getInstance().getGlobalManager().isDebug()) {
+			Logger.info(AnhyLingo.getInstance(), "CurrentServerVersion: " + ver);
+		}
+		
+        if (ver < 1.19) {
+        	return PacketType.Play.Server.CHAT;
+        }
+    	return PacketType.Play.Server.SYSTEM_CHAT;
+        
+	}
 
     /**
      * Handles the modification of system chat packets.
@@ -72,30 +73,72 @@ public class PacketSystemChat extends AbstractPacketListener {
      */
     @Override
     protected void handlePacket(PacketEvent event) {
-        
+        double currentVersion = getCurrentServerVersion();
+        if (currentVersion < 1.19) {
+            if(!handleWrappedChatComponent(event)) {
+            	handleChatPacketForOldVersions(event);
+            }
+        } else {
+        	handleStructureModifier(event);
+        }
+    }
+
+    private void handleChatPacketForOldVersions(PacketEvent event) {
         ModificationState modState = new ModificationState();
         String[] langs = getPlayerLanguage(event.getPlayer());
-        
-        
+
+        PacketContainer packet = event.getPacket();
+        StructureModifier<Component> components = packet.getModifier().withType(Component.class);
+
+        if (components.size() > 0 && components.read(0) != null) {
+            Component component = components.read(0);
+            String jsonSystemChat = PaperUtils.serializeComponent(component);
+            String modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
+
+            if (modState.isModified() && modifiedJson != null) {
+                Component modifiedComponent = PaperUtils.getPaperGsonComponentSerializer().deserialize(modifiedJson);
+                components.write(0, modifiedComponent);
+            }
+        }
+    }
+
+    private boolean handleWrappedChatComponent(PacketEvent event) {
+        ModificationState modState = new ModificationState();
+        String[] langs = getPlayerLanguage(event.getPlayer());
+
+        PacketContainer packet = event.getPacket();
+
+        try {
+            StructureModifier<WrappedChatComponent> chatComponents = packet.getChatComponents();
+            if (chatComponents.size() > 0 && chatComponents.read(0) != null) {
+                WrappedChatComponent wrappedChat = chatComponents.read(0);
+                String jsonChat = wrappedChat.getJson();
+                String modifiedJson = modifyChat(jsonChat, langs, modState, "text");
+
+                if (modState.isModified() && modifiedJson != null) {
+                    WrappedChatComponent modifiedComponent = WrappedChatComponent.fromJson(modifiedJson);
+                    chatComponents.write(0, modifiedComponent);
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            // Якщо виникла помилка, повертаємо false
+            return false;
+        }
+
+        return false;
+    }
+
+    private void handleStructureModifier(PacketEvent event) {
+        ModificationState modState = new ModificationState();
+        String[] langs = getPlayerLanguage(event.getPlayer());
+
         PacketContainer packet = event.getPacket();
         Optional<Boolean> isFiltered = packet.getMeta("psr_filtered_packet");
         if (!(isFiltered.isPresent() && isFiltered.get())) {
-
             StructureModifier<Boolean> booleans = packet.getBooleans();
-            if (booleans.size() == 1) {
-            	
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
-                	Logger.warn(lingoPlugin, "booleans.read(0): " + booleans.read(0));
-            	
-                if (booleans.read(0)) {
-                	reSetActionBar(event, langs, modState);
-                    return;
-                }
-            } else if (packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()) {
-            	
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
-            	Logger.warn(lingoPlugin, "packet.getIntegers().read(0) == EnumWrappers.ChatType.GAME_INFO.getId()");
-            	
+            if (booleans.size() == 1 && booleans.read(0)) {
+                reSetActionBar(event, langs, modState);
                 return;
             }
 
@@ -106,19 +149,10 @@ public class PacketSystemChat extends AbstractPacketListener {
             String jsonSystemChat;
             String modifiedJson;
             boolean isPaper = false;
-            
-            if (contentField != null) {
-            	
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
-            		Logger.info(lingoPlugin, "contentField != null");
-            	
-            	jsonSystemChat = contentField.toString();
 
+            if (contentField != null) {
+                jsonSystemChat = contentField.toString();
             } else {
-            	
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat())
-            		Logger.info(lingoPlugin, "contentField == null");
-            	
                 Component read = componentModifier.read(0);
                 if (read == null) {
                     return;
@@ -127,23 +161,19 @@ public class PacketSystemChat extends AbstractPacketListener {
                 isPaper = true;
             }
 
-        	modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
+            modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
 
-            // Запис модифікованого рядка назад у компонент
             if (modState.isModified() && modifiedJson != null) {
-            	if (isPaper) {
-                    // 1. Серіалізація зміненого JSON-рядка назад у об'єкт Component
+                if (isPaper) {
                     Component modifiedComponent = PaperUtils.getPaperGsonComponentSerializer().deserialize(modifiedJson);
-
-                    // 3. Запис зміненого об'єкту Component назад у пакет
                     componentModifier.write(0, modifiedComponent);
-            	} else {
-                	// Запис зміненого JSON-рядка назад у пакет
-                	stringModifier.write(0, modifiedJson);
-            	}
+                } else {
+                    stringModifier.write(0, modifiedJson);
+                }
             }
         }
     }
+
 
     /**
      * Gets the LanguageManager instance from the plugin.
@@ -153,5 +183,20 @@ public class PacketSystemChat extends AbstractPacketListener {
 	@Override
 	public LanguageManager getLangMan() {
 		return lingoPlugin.getGlobalManager().getLanguageManager();
+	}
+	
+	public static double getCurrentServerVersion() {
+	    String versionString = Bukkit.getBukkitVersion().split("-")[0];
+	    String[] splitVersion = versionString.split("\\.");
+
+	    try {
+	        int major = Integer.parseInt(splitVersion[0]);
+	        int minor = splitVersion.length > 1 ? Integer.parseInt(splitVersion[1]) : 0;
+	        double version = major + minor / (minor >= 10 ? 100.0 : 10.0);
+	        return version;
+	    } catch (NumberFormatException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
 	}
 }

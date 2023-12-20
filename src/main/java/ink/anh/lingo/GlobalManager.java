@@ -11,10 +11,9 @@ import ink.anh.api.LibraryManager;
 import ink.anh.api.lingo.Translator;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
+import ink.anh.api.utils.StringUtils;
 import ink.anh.lingo.item.LanguageItemStack;
 import ink.anh.lingo.lang.LanguageSystemChat;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import net.md_5.bungee.api.ChatColor;
 
 
 /**
@@ -28,7 +27,6 @@ public class GlobalManager extends LibraryManager {
     
     private String pluginName;
     private String defaultLang;
-    private static BukkitAudiences bukkitAudiences;
 	
 	private LanguageManager langManager;
     private LanguageItemStack languageItemStack;
@@ -94,18 +92,6 @@ public class GlobalManager extends LibraryManager {
     @Override
     public String getPluginName() {
         return pluginName;
-    }
-
-    /**
-     * Gets the BukkitAudiences instance for the plugin.
-     * BukkitAudiences is part of the Adventure library and is used for sending rich text messages.
-     * This method is part of the implementation of the LibraryManager interface.
-     *
-     * @return The BukkitAudiences instance associated with this plugin.
-     */
-    @Override
-    public BukkitAudiences getBukkitAudiences() {
-        return bukkitAudiences;
     }
 
     /**
@@ -258,9 +244,8 @@ public class GlobalManager extends LibraryManager {
      * @param lingoPlugin The instance of AnhyLingo plugin.
      */
     private void loadFields(AnhyLingo lingoPlugin) {
-        bukkitAudiences = BukkitAudiences.create(lingoPlugin);
         defaultLang = lingoPlugin.getConfig().getString("language", "en");
-        pluginName = ChatColor.translateAlternateColorCodes('&',lingoPlugin.getConfig().getString("plugin_name", "AnhyLingo"));
+        pluginName = StringUtils.colorize(lingoPlugin.getConfig().getString("plugin_name", "AnhyLingo"));
         debug = lingoPlugin.getConfig().getBoolean("debug", false);
         setLanguageManagers();
 

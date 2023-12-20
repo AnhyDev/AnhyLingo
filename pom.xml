@@ -9,7 +9,7 @@
 
     <groupId>ink.anh</groupId>
     <artifactId>AnhyLingo</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.4</version>
     <name>AnhyLingo</name>
     <description>AnhyLingo projekt</description>
     
@@ -107,7 +107,7 @@
         <dependency>
 	    	<groupId>com.github.AnhyDev</groupId>
 	    	<artifactId>AnhyLibAPI</artifactId>
-	    	<version>v1.3.2</version>
+	    	<version>v1.3.5</version>
             <scope>provided</scope>
 		</dependency>
 

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -15,7 +14,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import ink.anh.api.messages.MessageType;
 import ink.anh.lingo.AnhyLingo;
-import ink.anh.lingo.item.ItemLang;
 
 /**
  * Handles the loading of YAML files from a URL into the server's file system as part of the AnhyLingo plugin.
