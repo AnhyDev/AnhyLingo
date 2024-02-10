@@ -92,7 +92,6 @@ public class PacketSystemChat extends AbstractPacketListener {
         for(int i = 0; i < fields.size(); i++) {
             if (fields.read(i) != null) {
                 Class<?> fieldType = fields.read(i).getClass();
-                Logger.warn(lingoPlugin, "Field " + i + " is of type: " + fieldType.getName());
                 String className = fieldType.getName();
                 if (className.equals("net.minecraft.network.chat.IChatMutableComponent")) {
                 	handleWrappedChatComponent(event);
