@@ -3,9 +3,9 @@ package ink.anh.lingo.file;
 import org.bukkit.command.CommandSender;
 
 import ink.anh.api.messages.MessageType;
-import ink.anh.api.messages.Messenger;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
+import ink.anh.lingo.command.AnswerToCommand;
 
 /**
  * Processes file-related commands for the AnhyLingo plugin.
@@ -83,7 +83,7 @@ public class FileCommandProcessor {
     }
 
     private void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type);
+    	AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
     }
 
     private AbstractFileManager getFileManagerForType(FileProcessType fileProcessType) {

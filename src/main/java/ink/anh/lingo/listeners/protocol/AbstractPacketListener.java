@@ -24,9 +24,21 @@ import org.bukkit.entity.Player;
  * This class provides common functionalities for handling packet modifications based on language settings.
  */
 public abstract class AbstractPacketListener {
-	public final PacketType packetType;
+	
+    /**
+     * The type of packet this listener is registered to handle.
+     */
+    public final PacketType packetType;
+    
+    /**
+     * Adapter for handling packet events. Subclasses will provide the specific behavior for different packet types.
+     */
     protected PacketAdapter packetAdapter;
-	public AnhyLingo lingoPlugin;
+    
+    /**
+     * The main plugin instance, used for accessing plugin-wide features and utilities.
+     */
+    public AnhyLingo lingoPlugin;
 
     /**
      * Constructor for AbstractPacketListener.

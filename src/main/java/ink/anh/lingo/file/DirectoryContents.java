@@ -8,11 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import ink.anh.api.lingo.Translator;
+import ink.anh.api.messages.MessageComponents;
 import ink.anh.api.messages.MessageType;
 import ink.anh.api.messages.Messenger;
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
+import ink.anh.lingo.command.AnswerToCommand;
 
 /**
  * Utility class for managing and displaying directory contents in the AnhyLingo plugin.
@@ -46,17 +48,17 @@ public class DirectoryContents {
             if (fileList != null) {
             	String iconFolder = "📁 ";
             	String iconFile = "📄 ";
-                // Сортування файлів та папок
+
                 Arrays.sort(fileList, Comparator.comparing(File::isFile)
                                                 .thenComparing(File::getName, String.CASE_INSENSITIVE_ORDER));
 
                 
-                Messenger.sendMessage(globalManager, sender, "lingo_file_folder_contents " + iconFolder + directoryPath, MessageType.IMPORTANT);
+            	AnswerToCommand.sendMessage(globalManager, sender, "lingo_file_folder_contents " + iconFolder + directoryPath, MessageType.IMPORTANT, true);
                 for (File file : fileList) {
                     if (file.isDirectory()) {
-                    	Messenger.sendShowFolder(globalManager, sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);
+                    	sendMessage(sender, directoryPath, file.getName(), iconFolder, MessageType.IMPORTANT, langs);
                     } else {
-                    	Messenger.sendMessageSimple(globalManager, sender, file.getName(), iconFile, MessageType.ESPECIALLY);
+                    	sendMessage(sender, null, file.getName(), iconFile, MessageType.ESPECIALLY, null);
                     }
                 }
             } else {
@@ -66,4 +68,35 @@ public class DirectoryContents {
         	sender.sendMessage(pluginName + Translator.translateKyeWorld(globalManager, "lingo_err_folder_is_notexist ", langs));
         }
     }
+
+    private static void sendMessage(CommandSender sender, String patch, String folder, String icon, MessageType type, String[] langs) {
+        MessageComponents folderComponent;
+        
+        if (patch != null) {
+            String separator = patch.endsWith("/") ? "" : "/";
+            String command = "/lingo dir " + patch + separator + folder;
+            String showFolder = Translator.translateKyeWorld(globalManager, "lingo_file_show_folder_contents ", langs);
+
+            MessageComponents hoverTextComponent = MessageComponents.builder()
+                .content("\n " + showFolder + folder + " \n")
+                .hexColor("#FFFF00")
+                .build();
+
+            folderComponent = MessageComponents.builder()
+                .content(icon + folder)
+                .hexColor(type.getColor(true))
+                .hoverComponent(hoverTextComponent)
+                .clickActionRunCommand(command)
+                .build();
+        } else {
+
+            folderComponent = MessageComponents.builder()
+                .content(icon + folder)
+                .hexColor(type.getColor(true))
+                .build();
+        }
+        
+        Messenger.sendMessage(globalManager.getPlugin(), sender, folderComponent, icon + type.getColor(false) + folder);
+    }
+ 
 }

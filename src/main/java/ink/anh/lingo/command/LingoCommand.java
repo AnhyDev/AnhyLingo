@@ -11,9 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import ink.anh.api.lingo.Translator;
 import ink.anh.api.messages.MessageType;
-import ink.anh.api.messages.Messenger;
 import ink.anh.api.utils.LangUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
@@ -312,12 +310,6 @@ public class LingoCommand implements CommandExecutor {
     }
 
 	private void sendMessage(CommandSender sender, String message, MessageType type) {
-		String[] langs = new String[] {globalManager.getDefaultLang()};
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            langs = LangUtils.getPlayerLanguage(player);
-        }
-
-    	Messenger.sendMessage(globalManager, sender, Translator.translateKyeWorld(globalManager, message, langs), type);
+    	AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
     }
 }

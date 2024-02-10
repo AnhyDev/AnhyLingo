@@ -8,8 +8,8 @@ import java.net.URL;
 import org.bukkit.command.CommandSender;
 
 import ink.anh.api.messages.MessageType;
-import ink.anh.api.messages.Messenger;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.command.AnswerToCommand;
 
 /**
  * Abstract base class for file management within the AnhyLingo plugin.
@@ -17,7 +17,10 @@ import ink.anh.lingo.AnhyLingo;
  */
 public abstract class AbstractFileManager {
 
-    protected AnhyLingo lingoPlugin;
+	/**
+	 * Reference to the main plugin instance, providing access to its global managers and utilities.
+	 */
+	protected AnhyLingo lingoPlugin;
 
     /**
      * Constructor for AbstractFileManager.
@@ -96,6 +99,6 @@ public abstract class AbstractFileManager {
      * @param type The type of message being sent.
      */
     public void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type);
+    	AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
     }
 }

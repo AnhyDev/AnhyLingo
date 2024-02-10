@@ -28,7 +28,7 @@ public class LanguageSystemChat extends LanguageManager {
      * Provides a singleton instance of LanguageSystemChat.
      * Ensures that only one instance of LanguageSystemChat is created and used throughout the plugin.
      *
-     * @param libraryManager The LibraryManager instance, typically the main plugin instance.
+     * @param manager The GlobalManager instance.
      * @return The singleton instance of LanguageSystemChat.
      */
     public static LanguageSystemChat getInstance(GlobalManager manager) {

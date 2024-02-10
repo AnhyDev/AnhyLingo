@@ -41,6 +41,19 @@ public class PacketSystemChat extends AbstractPacketListener {
             
         	@Override
         	public void onPacketSending(PacketEvent event) {
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
+            		Logger.warn(lingoPlugin, "PacketType: " + event.getPacketType().name());
+                    PacketContainer packet = event.getPacket();
+                    StructureModifier<Object> fields = packet.getModifier();
+                    for(int i = 0; i < fields.size(); i++) {
+                        if (fields.read(i) != null) {
+                            Class<?> fieldType = fields.read(i).getClass();
+                            Logger.warn(lingoPlugin, "Field " + i + " is of type: " + fieldType.getName());
+                        }
+                        Logger.info(lingoPlugin, "Field " + i + ": " + fields.read(i));
+                    }
+            	}
+
         		
         		if (!lingoPlugin.getGlobalManager().isPacketLingo()) {
         			return;
@@ -72,16 +85,35 @@ public class PacketSystemChat extends AbstractPacketListener {
      * @param event The PacketEvent to be handled.
      */
     @Override
-    protected void handlePacket(PacketEvent event) {
-        double currentVersion = getCurrentServerVersion();
-        if (currentVersion < 1.19) {
-            if(!handleWrappedChatComponent(event)) {
-            	handleChatPacketForOldVersions(event);
+	protected void handlePacket(PacketEvent event) {
+	    PacketContainer packet = event.getPacket();
+        StructureModifier<Object> fields = packet.getModifier();
+        boolean processed = false;
+        for(int i = 0; i < fields.size(); i++) {
+            if (fields.read(i) != null) {
+                Class<?> fieldType = fields.read(i).getClass();
+                Logger.warn(lingoPlugin, "Field " + i + " is of type: " + fieldType.getName());
+                String className = fieldType.getName();
+                if (className.equals("net.minecraft.network.chat.IChatMutableComponent")) {
+                	handleWrappedChatComponent(event);
+                	processed = true;
+                }
             }
-        } else {
-        	handleStructureModifier(event);
         }
-    }
+	    if (processed) {
+	        return;
+	    } else {
+	        // Інакше, продовжуємо зі стандартною обробкою
+	        double currentVersion = getCurrentServerVersion();
+            if (currentVersion < 1.19) {
+                if(!handleWrappedChatComponent(event)) {
+                	handleChatPacketForOldVersions(event);
+                }
+            } else {
+	            handleStructureModifier(event);
+	        }
+	    }
+	}
 
     private void handleChatPacketForOldVersions(PacketEvent event) {
         ModificationState modState = new ModificationState();
@@ -141,8 +173,23 @@ public class PacketSystemChat extends AbstractPacketListener {
                 reSetActionBar(event, langs, modState);
                 return;
             }
-
+            
             StructureModifier<String> stringModifier = packet.getStrings();
+            if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "Attempting to read String field at index 0.");
+            if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "String fields count: " + stringModifier.size());
+            
+            if (stringModifier.size() > 0) {
+                try {
+                    String contentField = stringModifier.read(0);
+                    if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "Successfully read String field: " + contentField);
+                } catch (Exception e) {
+                	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.error(lingoPlugin, "Error reading String field at index 0: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.warn(lingoPlugin, "No String fields available in the packet.");
+            }
+            
             StructureModifier<Component> componentModifier = packet.getModifier().withType(Component.class);
             String contentField = stringModifier.read(0);
 

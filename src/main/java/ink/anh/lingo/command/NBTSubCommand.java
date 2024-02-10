@@ -1,7 +1,6 @@
 package ink.anh.lingo.command;
 
 import ink.anh.api.messages.MessageType;
-import ink.anh.api.messages.Messenger;
 import ink.anh.api.nbt.NBTExplorer;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
@@ -206,8 +205,8 @@ public class NBTSubCommand {
         }
     }
 
-	private static void sendMessage(CommandSender sender, String message, MessageType type) {
-    	Messenger.sendMessage(AnhyLingo.getInstance().getGlobalManager(), sender, message, type);
+	private void sendMessage(CommandSender sender, String message, MessageType type) {
+    	AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
     }
 
 }
