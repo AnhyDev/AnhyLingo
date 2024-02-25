@@ -96,7 +96,10 @@ public class PacketSystemChat extends AbstractPacketListener {
                 if (className.equals("net.minecraft.network.chat.IChatMutableComponent")) {
                 	handleWrappedChatComponent(event);
                 	processed = true;
-                }
+                } else if (className.equals("io.papermc.paper.adventure.AdventureComponent")) {
+                	handleAdventureComponent(event);
+                    processed = true;
+    	        }
             }
         }
 	    if (processed) {
@@ -114,6 +117,19 @@ public class PacketSystemChat extends AbstractPacketListener {
 	    }
 	}
 
+    private void handleAdventureComponent(PacketEvent event) {
+        PacketContainer packet = event.getPacket();
+        StructureModifier<Component> components = packet.getModifier().withType(Component.class);
+        if (components.size() > 0 && components.read(0) != null) {
+            Component originalComponent = components.read(0);
+            modifyAndWriteComponent(event, originalComponent);
+        } else {
+            if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
+                Logger.warn(lingoPlugin, "No AdventureComponent found in the packet.");
+            }
+        }
+    }
+
     private void handleChatPacketForOldVersions(PacketEvent event) {
         ModificationState modState = new ModificationState();
         String[] langs = getPlayerLanguage(event.getPlayer());
@@ -129,6 +145,27 @@ public class PacketSystemChat extends AbstractPacketListener {
             if (modState.isModified() && modifiedJson != null) {
                 Component modifiedComponent = PaperUtils.getPaperGsonComponentSerializer().deserialize(modifiedJson);
                 components.write(0, modifiedComponent);
+            }
+        }
+    }
+
+    private void modifyAndWriteComponent(PacketEvent event, Component originalComponent) {
+        ModificationState modState = new ModificationState();
+        String[] langs = getPlayerLanguage(event.getPlayer());
+
+        String jsonSystemChat = PaperUtils.serializeComponent(originalComponent);
+        String modifiedJson = modifyChat(jsonSystemChat, langs, modState, "text");
+
+        if (modState.isModified() && modifiedJson != null) {
+            Component modifiedComponent = PaperUtils.getPaperGsonComponentSerializer().deserialize(modifiedJson);
+            event.getPacket().getModifier().write(0, modifiedComponent);
+
+            if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
+                Logger.info(lingoPlugin, "Component modified and written back to the packet: " + modifiedJson);
+            }
+        } else {
+            if (lingoPlugin.getGlobalManager().isDebugPacketShat()) {
+                Logger.info(lingoPlugin, "No modifications were made to the Component.");
             }
         }
     }
