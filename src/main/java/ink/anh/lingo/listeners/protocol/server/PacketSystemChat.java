@@ -93,7 +93,7 @@ public class PacketSystemChat extends AbstractPacketListener {
             if (fields.read(i) != null) {
                 Class<?> fieldType = fields.read(i).getClass();
                 String className = fieldType.getName();
-                if (className.equals("net.minecraft.network.chat.IChatMutableComponent")) {
+                if (className.equals("net.minecraft.network.chat.IChatMutableComponent") || className.equals("net.minecraft.network.chat.MutableComponent")) {
                 	handleWrappedChatComponent(event);
                 	processed = true;
                 } else if (className.equals("io.papermc.paper.adventure.AdventureComponent")) {
@@ -209,23 +209,23 @@ public class PacketSystemChat extends AbstractPacketListener {
                 reSetActionBar(event, langs, modState);
                 return;
             }
-            
+
             StructureModifier<String> stringModifier = packet.getStrings();
             if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "Attempting to read String field at index 0.");
             if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "String fields count: " + stringModifier.size());
-            
+
             if (stringModifier.size() > 0) {
                 try {
                     String contentField = stringModifier.read(0);
                     if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.info(lingoPlugin, "Successfully read String field: " + contentField);
                 } catch (Exception e) {
-                	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.error(lingoPlugin, "Error reading String field at index 0: " + e.getMessage());
+                    if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.error(lingoPlugin, "Error reading String field at index 0: " + e.getMessage());
                     e.printStackTrace();
                 }
             } else {
-            	if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.warn(lingoPlugin, "No String fields available in the packet.");
+                if (lingoPlugin.getGlobalManager().isDebugPacketShat()) Logger.warn(lingoPlugin, "No String fields available in the packet.");
             }
-            
+
             StructureModifier<Component> componentModifier = packet.getModifier().withType(Component.class);
             String contentField = stringModifier.read(0);
 
@@ -256,7 +256,6 @@ public class PacketSystemChat extends AbstractPacketListener {
             }
         }
     }
-
 
     /**
      * Gets the LanguageManager instance from the plugin.
