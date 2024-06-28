@@ -5,30 +5,29 @@ import ink.anh.api.nbt.NBTExplorer;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.Permissions;
 
-import java.util.Arrays;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import com.comphenix.protocol.wrappers.nbt.NbtCompound;
-import com.comphenix.protocol.wrappers.nbt.NbtList;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 
 /**
  * Class handling the NBT (Named Binary Tag) related subcommands for the AnhyLingo plugin.
  * This class provides functionality to manipulate and retrieve NBT data from items in-game.
  */
 public class NBTSubCommand {
-	
-	private AnhyLingo lingoPlugin;
+
+    private AnhyLingo lingoPlugin;
 
     /**
      * Constructor for NBTSubCommand.
      *
      * @param plugin The AnhyLingo plugin instance.
      */
-	public NBTSubCommand(AnhyLingo plugin) {
-		this.lingoPlugin = plugin;
-	}
+    public NBTSubCommand(AnhyLingo plugin) {
+        this.lingoPlugin = plugin;
+    }
 
     /**
      * Executes the appropriate NBT related command based on the arguments.
@@ -55,13 +54,13 @@ public class NBTSubCommand {
     private boolean set(CommandSender sender, String[] args) {
         ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_SET);
         if (itemInHand == null) {
-            return false;
+            return true;
         }
 
         // Перевіряємо, чи передано достатньо аргументів
         if (args.length < 4) {
             sendMessage(sender, "lingo_err_command_format /lingo nbt set <nbt_key> <params...>", MessageType.WARNING);
-            return false;
+            return true;
         }
 
         String nbtKey = args[2];
@@ -77,24 +76,28 @@ public class NBTSubCommand {
     private boolean list(CommandSender sender) {
         ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_LIST);
         if (itemInHand == null) {
-            return false;
+            return true;
         }
 
         // Отримуємо NBT-теги для предмета
-        NbtCompound compound = NBTExplorer.getNBT(itemInHand);
+        ItemMeta itemMeta = itemInHand.getItemMeta();
+        if (itemMeta == null) {
+            sendMessage(sender, "lingo_err_item_no_NBT_tags ", MessageType.WARNING);
+            return true;
+        }
 
-        if (compound == null || compound.getKeys().isEmpty()) {
+        PersistentDataContainer dataContainer = itemMeta.getPersistentDataContainer();
+
+        if (dataContainer.getKeys().isEmpty()) {
             sendMessage(sender, "lingo_err_item_no_NBT_tags ", MessageType.WARNING);
             return true;
         }
 
         // Виводимо список ключів
         sendMessage(sender, "lingo_NBT_keys_for_item ", MessageType.NORMAL);
-        for (String key : compound.getKeys()) {
-            sendMessage(sender, "- " + key, MessageType.ESPECIALLY);
-        }
-        for (String key : compound.getKeys()) {
-        	lingoPlugin.getLogger().info("- " + key);
+        for (NamespacedKey key : dataContainer.getKeys()) {
+            sendMessage(sender, "- " + key.getKey(), MessageType.ESPECIALLY);
+            lingoPlugin.getLogger().info("- " + key.getKey());
         }
 
         return true;
@@ -103,27 +106,26 @@ public class NBTSubCommand {
     private boolean info(CommandSender sender, String[] args) {
         ItemStack itemInHand = validatePlayerWithPermissionAndGetItemInHand(sender, Permissions.NBT_INFO);
         if (itemInHand == null) {
-            return false;
+            return true;
         }
 
         // Перевіряємо, чи передано ключ NBT-тегу
         if (args.length < 3) {
             sendMessage(sender, "lingo_err_command_format /lingo nbt info <nbt_key>", MessageType.WARNING);
-            return false;
+            return true;
         }
 
         String nbtKey = args[2];
 
         // Отримуємо NBT-теги для предмета
-        NbtCompound compound = NBTExplorer.getNBT(itemInHand);
+        String value = NBTExplorer.getNBTValue(itemInHand, nbtKey);
 
-        if (compound == null || !compound.containsKey(nbtKey)) {
+        if (value == null) {
             sendMessage(sender, "lingo_err_NBT_tag_not_exist ", MessageType.WARNING);
             return true;
         }
 
         // Виводимо значення NBT-тегу
-        String value = nbtValueToString(compound, nbtKey);
         sendMessage(sender, "NBT-" + nbtKey + ": " + value, MessageType.NORMAL);
 
         // Відправляємо інформацію в логи серверу
@@ -157,56 +159,8 @@ public class NBTSubCommand {
         return itemInHand;
     }
 
-    /**
-     * Converts the NBT value associated with the given key in the provided NbtCompound to a String.
-     * This method handles various types of NBT data and formats them into a human-readable string.
-     * It's useful for displaying NBT data in commands or logs.
-     *
-     * @param compound The NbtCompound from which to retrieve the value.
-     * @param key The key corresponding to the NBT value to convert.
-     * @return A String representation of the NBT value, or null if the key does not exist or the value is null.
-     */
-    public String nbtValueToString(NbtCompound compound, String key) {
-        if (compound == null || !compound.containsKey(key)) {
-            return null;
-        }
-
-        Object value = compound.getObject(key);
-        if (value instanceof Byte) {
-            return value.toString();
-        } else if (value instanceof Double) {
-            return value.toString();
-        } else if (value instanceof Float) {
-            return value.toString();
-        } else if (value instanceof Integer) {
-            return value.toString();
-        } else if (value instanceof Long) {
-            return value.toString();
-        } else if (value instanceof Short) {
-            return value.toString();
-        } else if (value instanceof byte[]) {
-            return Arrays.toString((byte[]) value);
-        } else if (value instanceof NbtCompound) {
-            return value.toString();
-        } else if (value instanceof int[]) {
-            return Arrays.toString((int[]) value);
-        } else if (value instanceof long[]) {
-            return Arrays.toString((long[]) value);
-        } else if (value instanceof float[]) {
-            return Arrays.toString((float[]) value);
-        } else if (value instanceof double[]) {
-            return Arrays.toString((double[]) value);
-        } else if (value instanceof String) {
-            return (String) value;
-        } else if (value instanceof NbtList<?>) {
-            return value.toString(); 
-        } else {
-            return value != null ? value.toString() : "null";
-        }
-    }
-
-	private void sendMessage(CommandSender sender, String message, MessageType type) {
-    	AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
+    private void sendMessage(CommandSender sender, String message, MessageType type) {
+        AnswerToCommand.sendMessage(lingoPlugin.getGlobalManager(), sender, message, type, true);
     }
 
 }
