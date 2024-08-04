@@ -59,7 +59,7 @@ public class NBTSubCommand {
 
         // Перевіряємо, чи передано достатньо аргументів
         if (args.length < 4) {
-            sendMessage(sender, "lingo_err_command_format /lingo nbt set <nbt_key> <params...>", MessageType.WARNING);
+            sendMessage(sender, "lingo_err_command_format /lingo data set <nbt_key> <params...>", MessageType.WARNING);
             return true;
         }
 
@@ -111,7 +111,7 @@ public class NBTSubCommand {
 
         // Перевіряємо, чи передано ключ NBT-тегу
         if (args.length < 3) {
-            sendMessage(sender, "lingo_err_command_format /lingo nbt info <nbt_key>", MessageType.WARNING);
+            sendMessage(sender, "lingo_err_command_format /lingo data info <nbt_key>", MessageType.WARNING);
             return true;
         }
 

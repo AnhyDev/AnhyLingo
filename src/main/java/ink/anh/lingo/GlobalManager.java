@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import ink.anh.api.LibraryManager;
+import ink.anh.api.database.DatabaseManager;
+import ink.anh.api.database.MySQLConfig;
 import ink.anh.api.lingo.Translator;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
@@ -338,4 +340,12 @@ public class GlobalManager extends LibraryManager {
     public boolean isDebugPacketShat() {
         return debugPacketShat;
     }
+
+	public MySQLConfig getMySQLConfig() {
+		return null;
+	}
+
+	public DatabaseManager getDatabaseManager() {
+		return null;
+	}
 }

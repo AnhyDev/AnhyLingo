@@ -56,6 +56,7 @@ public class LingoCommand implements CommandExecutor {
 
             switch (args[0].toLowerCase()) {
             case "nbt":
+            case "data":
                 return new NBTSubCommand(lingoPlugin).execNBT(sender, args);
             case "items":
                 return itemLang(sender, args);
