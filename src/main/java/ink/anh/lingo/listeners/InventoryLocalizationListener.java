@@ -44,6 +44,12 @@ public class InventoryLocalizationListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryOpen(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
+
+        if (event.getInventory().getHolder() instanceof TranslatableHolder holder) {
+            if (holder.shouldPreventTranslation()) {
+                return;
+            }
+        }
 		
 		if (itemLingo) {
 			String[] langs = getPlayerLanguage(player);
@@ -65,6 +71,12 @@ public class InventoryLocalizationListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getView().getType() == InventoryType.CREATIVE) return;
+
+        if (event.getInventory().getHolder() instanceof TranslatableHolder holder) {
+            if (holder.shouldPreventTranslation()) {
+                return;
+            }
+        }
         
         Player player = (Player) event.getWhoClicked();
 		
