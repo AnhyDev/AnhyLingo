@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 
 import ink.anh.api.messages.Logger;
 import ink.anh.lingo.AnhyLingo;
+import ink.anh.lingo.listeners.EntityNamePacketListener;
 import ink.anh.lingo.listeners.protocol.server.PacketSystemChat;
 
 import java.util.ArrayList;
@@ -67,6 +68,7 @@ public class PacketListenerManager {
                 throwable.printStackTrace();
             }
         }
+        EntityNamePacketListener.entityNameTranslate();
     }
 
     /**

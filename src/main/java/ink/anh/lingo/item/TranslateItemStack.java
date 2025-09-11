@@ -1,12 +1,18 @@
 package ink.anh.lingo.item;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import ink.anh.api.lingo.Translator;
 import ink.anh.api.nbt.NBTExplorer;
+import ink.anh.api.utils.StringUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.GlobalManager;
 
@@ -20,7 +26,8 @@ public class TranslateItemStack {
     private String lang_NBT;
     private String key_NBT;
     private Logger logger;
-
+    private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("%%([^%]+)%%");
+    
     /**
      * Constructor for TranslateItemStack.
      *
@@ -41,7 +48,7 @@ public class TranslateItemStack {
      * @param item The ItemStack to be modified.
      */
     public void modifyItem(String[] langs, ItemStack item, boolean forceTranslation) {
-        logger.info("Starting modifyItem method.");
+    	
         if (langs == null) {
             logger.warning("Languages array is null.");
             return;
@@ -49,44 +56,34 @@ public class TranslateItemStack {
 
         String customID = NBTExplorer.getNBTValue(item, key_NBT);
         if (customID == null) {
-            logger.warning("PersistentDataContainer does not have key: " + key_NBT);
             return;
         }
 
-        logger.info("Found customID: " + customID);
-
         if (globalManager.getLanguageItemStack().dataContainsKey(customID, langs)) {
-            logger.info("Data contains key for customID: " + customID);
             ItemLang itemLang = null;
             boolean processed = false;
 
             String langID = NBTExplorer.getNBTValue(item, lang_NBT);
             if (langID != null) {
-                logger.info("Found langID: " + langID);
 
                 for (String currentLang : langs) {
                     itemLang = globalManager.getLanguageItemStack().getTranslate(customID, currentLang);
-                    logger.info("Checking language: " + currentLang);
 
                     if (langID.equals(currentLang) && !forceTranslation) {
-                        logger.info("Language already set and no force translation: " + currentLang);
                         processed = true;
                         return;
                     } else if (itemLang != null) {
-                        logger.info("Translating item to language: " + currentLang);
-                        translateItemStack(item, itemLang);
+                        translateItemStack(langs, item, itemLang);
                         processed = true;
                     }
                 }
             }
             if (!processed) {
-                logger.info("No languages matched or force translation, getting default data.");
                 itemLang = globalManager.getLanguageItemStack().getData(customID, langs);
-                translateItemStack(item, itemLang);
+                translateItemStack(langs, item, itemLang);
             }
-        } else {
-            logger.warning("Data does not contain key for customID: " + customID);
         }
+
     }
 
     /**
@@ -96,31 +93,58 @@ public class TranslateItemStack {
      * @param item The ItemStack to be translated.
      * @param itemLang The ItemLang containing the translation details.
      */
-    private void translateItemStack(ItemStack item, ItemLang itemLang) {
-        logger.info("Starting translateItemStack method.");
-
-        NBTExplorer.setNBTValue(item, lang_NBT, itemLang.getLang());
-        logger.info("Set lang_NBT to: " + itemLang.getLang());
-
+    private void translateItemStack(String[] langs, ItemStack item, ItemLang itemLang) {
         ItemMeta meta = item.getItemMeta();
-        if (meta == null) {
-            logger.warning("ItemMeta is null during translation.");
-            return;
-        }
+        if (meta == null) return;
 
+        // Обробка назви з плейсхолдерами
         String displayName = itemLang.getName();
         if (displayName != null) {
+            displayName = replacePlaceholders(langs, displayName, item);
             meta.setDisplayName(displayName);
-            logger.info("Set display name to: " + displayName);
         }
 
+        // Обробка лору з плейсхолдерами
         List<String> lore = itemLang.getLore() != null ? Arrays.asList(itemLang.getLore()) : null;
         if (lore != null) {
-            meta.setLore(lore);
-            logger.info("Set lore to: " + String.join(", ", lore));
+        	
+            boolean hasPlaceholders = (displayName != null && displayName.contains("%%")) || anyLoreHasPlaceholders(lore);
+            if (hasPlaceholders) {
+                List<String> translatedLore = new ArrayList<>(lore.size());
+                for (String line : lore) {
+                    translatedLore.add(replacePlaceholders(langs, line, item));
+                }
+                meta.setLore(translatedLore);
+            } else {
+                meta.setLore(lore);
+            }
         }
 
         item.setItemMeta(meta);
-        logger.info("Finished translateItemStack method.");
+        NBTExplorer.setNBTValueFromString(item, lang_NBT, "string:" + itemLang.getLang());
+    }
+    
+    private boolean anyLoreHasPlaceholders(List<String> lore) {
+        for (String line : lore) {
+            if (line.contains("%%")) return true;
+        }
+        return false;
+    }
+    
+    private String replacePlaceholders(String[] langs, String text, ItemStack item) {
+        if (!text.contains("%%")) return text; // Швидка перевірка
+
+        Matcher matcher = PLACEHOLDER_PATTERN.matcher(text);
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            String key = matcher.group(1); // Отримуємо ключ між %%
+            String value = StringUtils.colorize(Translator.translateKyeWorld(globalManager,
+            		NBTExplorer.getNBTValue(item, key) != null ? NBTExplorer.getNBTValue(item, key) : "null", langs));
+            matcher.appendReplacement(result, value != null ? value : matcher.group(0)); // Якщо значення немає, лишаємо плейсхолдер
+        }
+        matcher.appendTail(result);
+
+        return result.toString();
     }
 }

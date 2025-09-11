@@ -2,8 +2,6 @@ package ink.anh.lingo.listeners.protocol.server;
 
 import java.util.Optional;
 
-import org.bukkit.Bukkit;
-
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
@@ -18,6 +16,7 @@ import net.kyori.adventure.text.Component;
 import ink.anh.api.lingo.ModificationState;
 import ink.anh.api.lingo.lang.LanguageManager;
 import ink.anh.api.messages.Logger;
+import ink.anh.api.utils.OtherUtils;
 import ink.anh.api.utils.PaperUtils;
 import ink.anh.lingo.AnhyLingo;
 import ink.anh.lingo.listeners.protocol.AbstractPacketListener;
@@ -65,13 +64,13 @@ public class PacketSystemChat extends AbstractPacketListener {
     }
 	
 	private static PacketType getPacketType() {
-		double ver = getCurrentServerVersion();
+		String ver = OtherUtils.getCurrentServerVersion();
 
 		if (AnhyLingo.getInstance().getGlobalManager().isDebug()) {
 			Logger.info(AnhyLingo.getInstance(), "CurrentServerVersion: " + ver);
 		}
 		
-        if (ver < 1.19) {
+        if (!OtherUtils.isServerVersionHigher("1.19")) {
         	return PacketType.Play.Server.CHAT;
         }
     	return PacketType.Play.Server.SYSTEM_CHAT;
@@ -106,8 +105,7 @@ public class PacketSystemChat extends AbstractPacketListener {
 	        return;
 	    } else {
 	        // Інакше, продовжуємо зі стандартною обробкою
-	        double currentVersion = getCurrentServerVersion();
-            if (currentVersion < 1.19) {
+	        if (!OtherUtils.isServerVersionHigher("1.19")) {
                 if(!handleWrappedChatComponent(event)) {
                 	handleChatPacketForOldVersions(event);
                 }
@@ -267,18 +265,4 @@ public class PacketSystemChat extends AbstractPacketListener {
 		return lingoPlugin.getGlobalManager().getLanguageManager();
 	}
 	
-	public static double getCurrentServerVersion() {
-	    String versionString = Bukkit.getBukkitVersion().split("-")[0];
-	    String[] splitVersion = versionString.split("\\.");
-
-	    try {
-	        int major = Integer.parseInt(splitVersion[0]);
-	        int minor = splitVersion.length > 1 ? Integer.parseInt(splitVersion[1]) : 0;
-	        double version = major + minor / (minor >= 10 ? 100.0 : 10.0);
-	        return version;
-	    } catch (NumberFormatException e) {
-	        e.printStackTrace();
-	        return 0;
-	    }
-	}
 }

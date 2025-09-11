@@ -28,6 +28,7 @@ public class ListenerManager {
 	private void ativateAllListeners(AnhyLingo lingoPlugin) {
 		
 		lingoPlugin.getServer().getPluginManager().registerEvents(new InventoryLocalizationListener(lingoPlugin), lingoPlugin);
+		lingoPlugin.getServer().getPluginManager().registerEvents(new PlayerKickListener(lingoPlugin), lingoPlugin);
 		
 	}
 }
